@@ -34,7 +34,7 @@ test a belief rather than illustrate a pipeline — is embedded in
 | `dentalClinic/VapiDentalAssistant.json` | 13-node workflow: builds a personalised Vapi assistant per caller, with returning-caller recognition |
 | `dentalClinic/VapiDentalTool.json` | 16-node workflow: the agent runtime — Pinecone RAG over clinic documents plus calendar and email tools |
 | `dentalClinic/VapiEndOfCall.json` | 20-node workflow: post-call analysis and destruction of the ephemeral Vapi assistant |
-| `dentalClinic/taniya_call_edited.MP3` | A real call recording from the dental receptionist (3m 23s, 128 kbps) |
+| [`dentalClinic/taniya_call_edited.MP3`](dentalClinic/taniya_call_edited.MP3) | A real call recording from the dental receptionist (3m 23s, 128 kbps) — [plays in the browser](#2-dental-clinic-inbound-receptionist) |
 | `charts/generate_charts.py` | Deterministic SVG report generator — reads both call-log CSVs, emits the three figures |
 | `charts/render_png.py` | Rasterises each figure to a 2x PNG, cropped exactly to the figure, for embedding in this README |
 | `docs/DESIGN-NOTES.md` | Why the figures look the way they do — form choices, the validated palettes, and the layout self-check |
@@ -92,6 +92,11 @@ Three workflows, split by responsibility so each stays small and independently d
 - **`VapiEndOfCall`** runs the analysis pipeline (below) and then **deletes the assistant** it was
   created for (`DELETE /assistant/{assistantId}`), so ephemeral per-call assistants never
   accumulate in the Vapi account.
+
+**Hear it:** [a real inbound call to the receptionist](https://cdn.jsdelivr.net/gh/kpalastro/n8n-vapi-voice-agents@main/dentalClinic/taniya_call_edited.MP3)
+— 3m 23s, 3.1 MB, plays in the browser. It is served through jsDelivr because GitHub's own raw
+links carry `Content-Disposition: attachment` and would download the file instead of playing it.
+The call logs here are redacted; the audio is the call as it happened.
 
 ---
 
