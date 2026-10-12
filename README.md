@@ -1,4 +1,8 @@
 # AI Voice Agents — n8n + Vapi
+**Demo Voice Hear it:** [a real inbound call to the receptionist](https://cdn.jsdelivr.net/gh/kpalastro/n8n-vapi-voice-agents@main/dentalClinic/taniya_call_edited.MP3)
+— 3m 23s, 3.1 MB, plays in the browser. It is served through jsDelivr because GitHub's own raw
+links carry `Content-Disposition: attachment` and would download the file instead of playing it.
+The call logs here are redacted; the audio is the call as it happened.
 
 Two production-shaped AI voice-agent systems built entirely in **n8n workflows**, wired to
 **Vapi** for telephony, speech-to-text and text-to-speech, and graded automatically after every
