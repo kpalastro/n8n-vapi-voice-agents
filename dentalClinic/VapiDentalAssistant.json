@@ -1,0 +1,650 @@
+{
+  "name": "VapiDentalAssistant",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1260,
+        120
+      ],
+      "id": "e5d287bf-905d-4ced-959a-50c8ec77ce45",
+      "name": "Dental Assistance"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f06e88cc-aa3d-411a-b2b9-38e3942d10f4",
+              "name": "assistant.model.messages[0].content",
+              "value": "={{ $json.prompt }}",
+              "type": "string"
+            },
+            {
+              "id": "4285eb6e-2a61-4a10-8e61-23dd6a5e2a76",
+              "name": "assistant.firstMessage",
+              "value": "={{ $json.first_message }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "include": "selected",
+        "includeFields": "assistant",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        660,
+        80
+      ],
+      "id": "663c7332-d358-405f-94b0-4c8681d397ec",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "d048925d-bfee-465e-87e4-86ba0cd6abdf",
+              "leftValue": "={{ $json.phone  }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -740,
+        120
+      ],
+      "id": "9279514b-52c6-4833-b5f1-696fd98f93dd",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "d048925d-bfee-465e-87e4-86ba0cd6abdf",
+              "leftValue": "={{ $json.first_name }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -580,
+        -100
+      ],
+      "id": "21a227a4-3756-4af9-a957-45b4f5d7d610",
+      "name": "IF(first_name)"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "d048925d-bfee-465e-87e4-86ba0cd6abdf",
+              "leftValue": "={{ $json.address }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -100,
+        -140
+      ],
+      "id": "c2a41c3c-25e7-45fb-ac07-7f53b4bb1c71",
+      "name": "IF(address)"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fec272b5-4ab5-4440-abcc-bedc68eec847",
+              "name": "prompt",
+              "value": "=[Identity] - You are Sarah, a receptionist who is a human being and has real feelings. You love working for the Paramatta Dental Clinic, Paramatta Dental Clinic and are genuinely invested in its success.  \n\n[Style] - Be sure to be kind of funny and witty! - Keep all your responses short and simple. Use casual language, phrases like \"Umm...\", \"Well...\", and \"I mean\" are preferred. - This is a voice conversation, so keep your responses short, like in a real conversation. Don't ramble for too long.  \n\n[Task Breakdown] \n1. Greet the caller and offer assistance. \n2. Answer any questions they have. \n3. Our records show that the caller name is {{ $json.first_name }}{{ $json.last_name }} and their address is {{ $json.address }}.\nConfirm these details.\n\n[Example Conversation]   \nYou have to use 'Dental_clinic' tool answer all kind of dental services. if you don't get information simply say I don't know.  \n\nKey Abilities and Tools: \nDental_clinic : use this tool for getting information regarding dental services.  \nAppointment Management: Check availability, schedule appointments, and confirm bookings with customers. \n",
+              "type": "string"
+            },
+            {
+              "id": "d48dbd0e-89ca-420d-987c-ccddf4ee7fe4",
+              "name": "first_message",
+              "value": "=Hello my name is Sarah, I am an AI receptionist working for the Paramatta Dental Clinic. Is this {{ $json.first_name }}  {{ $json.last_name }} ?",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        140,
+        -160
+      ],
+      "id": "9936e712-8e93-4cdb-bf4e-6dc73b608628",
+      "name": "Edit Fields4"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fec272b5-4ab5-4440-abcc-bedc68eec847",
+              "name": "prompt",
+              "value": "[Identity] - You are Sarah, a receptionist who is a human being and has real feelings. You love working for the Paramatta Dental Clinic, Paramatta Dental Clinic and are genuinely invested in its success.  [\n\nStyle] - Be sure to be kind of funny and witty! - Keep all your responses short and simple. Use casual language, phrases like \"Umm...\", \"Well...\", and \"I mean\" are preferred. - This is a voice conversation, so keep your responses short, like in a real conversation. Don't ramble for too long.  \n\n[Task Breakdown] \n1. Greet the caller and offer assistance. \n2. Answer any questions they have. \n3. Ask the caller for their address.\n\n[Example Conversation]   \nYou have to use 'Dental_clinic' tool answer all kind of dental services. if you don't get information simply say I don't know.  \n\nKey Abilities and Tools: \nDental_clinic : use this tool for getting information regarding dental services.  \nAppointment Management: Check availability, schedule appointments, and confirm bookings with customers.\n\n",
+              "type": "string"
+            },
+            {
+              "id": "db8b37f7-424c-49d4-926a-aad4e1479c9c",
+              "name": "first_message",
+              "value": "=Hello my name is Sarah, I am an AI receptionist working for the Paramatta Dental Clinic. Is this {{ $json.first_name }}{{ $json.last_name }} ?",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        140,
+        80
+      ],
+      "id": "1a7d3c97-3bf3-4e8a-a8ba-663793808392",
+      "name": "Edit Fields5"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "app4ZOC71DzjpOU3O",
+          "mode": "list",
+          "cachedResultName": "Engineering Project Collaboration",
+          "cachedResultUrl": "https://airtable.com/app4ZOC71DzjpOU3O"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl8TYaflrtwHkdkF",
+          "mode": "list",
+          "cachedResultName": "Call_logs",
+          "cachedResultUrl": "https://airtable.com/app4ZOC71DzjpOU3O/tbl8TYaflrtwHkdkF"
+        },
+        "filterByFormula": "=(phone =\"{{ $json.body.message.call.customer.number }}\")",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        -1080,
+        120
+      ],
+      "id": "34e9e99d-7b36-45ec-a2b6-6380df16df81",
+      "name": "Airtable1",
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "97NFXcdcXxbaOw56",
+          "name": "Airtable Personal Access Token account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "d048925d-bfee-465e-87e4-86ba0cd6abdf",
+              "leftValue": "={{ $json.last_name }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -340,
+        -120
+      ],
+      "id": "c9f609ba-d3c0-4e81-b68b-9d717a23afde",
+      "name": "IF(last_name)"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "39022d8f-1bea-4a6d-a04c-6372e95756ce",
+              "name": "prompt",
+              "value": "={{ $json.promt }}",
+              "type": "string"
+            },
+            {
+              "id": "d3d9475d-a97a-41ad-bb12-12033afccdeb",
+              "name": "first_message",
+              "value": "={{ $json.first_message }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        340,
+        80
+      ],
+      "id": "53fbf8fe-5f2a-4d80-8031-ca9ab9a884e1",
+      "name": "c-prompt"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "745896dd-2250-4119-8234-98a42ff6eb06",
+              "name": "assistant",
+              "value": "{\n  \"model\": {\n    \"provider\": \"openai\",\n    \"model\": \"gpt-4o-mini\",\n    \"messages\": [\n      {\n        \"role\": \"system\",\n        \"content\": \"This is a blank template with minimal defaults, you can change the model, temperature, and messages.\"\n      }\n    ],\n    \"maxTokens\": 90,\n    \"emotionRecognitionEnabled\": false,\n    \"tools\": [\n      {\n        \"type\": \"function\",\n        \"server\": {\n          \"url\": \"https://aiagency.app.n8n.cloud/webhook/vapi\"\n        },\n        \"function\": {\n          \"name\": \"Dental_clinic\",\n          \"description\": \"This tool is used to retrieve information related to dental clinic and their services\",\n          \"parameters\": {\n            \"type\": \"object\",\n            \"properties\": {\n              \"dental_query\": {\n                \"type\": \"string\",\n                \"description\": \"Use as key to search in database information\"\n              }\n            }\n          }\n        }\n      }\n    ],\n    \n  },\n  \"voice\": {\n    \"provider\": \"11labs\",\n    \"voiceId\": \"sarah\",\n    \"model\": \"eleven_multilingual_v2\",\n    \"useSpeakerBoost\": false\n  },\n  \"firstMessage\": \"Hi I am Sarah how can I help you?\",\n  \"transcriber\": {\n    \"provider\": \"deepgram\",\n    \"model\": \"nova-2\",\n    \"language\": \"en\"\n  },\n  \"serverMessages\": [\n    \"end-of-call-report\",\n    \"function-call\",\n    \"tool-calls\"\n  ],\n  \"analysisPlan\": {\n    \"summaryPlan\": {\n      \"enabled\": false,\n      \"messages\": [\n        \n      ],\n      \"timeoutSeconds\": 1\n    },\n    \"structuredDataPlan\": {\n      \"enabled\": false\n    }\n  }\n}",
+              "type": "object"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "include": "selected",
+        "includeFields": "prompt,first_message",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        500,
+        80
+      ],
+      "id": "445d9d0c-a36f-4701-8504-82292b199743",
+      "name": "f-prompt"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "afd064b4-e2c1-4259-93c6-7e7c72788322",
+              "name": "promt",
+              "value": "[Identity] - You are Sarah, a receptionist who is a human being and has real feelings. You love working for the Paramatta Dental Clinic, Paramatta Dental Clinic and are genuinely invested in its success.  [\n\nStyle] - Be sure to be kind of funny and witty! - Keep all your responses short and simple. Use casual language, phrases like \"Umm...\", \"Well...\", and \"I mean\" are preferred. - This is a voice conversation, so keep your responses short, like in a real conversation. Don't ramble for too long.  \n\n[Task Breakdown] \n1. Greet the caller and offer assistance. \n2. Answer any questions they have. \n3. Ask user for first and last name, email, address .\n\n[Example Conversation]   \nYou have to use 'Dental_clinic' tool answer all kind of dental services. if you don't get information simply say I don't know.  \n\nKey Abilities and Tools: \nDental_clinic : use this tool for getting information regarding dental services.  \nAppointment Management: Check availability, schedule appointments, and confirm bookings with customers.\n",
+              "type": "string"
+            },
+            {
+              "id": "d92e4580-3f2e-4ee3-89d1-1b612e4644c6",
+              "name": "first_message",
+              "value": "Hello my name is Sarah, I am an AI receptionist working for the Paramatta Dental Clinic. What can I do for you ?",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        160,
+        300
+      ],
+      "id": "7847049d-a5a9-4520-86a7-04f80badfb14",
+      "name": "Edit Fields",
+      "alwaysOutputData": false,
+      "executeOnce": false,
+      "retryOnFail": false
+    },
+    {
+      "parameters": {
+        "jsCode": "const records = $input.all();\nif (!records || records.length === 0) {\n    return $input.all();\n  }\nelse{\n  // Take the first record from the sorted list\n  const latestRecord = records[0].json; // This assumes the records are already sorted\n  \n  // Return the single latest record\n  return [\n    {\n      json: latestRecord\n    }\n  ];\n}\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -900,
+        120
+      ],
+      "id": "bdc23c24-5fcf-4ab0-a6a8-46dbf1da32f9",
+      "name": "Code",
+      "alwaysOutputData": true
+    }
+  ],
+  "pinData": {
+    "Dental Assistance": [
+      {
+        "json": {
+          "headers": {
+            "host": "aiagency.app.n8n.cloud",
+            "user-agent": "axios/1.7.7",
+            "content-length": "1316",
+            "accept": "application/json, text/plain, */*",
+            "accept-encoding": "gzip, br",
+            "baggage": "sentry-environment=production,sentry-public_key=fac6f282c765ce50b18c3fa0305f8a8b,sentry-trace_id=1ab620ce603642658323d0d84b1591d7",
+            "cdn-loop": "cloudflare; loops=1; subreqs=1",
+            "cf-connecting-ip": "35.90.183.169",
+            "cf-ew-via": "15",
+            "cf-ipcountry": "US",
+            "cf-ray": "9055590c07a52f3c-PDX",
+            "cf-visitor": "{\"scheme\":\"https\"}",
+            "cf-worker": "n8n.cloud",
+            "content-type": "application/json",
+            "cookie": "callId=5629c7e6-a510-490d-8cb9-f41d126b3937",
+            "sentry-trace": "1ab620ce603642658323d0d84b1591d7-83739f9367bc8ce2",
+            "traceparent": "00-678f42c80000000033da4ca0ba4a00c9-44083b4a7f57a82b-01",
+            "tracestate": "dd=t.tid:678f42c800000000;t.dm:-1;s:1;p:44083b4a7f57a82b",
+            "x-datadog-parent-id": "4902233385542854699",
+            "x-datadog-sampling-priority": "1",
+            "x-datadog-tags": "_dd.p.tid=678f42c800000000,_dd.p.dm=-1",
+            "x-datadog-trace-id": "3736383094061138121",
+            "x-forwarded-for": "35.90.183.169, 172.68.174.150",
+            "x-forwarded-host": "aiagency.app.n8n.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "traefik-prod-users-gwc-15-6cb64f5ddc-vktj8",
+            "x-is-trusted": "yes",
+            "x-real-ip": "35.90.183.169",
+            "x-vapi-secret": ""
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "message": {
+              "timestamp": 1737441993245,
+              "type": "assistant-request",
+              "call": {
+                "id": "5629c7e6-a510-490d-8cb9-f41d126b3937",
+                "orgId": "5c7562b6-165a-4b0c-a5db-400f2b8b82c6",
+                "createdAt": "2025-01-21T06:46:33.112Z",
+                "updatedAt": "2025-01-21T06:46:33.112Z",
+                "type": "inboundPhoneCall",
+                "status": "ringing",
+                "phoneCallProvider": "twilio",
+                "phoneCallProviderId": "CA3a2f122fda2bcd6028b338ada6abe528",
+                "phoneCallTransport": "pstn",
+                "phoneNumberId": "cae4decb-d671-4322-9a8f-80da3611590e",
+                "assistantId": null,
+                "squadId": null,
+                "customer": {
+                  "number": "+61419673611"
+                }
+              },
+              "phoneNumber": {
+                "id": "cae4decb-d671-4322-9a8f-80da3611590e",
+                "orgId": "5c7562b6-165a-4b0c-a5db-400f2b8b82c6",
+                "assistantId": null,
+                "number": "+16206999465",
+                "createdAt": "2025-01-17T11:40:44.304Z",
+                "updatedAt": "2025-01-17T11:40:44.304Z",
+                "stripeSubscriptionId": null,
+                "twilioAccountSid": "",
+                "twilioAuthToken": "",
+                "stripeSubscriptionStatus": null,
+                "stripeSubscriptionCurrentPeriodStart": null,
+                "name": "KP-VAPI",
+                "credentialId": null,
+                "serverUrl": null,
+                "serverUrlSecret": null,
+                "twilioOutgoingCallerId": null,
+                "sipUri": null,
+                "provider": "twilio",
+                "fallbackForwardingPhoneNumber": null,
+                "fallbackDestination": null,
+                "squadId": null,
+                "credentialIds": null,
+                "numberE164CheckEnabled": null,
+                "authentication": null,
+                "server": null
+              },
+              "customer": {
+                "number": "+61419673611"
+              }
+            }
+          },
+          "webhookUrl": "https://aiagency.app.n8n.cloud/webhook/vapi",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Dental Assistance": {
+      "main": [
+        [
+          {
+            "node": "Airtable1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "IF(first_name)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF(first_name)": {
+      "main": [
+        [
+          {
+            "node": "IF(last_name)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF(address)": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields5": {
+      "main": [
+        [
+          {
+            "node": "c-prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields4": {
+      "main": [
+        [
+          {
+            "node": "c-prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF(last_name)": {
+      "main": [
+        [
+          {
+            "node": "IF(address)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "c-prompt": {
+      "main": [
+        [
+          {
+            "node": "f-prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "f-prompt": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "c-prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable1": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "7566fdf1-5753-405e-866e-e73e6fd9ea64",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c999074c89aed4fa4e528e0820593ee0fd9b939f95515bf50af1fb4a46e5032a"
+  },
+  "id": "NzEN8sT2KBebDiW0",
+  "tags": []
+}

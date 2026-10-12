@@ -1,0 +1,1989 @@
+{
+  "name": "VapiEndOfCall",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        -480,
+        0
+      ],
+      "id": "ce956e08-7dc2-45fc-a8ca-96bc93344ffb",
+      "name": "Call Log"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.1,
+      "position": [
+        160,
+        180
+      ],
+      "id": "a23d21aa-2a70-4bfd-bdbd-fb8541247534",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "ZPKX8CfcOAOTRl1T",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "92f90607-65cc-41cf-9449-d571ec328830",
+              "leftValue": "={{ $json.transcript.isNotEmpty() }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -60,
+        0
+      ],
+      "id": "8f22ba8d-7624-4d34-8fe4-c5a754de1e8b",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.1,
+      "position": [
+        520,
+        160
+      ],
+      "id": "dfd69d68-68e7-4cbc-b130-82e7fbae64d9",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "ZPKX8CfcOAOTRl1T",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "text": "={{ $('If').item.json.transcript }}",
+        "attributes": {
+          "attributes": [
+            {
+              "name": "ai_call_performance_grade",
+              "description": "AI call handling performance graded by (Good,Nuetral,Bad)",
+              "required": true
+            },
+            {
+              "name": "ai_performance_justification",
+              "description": "Justification for the performance grade",
+              "required": true
+            }
+          ]
+        },
+        "options": {
+          "systemPromptTemplate": "### **Instructions:**\nAnalyze the interaction in the transcript and grade the\nAI receptionist's performance as **bad**, **neutral**, or\n**good**.\n### **Evaluation Criteria:**\n1. **Clarity:** Was the AI easy to understand?\n2. **Tone:** Did the AI sound polite and professional?\n3. **Flow:** Was the conversation smooth, with minimal repetition or confusion?\n4. **Resolution:** Did the AI guide the caller toward a clear next step?\n### **Grading Instructions:**\n- **Grade:** **Bad**, **Neutral**, or **Good**\n- **Justification:** 1-2 concise sentences summarizing key reasons for the grade."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "typeVersion": 1,
+      "position": [
+        500,
+        -140
+      ],
+      "id": "61fdb872-e315-4b7d-a6bc-d712841f306f",
+      "name": "Grade Performance"
+    },
+    {
+      "parameters": {
+        "text": "={{ $json.transcript }}",
+        "attributes": {
+          "attributes": [
+            {
+              "name": "first_name",
+              "description": "The callers first name",
+              "required": true
+            },
+            {
+              "name": "last_name",
+              "description": "The callers last name",
+              "required": true
+            },
+            {
+              "name": "address",
+              "description": "The callers address",
+              "required": true
+            },
+            {
+              "name": "query",
+              "description": "Primary reason for a call in a few words"
+            },
+            {
+              "name": "summary",
+              "description": "Concise summary for the entire conversation"
+            }
+          ]
+        },
+        "options": {
+          "systemPromptTemplate": "You are an expert extraction algorithm.\nOnly extract relevant information from the text.\nIf you do not know the value of an attribute asked to extract, you may omit the attribute's value.\n\nYou are a transcript analyzer for extracting the caller's first and last name from a call handled by an Al voice receptionist at Paramatta Dental Clinic.\nAnalyze the entire transcript for the correct first and last name of the caller, address of the caller, query and summary."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "typeVersion": 1,
+      "position": [
+        160,
+        -140
+      ],
+      "id": "edba2a38-3f2c-4179-bdfe-fd1d115f4f00",
+      "name": "Personal Information Extractor"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get the transcript\nconst transcript = $('init_variables').first().json.transcript;\n\n// Split the transcript into lines\nconst lines = transcript.split('\\n');\n\n// Add an additional newline between each user and AI chat\nconst formatted_transcript = lines.map((line, index) => {\n  if (index > 0 && (line.startsWith('AI:') || line.startsWith('User:'))) {\n    return '\\n' + line;\n  } else {\n    return line;\n  }\n}).join('\\n');\n\n// Return the formatted transcript\nreturn { formatted_transcript };\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        860,
+        -140
+      ],
+      "id": "113f096c-7a2e-4c7d-9ce6-1c12624a1024",
+      "name": "Code Format transcript"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6ea8224b-91d8-4916-ae08-e5373515678c",
+              "name": "transcript",
+              "value": "={{ $json.body.message.transcript || \"\"}}",
+              "type": "string"
+            },
+            {
+              "id": "bd3484b8-af47-4cb8-b2a8-774b32ddb564",
+              "name": "started_at",
+              "value": "={{ $json.body.message.startedAt || null }}",
+              "type": "string"
+            },
+            {
+              "id": "8cc11f8a-8570-44d9-9bd5-cfad7fcd83f4",
+              "name": "ended_at",
+              "value": "={{ $json.body.message.endedAt || null }}",
+              "type": "string"
+            },
+            {
+              "id": "38d85ae9-0dfd-40f9-87e2-0b2914ea000e",
+              "name": "call_type",
+              "value": "={{ $json.body.message.call.type || null }}",
+              "type": "string"
+            },
+            {
+              "id": "ab78c574-5df7-48e3-99ef-3b2170a4782e",
+              "name": "ended_reason",
+              "value": "={{ $json.body.message.endedReason || null }}",
+              "type": "string"
+            },
+            {
+              "id": "3aeddc79-4140-4412-8b14-fb364333867d",
+              "name": "recording_url",
+              "value": "={{ $json.body.message.recordingUrl || null }}",
+              "type": "string"
+            },
+            {
+              "id": "78e99e34-8a3c-4ceb-9bed-a9039bbbd0c7",
+              "name": "call_id",
+              "value": "={{ $json.body.message.call.id || null }}",
+              "type": "string"
+            },
+            {
+              "id": "de3fac58-b7a0-4a73-9772-f93fa90daaeb",
+              "name": "user_number",
+              "value": "={{ $json.body.message.call.customer.number || null  }}",
+              "type": "string"
+            },
+            {
+              "id": "98034a13-73a3-4c5a-b6d5-434e595bd82c",
+              "name": "call_cost",
+              "value": "={{ $json.body.message.cost || null }}",
+              "type": "number"
+            },
+            {
+              "id": "9271ea04-90ec-474e-9cab-eeff99dcf9f4",
+              "name": "call_duration",
+              "value": "={{ $json.body.message.durationMinutes || null }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -260,
+        0
+      ],
+      "id": "50f3aa25-1fca-4bb7-b8b8-fe06fcee1244",
+      "name": "init_variables"
+    },
+    {
+      "parameters": {
+        "jsCode": "const transcript = $('init_variables').first().json.transcript\n\n// Initialize counters for bot (AI) and user words\nlet bot_word_count = 0;\nlet user_word_count = 0;\n\n// Split the transcript into lines based on the newline character '\\n'\n// Each line represents either the AI or the User speaking\nconst lines = transcript.split('\\n');\n\n// Loop through each line in the transcript\nfor (let i = 0; i < lines.length; i++) {\n    // Check if the line starts with \"AI:\" or \"User:\"\n    if (lines[i].startsWith('AI:')) {\n        // Remove \"AI:\" prefix and split the remaining text into words\n        const words = lines[i].replace('AI:', '').trim().split(/\\s+/);\n        // Add the number of words to the bot's word count\n        bot_word_count += words.length;\n    } else if (lines[i].startsWith('User:')) {\n        // Remove \"User:\" prefix and split the remaining text into words\n        const words = lines[i].replace('User:', '').trim().split(/\\s+/);\n        // Add the number of words to the user's word count\n        user_word_count += words.length;\n    }\n}\n\n// Calculate the total word count (AI + User)\nconst total_word_count = bot_word_count + user_word_count;\n\n// Avoid dividing by zero to prevent errors in case there's no data\nlet bot_word_percent = 0;\nlet user_word_percent = 0;\n\nif (total_word_count > 0) {\n    // Calculate the word percentages for AI and User\n    bot_word_percent = Math.round((bot_word_count / total_word_count) * 100);\n    user_word_percent = Math.round((user_word_count / total_word_count) * 100);\n}\n\n// Output the results for use in other parts of the workflow\nreturn {\n    bot_word_count: bot_word_count,\n    bot_word_percent: bot_word_percent + '%',\n    user_word_count: user_word_count,\n    user_word_percent: user_word_percent + '%'\n};\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1100,
+        -140
+      ],
+      "id": "8d2b659c-cae2-41df-b5f1-9de09ce4238f",
+      "name": "Word count"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e3232305-4d76-462b-a479-bc8d67bea06d",
+              "name": "first_name",
+              "value": "={{ $('Personal Information Extractor').item.json.output.first_name }}",
+              "type": "string"
+            },
+            {
+              "id": "d4d0b6df-522f-47e3-911f-28c5deb8df2d",
+              "name": "last_name",
+              "value": "={{ $('Personal Information Extractor').item.json.output.last_name }}",
+              "type": "string"
+            },
+            {
+              "id": "4c91a42e-a17e-40c9-b4d3-b834e4258005",
+              "name": "address",
+              "value": "={{ $('Personal Information Extractor').item.json.output.address }}",
+              "type": "string"
+            },
+            {
+              "id": "6281f66a-f51f-47d1-9a1e-d828fc4b8cc5",
+              "name": "phone",
+              "value": "={{ $('If').item.json.user_number }}",
+              "type": "string"
+            },
+            {
+              "id": "dba75c46-cdb3-4d7b-8270-ab0aeff09dd7",
+              "name": "query",
+              "value": "={{ $('Personal Information Extractor').item.json.output.query }}",
+              "type": "string"
+            },
+            {
+              "id": "abf2964b-c961-4108-9692-bc26d070db3a",
+              "name": "summary",
+              "value": "={{ $('Personal Information Extractor').item.json.output.summary }}",
+              "type": "string"
+            },
+            {
+              "id": "1bb496ec-b2c7-43d5-bb9c-f3c2ece08b6b",
+              "name": "started_at",
+              "value": "={{ $('If').item.json.started_at }}",
+              "type": "string"
+            },
+            {
+              "id": "34a71098-7e12-436c-9522-ebbfe0065f7a",
+              "name": "ended_at",
+              "value": "={{ $('If').item.json.ended_at }}",
+              "type": "string"
+            },
+            {
+              "id": "fe53dc85-504a-41bd-9b15-b38ab9955dcb",
+              "name": "call_type",
+              "value": "={{ $('If').item.json.call_type }}",
+              "type": "string"
+            },
+            {
+              "id": "ab5977b4-6c67-4af8-996f-672beddd367f",
+              "name": "ended_reason",
+              "value": "={{ $('If').item.json.ended_reason }}",
+              "type": "string"
+            },
+            {
+              "id": "5af1e411-160b-44fa-9195-2d21ab09c7c0",
+              "name": "recording_url",
+              "value": "={{ $('If').item.json.recording_url }}",
+              "type": "string"
+            },
+            {
+              "id": "3f88c2c0-0478-4453-9720-83cf0f4a9fe8",
+              "name": "call_duration",
+              "value": "={{ $('If').item.json.call_duration }}",
+              "type": "number"
+            },
+            {
+              "id": "67c6f586-d67f-4408-97b6-4a5bf4774ffc",
+              "name": "call_cost",
+              "value": "={{ $('If').item.json.call_cost }}",
+              "type": "number"
+            },
+            {
+              "id": "a9a3820e-0b77-4b36-acbc-491a4ddfd88e",
+              "name": "bot_word_count",
+              "value": "={{ $json.bot_word_count }}",
+              "type": "number"
+            },
+            {
+              "id": "c9709be9-32ac-49aa-b0ce-802dca998f9d",
+              "name": "bot_word_percent",
+              "value": "={{ $json.bot_word_percent }}",
+              "type": "string"
+            },
+            {
+              "id": "735edb5b-6579-479d-ba41-cd10988b9774",
+              "name": "user_word_count",
+              "value": "={{ $json.user_word_count }}",
+              "type": "number"
+            },
+            {
+              "id": "df59c462-fc27-4856-b1d4-cd35385d1b08",
+              "name": "user_word_percent",
+              "value": "={{ $json.user_word_percent }}",
+              "type": "string"
+            },
+            {
+              "id": "246a274f-0f0c-41ac-aa10-cf1f5378e9e4",
+              "name": "ai_call_performance_grade",
+              "value": "={{ $('Grade Performance').item.json.output.ai_call_performance_grade }}",
+              "type": "string"
+            },
+            {
+              "id": "36bf941d-ae6c-4e5b-a7c8-6a4b4e1929fe",
+              "name": "ai_performance_justification",
+              "value": "={{ $('Grade Performance').item.json.output.ai_performance_justification }}",
+              "type": "string"
+            },
+            {
+              "id": "11d7a0b9-00ab-4daa-ab67-583f4b1ac424",
+              "name": "formatted_transcript",
+              "value": "={{ $('Code Format transcript').item.json.formatted_transcript }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1320,
+        -140
+      ],
+      "id": "810b9aaf-96b3-435a-98da-de511d6a97ff",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e3232305-4d76-462b-a479-bc8d67bea06d",
+              "name": "first_name",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "d4d0b6df-522f-47e3-911f-28c5deb8df2d",
+              "name": "last_name",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "4c91a42e-a17e-40c9-b4d3-b834e4258005",
+              "name": "address",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "6281f66a-f51f-47d1-9a1e-d828fc4b8cc5",
+              "name": "phone",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "dba75c46-cdb3-4d7b-8270-ab0aeff09dd7",
+              "name": "query",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "abf2964b-c961-4108-9692-bc26d070db3a",
+              "name": "summary",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "1bb496ec-b2c7-43d5-bb9c-f3c2ece08b6b",
+              "name": "started_at",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "34a71098-7e12-436c-9522-ebbfe0065f7a",
+              "name": "ended_at",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "fe53dc85-504a-41bd-9b15-b38ab9955dcb",
+              "name": "call_type",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "ab5977b4-6c67-4af8-996f-672beddd367f",
+              "name": "ended_reason",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "5af1e411-160b-44fa-9195-2d21ab09c7c0",
+              "name": "recording_url",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "3f88c2c0-0478-4453-9720-83cf0f4a9fe8",
+              "name": "call_duration",
+              "value": "=",
+              "type": "number"
+            },
+            {
+              "id": "67c6f586-d67f-4408-97b6-4a5bf4774ffc",
+              "name": "call_cost",
+              "value": "=",
+              "type": "number"
+            },
+            {
+              "id": "a9a3820e-0b77-4b36-acbc-491a4ddfd88e",
+              "name": "bot_word_count",
+              "value": "=",
+              "type": "number"
+            },
+            {
+              "id": "735edb5b-6579-479d-ba41-cd10988b9774",
+              "name": "user_word_count",
+              "value": "=",
+              "type": "number"
+            },
+            {
+              "id": "df59c462-fc27-4856-b1d4-cd35385d1b08",
+              "name": "user_word_percent",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "246a274f-0f0c-41ac-aa10-cf1f5378e9e4",
+              "name": "ai_call_performance_grade",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "36bf941d-ae6c-4e5b-a7c8-6a4b4e1929fe",
+              "name": "ai_performance_justification",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "11d7a0b9-00ab-4daa-ab67-583f4b1ac424",
+              "name": "formatted_transcript",
+              "value": "=",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1320,
+        40
+      ],
+      "id": "eb439279-2655-48c0-b11f-c45f1a3d6aa5",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e3232305-4d76-462b-a479-bc8d67bea06d",
+              "name": "first_name",
+              "value": "={{ $json.first_name }}",
+              "type": "string"
+            },
+            {
+              "id": "ef6ff065-d37b-4263-ae7f-2864c552b81f",
+              "name": "last_name",
+              "value": "={{ $json.last_name }}",
+              "type": "string"
+            },
+            {
+              "id": "9a4d974e-4dfb-4be8-abf5-d526093a2fef",
+              "name": "address",
+              "value": "={{ $json.address }}",
+              "type": "string"
+            },
+            {
+              "id": "8a0c01fc-dfa9-4aee-b021-31f616a35905",
+              "name": "phone",
+              "value": "={{ $json.phone }}",
+              "type": "string"
+            },
+            {
+              "id": "7b55ea27-dd37-482f-9f8a-f11150250203",
+              "name": "query",
+              "value": "={{ $json.query }}",
+              "type": "string"
+            },
+            {
+              "id": "5af66098-4684-42ee-b94b-b4bd619da0b2",
+              "name": "summary",
+              "value": "={{ $json.summary }}",
+              "type": "string"
+            },
+            {
+              "id": "db0a1ca9-9be8-49bc-9635-64fac1c5980e",
+              "name": "started_at",
+              "value": "={{ $json.started_at }}",
+              "type": "string"
+            },
+            {
+              "id": "c03fa6a6-989c-4e98-a0b4-24c1fde9b606",
+              "name": "ended_at",
+              "value": "={{ $json.ended_at }}",
+              "type": "string"
+            },
+            {
+              "id": "736b3d2e-cc0d-404a-973f-330c4c94fa7a",
+              "name": "call_type",
+              "value": "={{ $json.call_type }}",
+              "type": "string"
+            },
+            {
+              "id": "d336d7c4-50ad-4e1d-a1a9-3919c69c8689",
+              "name": "ended_reason",
+              "value": "={{ $json.ended_reason }}",
+              "type": "string"
+            },
+            {
+              "id": "1a5727ca-ccd4-4679-9fe6-0664fa8598a7",
+              "name": "recording_url",
+              "value": "={{ $json.recording_url }}",
+              "type": "string"
+            },
+            {
+              "id": "31f33b89-9dab-47cc-9fe7-39211e0a8d51",
+              "name": "call_duration",
+              "value": "={{ $json.call_duration }}",
+              "type": "number"
+            },
+            {
+              "id": "a2c6cad0-ccd0-422b-b831-17949e9bd0e6",
+              "name": "call_cost",
+              "value": "={{ $json.call_cost }}",
+              "type": "number"
+            },
+            {
+              "id": "be67cfba-da5c-4979-94d7-c7dc4d498f9a",
+              "name": "bot_word_count",
+              "value": "={{ $json.bot_word_count }}",
+              "type": "number"
+            },
+            {
+              "id": "8bad67aa-586b-4e8a-8045-4436ded41380",
+              "name": "bot_word_count",
+              "value": "={{ $json.bot_word_count }}",
+              "type": "number"
+            },
+            {
+              "id": "a339b012-e474-4df4-b9dc-a207c77108a5",
+              "name": "bot_word_percent",
+              "value": "={{ $json.bot_word_percent }}",
+              "type": "string"
+            },
+            {
+              "id": "d598008d-da19-4432-8a30-b9f9b7384f20",
+              "name": "user_word_count",
+              "value": "={{ $json.user_word_count }}",
+              "type": "number"
+            },
+            {
+              "id": "b83aee5f-f006-4508-8af9-497eac54b370",
+              "name": "ai_call_performance_grade",
+              "value": "={{ $json.ai_call_performance_grade }}",
+              "type": "string"
+            },
+            {
+              "id": "71dfb97b-32e0-44b9-a243-8cca1c2ea307",
+              "name": "ai_performance_justification",
+              "value": "={{ $json.ai_performance_justification }}",
+              "type": "string"
+            },
+            {
+              "id": "ab16d9f3-85c1-45cb-abf7-69b71dc2f097",
+              "name": "ai_performance_justification",
+              "value": "={{ $json.ai_performance_justification }}",
+              "type": "string"
+            },
+            {
+              "id": "1ebf35cb-a565-4101-ab03-130762311b03",
+              "name": "formatted_transcript",
+              "value": "={{ $json.formatted_transcript }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        80,
+        420
+      ],
+      "id": "53f463f5-4465-4acb-af2a-f373da5f8fcf",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "app4ZOC71DzjpOU3O",
+          "mode": "list",
+          "cachedResultName": "Engineering Project Collaboration",
+          "cachedResultUrl": "https://airtable.com/app4ZOC71DzjpOU3O"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl8TYaflrtwHkdkF",
+          "mode": "list",
+          "cachedResultName": "Call_logs",
+          "cachedResultUrl": "https://airtable.com/app4ZOC71DzjpOU3O/tbl8TYaflrtwHkdkF"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "call_duration": "={{ $json.call_duration }}",
+            "call_cost": "={{ $json.call_cost }}",
+            "bot_word_count": "={{ $json.bot_word_count }}",
+            "user_word_count": "={{ $json.user_word_count }}",
+            "first_name": "={{ $json.first_name }}",
+            "last_name": "={{ $json.last_name }}",
+            "address": "={{ $json.address }}",
+            "query": "={{ $json.query }}",
+            "summary": "={{ $json.summary }}",
+            "started_at": "={{ $json.started_at }}",
+            "ended_at": "={{ $json.ended_at }}",
+            "call_type": "={{ $json.call_type }}",
+            "ended_reason": "={{ $json.ended_reason }}",
+            "recording_url": "={{ $json.recording_url }}",
+            "bot_word_percent": "={{ $json.bot_word_percent }}",
+            "ai_call_performance_grade": "={{ $json.ai_call_performance_grade }}",
+            "ai_performance_justification": "={{ $json.ai_performance_justification }}",
+            "formatted_transcript": "={{ $json.formatted_transcript }}",
+            "phone": "={{ $json.phone }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "first_name",
+              "displayName": "first_name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "last_name",
+              "displayName": "last_name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "address",
+              "displayName": "address",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "phone",
+              "displayName": "phone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "query",
+              "displayName": "query",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "summary",
+              "displayName": "summary",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "started_at",
+              "displayName": "started_at",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "ended_at",
+              "displayName": "ended_at",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "call_type",
+              "displayName": "call_type",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "ended_reason",
+              "displayName": "ended_reason",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "recording_url",
+              "displayName": "recording_url",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "call_duration",
+              "displayName": "call_duration",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "call_cost",
+              "displayName": "call_cost",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "bot_word_count",
+              "displayName": "bot_word_count",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "bot_word_percent",
+              "displayName": "bot_word_percent",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "user_word_count",
+              "displayName": "user_word_count",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "ai_call_performance_grade",
+              "displayName": "ai_call_performance_grade",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "ai_performance_justification",
+              "displayName": "ai_performance_justification",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "formatted_transcript",
+              "displayName": "formatted_transcript",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        300,
+        420
+      ],
+      "id": "7d0816ee-b017-4fc2-b1ca-487e50a4acbc",
+      "name": "Airtable",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "97NFXcdcXxbaOw56",
+          "name": "Airtable Personal Access Token account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "99682232-0a0d-4fd7-ab9b-db3290c61ecc",
+              "name": "call_id",
+              "value": "={{ $('Call Log').item.json.body.message.call.id }}",
+              "type": "string"
+            },
+            {
+              "id": "75ad304a-09be-4f29-a401-a1124e428101",
+              "name": "orgId",
+              "value": "={{ $('Call Log').item.json.body.message.call.orgId }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        480,
+        420
+      ],
+      "id": "fd9b39b3-e18b-4e82-98ac-45a8b2e6df48",
+      "name": "callinfo"
+    },
+    {
+      "parameters": {
+        "method": "DELETE",
+        "url": "=https://api.vapi.ai/assistant/{{ $json.assistantId }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('JWT').item.json.token }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1360,
+        280
+      ],
+      "id": "01d22665-b727-4381-8c8e-4a834853bc17",
+      "name": "Delete Assistance"
+    },
+    {
+      "parameters": {
+        "useJson": true,
+        "claimsJson": "={\n  \"orgId\": \"{{ $json.orgId }}\",\n  \"exp\": {{ Math.floor(new Date().getTime() / 1000) + 3600 }}\n}",
+        "options": {}
+      },
+      "id": "0339f29f-0c10-46a8-9331-a1d9abe44f83",
+      "name": "JWT",
+      "type": "n8n-nodes-base.jwt",
+      "typeVersion": 1,
+      "position": [
+        660,
+        420
+      ],
+      "credentials": {
+        "jwtAuth": {
+          "id": "ZFvmst3UaGVuhRaJ",
+          "name": "JWT Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://api.vapi.ai/call/{{ $('Delete Assitance').item.json.call_id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('JWT').item.json.token }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0e8f76db-2197-4d41-86b2-6de73e88c1b3",
+      "name": "Call Status",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1000,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "errorMessage": "=callinfo is {{ $('callinfo').item.json.call_id }}"
+      },
+      "type": "n8n-nodes-base.stopAndError",
+      "typeVersion": 1,
+      "position": [
+        1360,
+        460
+      ],
+      "id": "f3558000-cc03-44ef-8792-e6361bc24d83",
+      "name": "Stop and Error"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "57cc9983-db3f-4c3f-bd54-85990f3c9b63",
+              "leftValue": "={{ $json.assistantId }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1180,
+        380
+      ],
+      "id": "ea125687-7353-4366-ac1d-982023dabdb2",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "57cc9983-db3f-4c3f-bd54-85990f3c9b63",
+              "leftValue": "={{ $('callinfo').item.json.call_id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        820,
+        420
+      ],
+      "id": "f934dfb7-e182-4df5-ad42-c241d88eeae5",
+      "name": "If2"
+    }
+  ],
+  "pinData": {
+    "Call Log": [
+      {
+        "json": {
+          "headers": {
+            "host": "aiagency.app.n8n.cloud",
+            "user-agent": "axios/1.7.7",
+            "content-length": "14820",
+            "accept": "application/json, text/plain, */*",
+            "accept-encoding": "gzip, br",
+            "baggage": "sentry-environment=production,sentry-public_key=a0021577936aec367b16615ad816c078,sentry-trace_id=d6cf5550435744f883506c36fe2c7d87",
+            "cdn-loop": "cloudflare; loops=1; subreqs=1",
+            "cf-connecting-ip": "35.94.105.153",
+            "cf-ew-via": "15",
+            "cf-ipcountry": "US",
+            "cf-ray": "90963154430fdf1b-SEA",
+            "cf-visitor": "{\"scheme\":\"https\"}",
+            "cf-worker": "n8n.cloud",
+            "content-type": "application/json",
+            "cookie": "callId=5e4976b6-49ea-40ac-b5e7-5577a7e6dbf2",
+            "sentry-trace": "d6cf5550435744f883506c36fe2c7d87-98a8ed545f4605eb",
+            "traceparent": "00-6799a2d50000000007915dd256212651-07915dd256212651-01",
+            "tracestate": "dd=t.tid:6799a2d500000000;t.dm:-1;s:1;p:07915dd256212651",
+            "x-datadog-parent-id": "545320187858069073",
+            "x-datadog-sampling-priority": "1",
+            "x-datadog-tags": "_dd.p.tid=6799a2d500000000,_dd.p.dm=-1",
+            "x-datadog-trace-id": "545320187858069073",
+            "x-forwarded-for": "35.94.105.153, 162.158.41.178",
+            "x-forwarded-host": "aiagency.app.n8n.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "traefik-prod-users-gwc-15-6cb64f5ddc-khbtb",
+            "x-is-trusted": "yes",
+            "x-real-ip": "35.94.105.153",
+            "x-vapi-secret": ""
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "message": {
+              "timestamp": 1738121941044,
+              "type": "end-of-call-report",
+              "analysis": {
+                "successEvaluation": "true"
+              },
+              "artifact": {
+                "messages": [
+                  {
+                    "role": "system",
+                    "message": "",
+                    "time": 1738121881898,
+                    "secondsFromStart": 0
+                  },
+                  {
+                    "role": "bot",
+                    "message": "Hello. My name is Sarah. I am an AI receptionist. Working for the Parramatta Dental Clinic. Is this Glink Paul?",
+                    "time": 1738121883284,
+                    "endTime": 1738121889664,
+                    "secondsFromStart": 1.12,
+                    "duration": 5960,
+                    "source": ""
+                  },
+                  {
+                    "role": "user",
+                    "message": "Yes, please.",
+                    "time": 1738121890924,
+                    "endTime": 1738121891744,
+                    "secondsFromStart": 8.76,
+                    "duration": 820
+                  },
+                  {
+                    "role": "bot",
+                    "message": "How can I assist you today, Glink? Are you looking to schedule an appointment? Inquire about services, or something else?",
+                    "time": 1738121893264,
+                    "endTime": 1738121899534,
+                    "secondsFromStart": 11.1,
+                    "duration": 5830,
+                    "source": ""
+                  },
+                  {
+                    "role": "user",
+                    "message": "I'm looking for the appointment for tomorrow at 5 30 PM.",
+                    "time": 1738121900414,
+                    "endTime": 1738121903794.001,
+                    "secondsFromStart": 18.25,
+                    "duration": 3380.0009765625
+                  },
+                  {
+                    "toolCalls": [
+                      {
+                        "id": "call_knJJ0y42Xm8hHmeBniM3m1Hr",
+                        "type": "function",
+                        "function": {
+                          "name": "Dental_clinic",
+                          "arguments": "{\n  \"dental_query\": \"appointment availability on 2023-10-04 at 5:30 PM\"\n}"
+                        }
+                      }
+                    ],
+                    "role": "tool_calls",
+                    "message": "",
+                    "time": 1738121904329,
+                    "secondsFromStart": 21.318
+                  },
+                  {
+                    "role": "bot",
+                    "message": "Me a moment.",
+                    "time": 1738121905094,
+                    "endTime": 1738121906874.001,
+                    "secondsFromStart": 22.93,
+                    "duration": 1780.0009765625,
+                    "source": ""
+                  },
+                  {
+                    "role": "tool_call_result",
+                    "time": 1738121910035,
+                    "secondsFromStart": 27.024,
+                    "name": "Dental_clinic",
+                    "result": "Great news! We have an appointment available on October 4th, 2023, at 5:30 PM. Would you like me to book that for you? If so, please confirm if you'd like to use your phone number +61419673611 for the appointment details.",
+                    "toolCallId": "call_knJJ0y42Xm8hHmeBniM3m1Hr"
+                  },
+                  {
+                    "role": "bot",
+                    "message": "We have an appointment available for you tomorrow, October fourth 20 23 at 5 30 PM. Would you like me to book for you using your phone number? Plus c 6 1 4 1",
+                    "time": 1738121911544.001,
+                    "endTime": 1738121922214,
+                    "secondsFromStart": 29.380001,
+                    "duration": 9949.9970703125,
+                    "source": ""
+                  },
+                  {
+                    "role": "user",
+                    "message": "Yes. Yes.",
+                    "time": 1738121921694.003,
+                    "endTime": 1738121922354.002,
+                    "secondsFromStart": 39.530003,
+                    "duration": 659.9990234375
+                  },
+                  {
+                    "toolCalls": [
+                      {
+                        "id": "call_wucVee0FBaQRtyfvBLF4HkaD",
+                        "type": "function",
+                        "function": {
+                          "name": "Dental_clinic",
+                          "arguments": "{\n  \"dental_query\": \"book appointment on 2023-10-04 at 5:30 PM for Glink Paul using phone number +61419673611\"\n}"
+                        }
+                      }
+                    ],
+                    "role": "tool_calls",
+                    "message": "",
+                    "time": 1738121922246,
+                    "secondsFromStart": 39.235
+                  },
+                  {
+                    "role": "bot",
+                    "message": "Give me a moment.",
+                    "time": 1738121922774,
+                    "endTime": 1738121923674,
+                    "secondsFromStart": 40.61,
+                    "duration": 900,
+                    "source": ""
+                  },
+                  {
+                    "role": "tool_call_result",
+                    "time": 1738121927457,
+                    "secondsFromStart": 44.446,
+                    "name": "Dental_clinic",
+                    "result": "I've successfully booked an appointment for Glink Paul on October 4th, 2023, at 5:30 PM at Paramatta Dental Clinic. You will receive a confirmation email shortly.   If you need anything else or have more questions, just let me know!",
+                    "toolCallId": "call_wucVee0FBaQRtyfvBLF4HkaD"
+                  },
+                  {
+                    "role": "bot",
+                    "message": "Your appointment has been successfully booked for tomorrow, October fourth 20 23 at 5 30 PM at",
+                    "time": 1738121928684,
+                    "endTime": 1738121935604,
+                    "secondsFromStart": 46.52,
+                    "duration": 6280,
+                    "source": ""
+                  }
+                ],
+                "messagesOpenAIFormatted": [
+                  {
+                    "role": "system",
+                    "content": ""
+                  },
+                  {
+                    "role": "assistant",
+                    "content": "Hello. My name is Sarah. I am an AI receptionist. Working for the Parramatta Dental Clinic. Is this Glink Paul?"
+                  },
+                  {
+                    "role": "user",
+                    "content": "Yes, please."
+                  },
+                  {
+                    "role": "assistant",
+                    "content": "How can I assist you today, Glink? Are you looking to schedule an appointment? Inquire about services, or something else?"
+                  },
+                  {
+                    "role": "user",
+                    "content": "I'm looking for the appointment for tomorrow at 5 30 PM."
+                  },
+                  {
+                    "role": "assistant",
+                    "tool_calls": [
+                      {
+                        "id": "call_knJJ0y42Xm8hHmeBniM3m1Hr",
+                        "type": "function",
+                        "function": {
+                          "name": "Dental_clinic",
+                          "arguments": "{\n  \"dental_query\": \"appointment availability on 2023-10-04 at 5:30 PM\"\n}"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "role": "tool",
+                    "tool_call_id": "call_knJJ0y42Xm8hHmeBniM3m1Hr",
+                    "content": "Great news! We have an appointment available on October 4th, 2023, at 5:30 PM. Would you like me to book that for you? If so, please confirm if you'd like to use your phone number +61419673611 for the appointment details."
+                  },
+                  {
+                    "role": "assistant",
+                    "content": "Me a moment. We have an appointment available for you tomorrow, October fourth 20 23 at 5 30 PM. Would you like me to book for you using your phone number? Plus c 6 1 4 1"
+                  },
+                  {
+                    "role": "user",
+                    "content": "Yes. Yes."
+                  },
+                  {
+                    "role": "assistant",
+                    "tool_calls": [
+                      {
+                        "id": "call_wucVee0FBaQRtyfvBLF4HkaD",
+                        "type": "function",
+                        "function": {
+                          "name": "Dental_clinic",
+                          "arguments": "{\n  \"dental_query\": \"book appointment on 2023-10-04 at 5:30 PM for Glink Paul using phone number +61419673611\"\n}"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "role": "tool",
+                    "tool_call_id": "call_wucVee0FBaQRtyfvBLF4HkaD",
+                    "content": "I've successfully booked an appointment for Glink Paul on October 4th, 2023, at 5:30 PM at Paramatta Dental Clinic. You will receive a confirmation email shortly.   If you need anything else or have more questions, just let me know!"
+                  },
+                  {
+                    "role": "assistant",
+                    "content": "Give me a moment. Your appointment has been successfully booked for tomorrow, October fourth 20 23 at 5 30 PM at"
+                  }
+                ],
+                "transcript": "AI: Hello. My name is Sarah. I am an AI receptionist. Working for the Parramatta Dental Clinic. Is this Glink Paul?\nUser: Yes, please.\nAI: How can I assist you today, Glink? Are you looking to schedule an appointment? Inquire about services, or something else?\nUser: I'm looking for the appointment for tomorrow at 5 30 PM.\nAI: Me a moment.\nAI: We have an appointment available for you tomorrow, October fourth 20 23 at 5 30 PM. Would you like me to book for you using your phone number? Plus c 6 1 4 1\nUser: Yes. Yes.\nAI: Give me a moment.\nAI: Your appointment has been successfully booked for tomorrow, October fourth 20 23 at 5 30 PM at\n",
+                "recordingUrl": "https://storage.vapi.ai/5e4976b6-49ea-40ac-b5e7-5577a7e6dbf2-1738121939340-2215cd15-65c1-4f66-a18e-02d02b368fff-mono.wav",
+                "stereoRecordingUrl": "https://storage.vapi.ai/5e4976b6-49ea-40ac-b5e7-5577a7e6dbf2-1738121939341-09030ddd-606e-43c6-b932-01df1ac75ff6-stereo.wav"
+              },
+              "startedAt": "2025-01-29T03:38:03.011Z",
+              "endedAt": "2025-01-29T03:38:56.835Z",
+              "endedReason": "customer-ended-call",
+              "cost": 0.0904,
+              "costBreakdown": {
+                "stt": 0.0094,
+                "llm": 0.0003,
+                "tts": 0.0348,
+                "vapi": 0.0449,
+                "total": 0.0904,
+                "llmPromptTokens": 1565,
+                "llmCompletionTokens": 162,
+                "ttsCharacters": 696,
+                "analysisCostBreakdown": {
+                  "summary": 0,
+                  "summaryPromptTokens": 0,
+                  "summaryCompletionTokens": 0,
+                  "structuredData": 0,
+                  "structuredDataPromptTokens": 0,
+                  "structuredDataCompletionTokens": 0,
+                  "successEvaluation": 0.001,
+                  "successEvaluationPromptTokens": 305,
+                  "successEvaluationCompletionTokens": 4
+                }
+              },
+              "costs": [
+                {
+                  "type": "transcriber",
+                  "transcriber": {
+                    "provider": "deepgram",
+                    "model": "nova-2"
+                  },
+                  "minutes": 0.9475166666666667,
+                  "cost": 0.00942401
+                },
+                {
+                  "type": "model",
+                  "model": {
+                    "provider": "openai",
+                    "model": "gpt-4o-mini"
+                  },
+                  "promptTokens": 1565,
+                  "completionTokens": 162,
+                  "cost": 0.00033195
+                },
+                {
+                  "type": "voice",
+                  "voice": {
+                    "provider": "11labs",
+                    "voiceId": "EXAVITQu4vr4xnSDxMaL",
+                    "model": "eleven_multilingual_v2"
+                  },
+                  "characters": 696,
+                  "cost": 0.0348
+                },
+                {
+                  "type": "vapi",
+                  "subType": "normal",
+                  "minutes": 0.8971,
+                  "cost": 0.044855
+                },
+                {
+                  "type": "analysis",
+                  "analysisType": "successEvaluation",
+                  "model": {
+                    "provider": "anthropic",
+                    "model": "claude-3-5-sonnet-20240620"
+                  },
+                  "promptTokens": 305,
+                  "completionTokens": 4,
+                  "cost": 0.000975
+                }
+              ],
+              "durationMs": 53824,
+              "durationSeconds": 53.824,
+              "durationMinutes": 0.8971,
+              "summary": "",
+              "transcript": "AI: Hello. My name is Sarah. I am an AI receptionist. Working for the Parramatta Dental Clinic. Is this Glink Paul?\nUser: Yes, please.\nAI: How can I assist you today, Glink? Are you looking to schedule an appointment? Inquire about services, or something else?\nUser: I'm looking for the appointment for tomorrow at 5 30 PM.\nAI: Me a moment.\nAI: We have an appointment available for you tomorrow, October fourth 20 23 at 5 30 PM. Would you like me to book for you using your phone number? Plus c 6 1 4 1\nUser: Yes. Yes.\nAI: Give me a moment.\nAI: Your appointment has been successfully booked for tomorrow, October fourth 20 23 at 5 30 PM at\n",
+              "messages": [
+                {
+                  "role": "system",
+                  "message": "",
+                  "time": 1738121881898,
+                  "secondsFromStart": 0
+                },
+                {
+                  "role": "bot",
+                  "message": "Hello. My name is Sarah. I am an AI receptionist. Working for the Parramatta Dental Clinic. Is this Glink Paul?",
+                  "time": 1738121883284,
+                  "endTime": 1738121889664,
+                  "secondsFromStart": 1.12,
+                  "duration": 5960,
+                  "source": ""
+                },
+                {
+                  "role": "user",
+                  "message": "Yes, please.",
+                  "time": 1738121890924,
+                  "endTime": 1738121891744,
+                  "secondsFromStart": 8.76,
+                  "duration": 820
+                },
+                {
+                  "role": "bot",
+                  "message": "How can I assist you today, Glink? Are you looking to schedule an appointment? Inquire about services, or something else?",
+                  "time": 1738121893264,
+                  "endTime": 1738121899534,
+                  "secondsFromStart": 11.1,
+                  "duration": 5830,
+                  "source": ""
+                },
+                {
+                  "role": "user",
+                  "message": "I'm looking for the appointment for tomorrow at 5 30 PM.",
+                  "time": 1738121900414,
+                  "endTime": 1738121903794.001,
+                  "secondsFromStart": 18.25,
+                  "duration": 3380.0009765625
+                },
+                {
+                  "toolCalls": [
+                    {
+                      "id": "call_knJJ0y42Xm8hHmeBniM3m1Hr",
+                      "type": "function",
+                      "function": {
+                        "name": "Dental_clinic",
+                        "arguments": "{\n  \"dental_query\": \"appointment availability on 2023-10-04 at 5:30 PM\"\n}"
+                      }
+                    }
+                  ],
+                  "role": "tool_calls",
+                  "message": "",
+                  "time": 1738121904329,
+                  "secondsFromStart": 21.318
+                },
+                {
+                  "role": "bot",
+                  "message": "Me a moment.",
+                  "time": 1738121905094,
+                  "endTime": 1738121906874.001,
+                  "secondsFromStart": 22.93,
+                  "duration": 1780.0009765625,
+                  "source": ""
+                },
+                {
+                  "role": "tool_call_result",
+                  "time": 1738121910035,
+                  "secondsFromStart": 27.024,
+                  "name": "Dental_clinic",
+                  "result": "Great news! We have an appointment available on October 4th, 2023, at 5:30 PM. Would you like me to book that for you? If so, please confirm if you'd like to use your phone number +61419673611 for the appointment details.",
+                  "toolCallId": "call_knJJ0y42Xm8hHmeBniM3m1Hr"
+                },
+                {
+                  "role": "bot",
+                  "message": "We have an appointment available for you tomorrow, October fourth 20 23 at 5 30 PM. Would you like me to book for you using your phone number? Plus c 6 1 4 1",
+                  "time": 1738121911544.001,
+                  "endTime": 1738121922214,
+                  "secondsFromStart": 29.380001,
+                  "duration": 9949.9970703125,
+                  "source": ""
+                },
+                {
+                  "role": "user",
+                  "message": "Yes. Yes.",
+                  "time": 1738121921694.003,
+                  "endTime": 1738121922354.002,
+                  "secondsFromStart": 39.530003,
+                  "duration": 659.9990234375
+                },
+                {
+                  "toolCalls": [
+                    {
+                      "id": "call_wucVee0FBaQRtyfvBLF4HkaD",
+                      "type": "function",
+                      "function": {
+                        "name": "Dental_clinic",
+                        "arguments": "{\n  \"dental_query\": \"book appointment on 2023-10-04 at 5:30 PM for Glink Paul using phone number +61419673611\"\n}"
+                      }
+                    }
+                  ],
+                  "role": "tool_calls",
+                  "message": "",
+                  "time": 1738121922246,
+                  "secondsFromStart": 39.235
+                },
+                {
+                  "role": "bot",
+                  "message": "Give me a moment.",
+                  "time": 1738121922774,
+                  "endTime": 1738121923674,
+                  "secondsFromStart": 40.61,
+                  "duration": 900,
+                  "source": ""
+                },
+                {
+                  "role": "tool_call_result",
+                  "time": 1738121927457,
+                  "secondsFromStart": 44.446,
+                  "name": "Dental_clinic",
+                  "result": "I've successfully booked an appointment for Glink Paul on October 4th, 2023, at 5:30 PM at Paramatta Dental Clinic. You will receive a confirmation email shortly.   If you need anything else or have more questions, just let me know!",
+                  "toolCallId": "call_wucVee0FBaQRtyfvBLF4HkaD"
+                },
+                {
+                  "role": "bot",
+                  "message": "Your appointment has been successfully booked for tomorrow, October fourth 20 23 at 5 30 PM at",
+                  "time": 1738121928684,
+                  "endTime": 1738121935604,
+                  "secondsFromStart": 46.52,
+                  "duration": 6280,
+                  "source": ""
+                }
+              ],
+              "recordingUrl": "https://storage.vapi.ai/5e4976b6-49ea-40ac-b5e7-5577a7e6dbf2-1738121939340-2215cd15-65c1-4f66-a18e-02d02b368fff-mono.wav",
+              "stereoRecordingUrl": "https://storage.vapi.ai/5e4976b6-49ea-40ac-b5e7-5577a7e6dbf2-1738121939341-09030ddd-606e-43c6-b932-01df1ac75ff6-stereo.wav",
+              "call": {
+                "id": "5e4976b6-49ea-40ac-b5e7-5577a7e6dbf2",
+                "orgId": "5c7562b6-165a-4b0c-a5db-400f2b8b82c6",
+                "createdAt": "2025-01-29T03:37:57.363Z",
+                "updatedAt": "2025-01-29T03:37:57.363Z",
+                "type": "inboundPhoneCall",
+                "monitor": {
+                  "listenUrl": "wss://phone-call-websocket.aws-us-west-2-backend-production2.vapi.ai/5e4976b6-49ea-40ac-b5e7-5577a7e6dbf2/listen",
+                  "controlUrl": "https://phone-call-websocket.aws-us-west-2-backend-production2.vapi.ai/5e4976b6-49ea-40ac-b5e7-5577a7e6dbf2/control"
+                },
+                "transport": {},
+                "phoneCallProvider": "twilio",
+                "phoneCallProviderId": "CA247f576ad26384ff0f6739588a131c01",
+                "phoneCallTransport": "pstn",
+                "status": "ringing",
+                "assistant": {
+                  "transcriber": {
+                    "provider": "deepgram",
+                    "model": "nova-2",
+                    "language": "en"
+                  },
+                  "model": {
+                    "model": "gpt-4o-mini",
+                    "messages": [
+                      {
+                        "role": "system"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "function": {
+                          "name": "Dental_clinic",
+                          "description": "This tool is used to retrieve information related to dental clinic and their services",
+                          "parameters": {
+                            "type": "object",
+                            "properties": {
+                              "dental_query": {
+                                "description": "Use as key to search in database information",
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "server": {
+                          "url": "https://aiagency.app.n8n.cloud/webhook/vapi"
+                        },
+                        "type": "function"
+                      }
+                    ],
+                    "maxTokens": 90,
+                    "emotionRecognitionEnabled": false,
+                    "provider": "openai"
+                  },
+                  "voice": {
+                    "provider": "11labs",
+                    "voiceId": "sarah",
+                    "model": "eleven_multilingual_v2",
+                    "useSpeakerBoost": false
+                  },
+                  "firstMessage": "Hello my name is Sarah, I am an AI receptionist working for the Paramatta Dental Clinic. Is this GlinkPaul ?",
+                  "serverMessages": [
+                    "end-of-call-report",
+                    "function-call",
+                    "tool-calls"
+                  ],
+                  "analysisPlan": {
+                    "summaryPlan": {
+                      "enabled": false,
+                      "messages": [],
+                      "timeoutSeconds": 1
+                    },
+                    "structuredDataPlan": {
+                      "enabled": false
+                    }
+                  }
+                },
+                "phoneNumberId": "93e7c3dc-2060-401c-a8f0-6719ca1346f4",
+                "customer": {
+                  "number": "+61419673611"
+                }
+              },
+              "phoneNumber": {
+                "id": "93e7c3dc-2060-401c-a8f0-6719ca1346f4",
+                "orgId": "5c7562b6-165a-4b0c-a5db-400f2b8b82c6",
+                "number": "+61489078677",
+                "createdAt": "2025-01-25T21:47:27.938Z",
+                "updatedAt": "2025-01-26T05:25:38.044Z",
+                "twilioAccountSid": "",
+                "twilioAuthToken": "",
+                "name": "Ausi",
+                "provider": "twilio"
+              },
+              "customer": {
+                "number": "+61419673611"
+              },
+              "assistant": {
+                "transcriber": {
+                  "provider": "deepgram",
+                  "model": "nova-2",
+                  "language": "en"
+                },
+                "model": {
+                  "model": "gpt-4o-mini",
+                  "messages": [
+                    {
+                      "role": "system"
+                    }
+                  ],
+                  "tools": [
+                    {
+                      "function": {
+                        "name": "Dental_clinic",
+                        "description": "This tool is used to retrieve information related to dental clinic and their services",
+                        "parameters": {
+                          "type": "object",
+                          "properties": {
+                            "dental_query": {
+                              "description": "Use as key to search in database information",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "server": {
+                        "url": "https://aiagency.app.n8n.cloud/webhook/vapi"
+                      },
+                      "type": "function"
+                    }
+                  ],
+                  "maxTokens": 90,
+                  "emotionRecognitionEnabled": false,
+                  "provider": "openai"
+                },
+                "voice": {
+                  "provider": "11labs",
+                  "voiceId": "sarah",
+                  "model": "eleven_multilingual_v2",
+                  "useSpeakerBoost": false
+                },
+                "firstMessage": "Hello my name is Sarah, I am an AI receptionist working for the Paramatta Dental Clinic. Is this GlinkPaul ?",
+                "serverMessages": [
+                  "end-of-call-report",
+                  "function-call",
+                  "tool-calls"
+                ],
+                "analysisPlan": {
+                  "summaryPlan": {
+                    "enabled": false,
+                    "messages": [],
+                    "timeoutSeconds": 1
+                  },
+                  "structuredDataPlan": {
+                    "enabled": false
+                  }
+                }
+              }
+            }
+          },
+          "webhookUrl": "https://aiagency.app.n8n.cloud/webhook/vapi",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Call Log": {
+      "main": [
+        [
+          {
+            "node": "init_variables",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Personal Information Extractor",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Personal Information Extractor",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Grade Performance",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Personal Information Extractor": {
+      "main": [
+        [
+          {
+            "node": "Grade Performance",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Grade Performance": {
+      "main": [
+        [
+          {
+            "node": "Code Format transcript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "init_variables": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code Format transcript": {
+      "main": [
+        [
+          {
+            "node": "Word count",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Word count": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable": {
+      "main": [
+        [
+          {
+            "node": "callinfo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "callinfo": {
+      "main": [
+        [
+          {
+            "node": "JWT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "JWT": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Status": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Delete Assistance",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Stop and Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Call Status",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Stop and Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "7cbbe419-ee90-4a8d-84de-d140168846c7",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c999074c89aed4fa4e528e0820593ee0fd9b939f95515bf50af1fb4a46e5032a"
+  },
+  "id": "V7lbpbWQwpuQmseb",
+  "tags": []
+}

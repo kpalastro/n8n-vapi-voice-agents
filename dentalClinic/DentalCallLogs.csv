@@ -1,0 +1,553 @@
+first_name,last_name,address,phone,query,summary,started_at,ended_at,call_type,ended_reason,recording_url,call_duration,call_cost,bot_word_count,bot_word_percent,user_word_count,ai_call_performance_grade,ai_performance_justification,formatted_transcript
+Koldeep,Pal,"61 Mashman Avenue, Westmead, NSW 2147",614xxxxx,Working hours and services for children,"The caller, Koldeep Pal, inquired about the clinic's working hours and services for children, and subsequently made an appointment for January 20th, 2025.",2025-01-20T15:55:45.188Z,2025-01-20T16:00:26.239Z,inboundPhoneCall,customer-ended-call,,4.6842,0.3776,321,"11,856,000%",100,Good,"The AI communicated clearly and maintained a polite tone throughout the conversation. It smoothly guided the caller through confirming details, answering questions, and successfully booking the appointment.","AI: Hello. My name is Sarah. I am an AI receptionist working for the Parramatta Dental Clinic. Is this Koldeep Pal?
+
+User: Yes, please.
+
+AI: Awesome. So I see here that you're at 6 Mashman Avenue, Westmead, NSW 2 1 4 5. Wanted to confirm that's all good.
+
+User: Yeah. All good.
+
+AI: Great. How can I assist you today? Got any questions or need to book an appointment?
+
+User: Uh, what are your working hours?
+
+AI: Hold on a sec.
+
+AI: Okay. So our hours are Monday to Wednesday, 9 AM, 6 PM. Thursday, 9 AM, 6 30 PM, Friday, 9 AM, 6 PM, Saturday, 9 AM, 5 PM. Closed on Sundays. Got any other questions?
+
+User: Okay. What are the services you have for the children?
+
+AI: This will just take a sec.
+
+AI: Alright. For the kiddos, we do dental exams, fillings, oral hygiene education, fissure sealants, fluoride treatments, and sports mouth guards, plus we handle cleanings and x rays. Pretty cool. Right? Anything else?
+
+User: Uh, can you book my appointment for tomorrow? Is 20 first of January 20 25.
+
+AI: Sure thing.
+
+AI: 1 moment.
+
+AI: Okay. We've got some slots open for January twentieth 2025. Wanna book it? Just let me know if you'd like to use your phone number plus 6 1 4 1 9 6 7 3 6 1 1 Or if you wanna share a different 1,
+
+User: Oh, I want to use the same 1. Can you book me today for 2 30 PM?
+
+User: On twentieth of Jan.
+
+AI: Sorry. A few more seconds.
+
+AI: Got it. So you wanna book your appointment for 2 30 PM on January twentieth 2025. Just to confirm, you're using the phone number plus 6 1 4 1 9 6 7 3 6 1 1. Right?
+
+User: Yep. Is that all done?
+
+AI: This will just take a sec.
+
+AI: Um, looks like we hit a snag while trying to book your appointment. Can you give me a valid email address for the confirmation instead? You'll still get the reminder on your phone number. Thanks a bunch.
+
+User: Yeah. My email is kudhith dot pal at g mail dot com. I can spell it out k u l d, double e, p dot p a l at g mail dot com.
+
+AI: Hold on a sec.
+
+AI: Okay. All set. Your appointment is booked for January twentieth 2025 at 2 30 PM. You'll get a confirmation email at kudith dot pal at gmail dot com soon. If you have more questions or need anything else, just shout.
+
+User: Alright. Thank you very much.
+
+AI: You bet anytime. Have a great day."
+Koldeep,Pal,,614xxxx,inquiry about root canal therapy and tooth fillings,"The caller, Koldeep Pal, inquired about dental services including root canal therapy and tooth fillings. He expressed interest in scheduling an appointment, but faced difficulties with the scheduling process.",2025-01-21T07:01:55.928Z,2025-01-21T07:06:35.288Z,inboundPhoneCall,customer-ended-call,,4.6560,0.4745,447,"11,880,000%",110,Bad,"The AI struggled with clarity regarding the services offered, frequently misinterpreted the user's inquiries, and failed to provide satisfactory resolution for scheduling the appointment, leading to frustration for the user.","AI: Hello. My name is Sarah. I am an AI receptionist working for the Parramatta Dental Clinic. Is this Koldeep Pal?
+
+User: Yes. I'm for LDPO.
+
+AI: Thank you for confirming your identity, Koldeep Pal. How may I assist you today regarding your appointment or services at Parramatta Dental Clinic?
+
+User: I just wanted to know whether you guys doing dealing with the group for now.
+
+AI: This will just take a sec.
+
+AI: I'm sorry, but I don't have information regarding group deals or discounts currently available at Parramatta Dental Clinic. If you have any other questions or
+
+User: Hello. Hello. No. No. I'm asking I'm asking about the roof, and I'll help you.
+
+AI: I apologize for the misunderstanding. Are you in inquiring about the dental services related to the roof of the mouth or do you need assistance related to a different aspect Please clarify, and I'll be happy to help.
+
+User: Okay. I'm looking for a do you guys deal with the root canal therapy?
+
+AI: This'll just take a sec.
+
+AI: I apologize, but I don't have detailed information regarding root canal therapy services at Parramatta Dental Clinic. If you have specific questions about the procedure or need assistance with something else, please let me know.
+
+User: Okay. How about the first billing of the dental?
+
+AI: Hold on a sec.
+
+AI: I'm sorry, but I don't have information regarding the first billing procedures at Parramatta Dental Clinic. If there's anything else I can
+
+User: Oh my god. I was talking over the filling of tooth.
+
+AI: just a sec.
+
+AI: At Parramatta Dental Clinic, tooth fillings are used to repair and restore teeth that are damaged by decay, fractures, or wear. Even with good oral hygiene,
+
+User: I would like to go for the condo production.
+
+AI: Could you please clarify if you're referring to scheduling an appointment for a tooth filling or if you meant something else. If you're looking to book a consultation for a dental procedure, please let me know your preferred date and time, and I'll assist you with that.
+
+User: Oh, my telephone is in the process of January. And the plan is 2 30 PM.
+
+AI: This will just take a sec.
+
+AI: I've checked the schedule, and we have availability for a tooth filling appointment today. January 20 first 2025 at 2 30 PM. Can you please confirm if you'd like to use the phone number plus 6 1 4 1 9 6 7 3 6 1 1 for any follow-up communications. If you prefer a different number, just let me know.
+
+User: Okay. I want the appointment for day after tomorrow.
+
+AI: Give me a moment.
+
+AI: It seems there was an error while trying to schedule the appointment for your tooth filling on January 20 second 2025 at 2 30 PM. You like to try again using the phone number plus e 6 1 4 1 9 6 7 3
+
+User: No. No.
+
+AI: hold on a sec. I'm sorry, but I'm
+
+AI: experiencing difficulty in scheduling your appointment for the tooth filling on January 20 second 2025 at 2 30 PM. I would recommend trying again later or contacting the clinic directly for assistance. If you have any other questions or need help with
+
+User: Alright. Thank you.
+
+AI: You're welcome. If you have any more questions in the
+
+User: Oh, thank you.
+
+AI: you're welcome. If you need anything else in the future, feel free to reach out. Have a great day."
+Glink,Paul,,614xxxx,Appointment scheduling and consultation,"The caller, Glink Paul, inquired about dental services and requested to schedule a consultation appointment.",2025-01-21T07:36:35.606Z,2025-01-21T07:39:19.892Z,inboundPhoneCall,silence-timed-out,,2.7381,0.2374,157,"11,706,000%",153,Neutral,"The AI was mostly clear and polite, but there was confusion regarding the user's email, leading to some unnecessary repetition. While an appointment was started to be scheduled, the flow could have been smoother.","AI: Hello. My name is Sarah. I am an AI receptionist working for the Parramatta Dental Clinic. What can I do for you?
+
+User: Hi, sir. I'm from. I'm having a pain on my throat, and it keep on bad. Growing and coming, and I'm having a cavity in 1 of the pills. Can you suggest what kind of services you're offering from the dental team?
+
+AI: Just a sec.
+
+AI: Well, we've got a range of services like general dentistry, children's dentistry, cosmetic stuff. And even tooth fillings. So we can help with cavities. If you want specifics on anything, just let me know.
+
+User: Yeah. I would like to go for the consultation. With your doctor. Can you schedule a appointment for me?
+
+AI: Sure thing. I can help with that. What's your first and last name? Also, could you give me your email and address? So
+
+User: My first name is Glink, and my last name is Paul, and my email address is goldie dot palle at g mail dot com. I can spell it out. K u l d, double e, p, dot p a l at g mail Um, my preferred date is 20 sixth of Jan. 20 25. I'm pretty sure it's Commerce 3 30 PM.
+
+AI: Got it, Glink Paul. Just to confirm, your email is goldie dot pallay at g mail dot com, and you want an appointment on January 20
+
+User: No. My email is email is kulvee dot palle. Kul dev dot kahl, k u l d, double e, p dot p a l at g mail dot com.
+
+AI: Thanks for clearing that up. So your email is koldi dot pali at g mail dot com. Right? And you want the appointment on January 20 sixth 2025 at 3 30 PM? Just double checking.
+
+User: Hotdog.
+
+AI: Love the enthusiasm. I'll go ahead and schedule that for you. Just a moment."
+Kuri,Pao,,614xxxx,Inquiry about son's baby teeth,The caller inquired about their son not losing baby teeth at age 10 and discussed scheduling a dental appointment.,2025-01-22T02:49:13.504Z,2025-01-22T02:52:14.545Z,inboundPhoneCall,customer-ended-call,,3.0174,0.2650,278,"11,820,000%",119,Neutral,"The AI was mostly clear and maintained a polite tone, but struggled with accuracy and flow during the appointment scheduling, including incorrectly handling dates and needing excessive pauses.","AI: Hello. My name is Sarah. I am an AI receptionist working for the Parramatta Dental Clinic. Is this Glink Paul?
+
+User: Uh, this is Kuri Pao.
+
+AI: Hello, Curipao. Can I assist you today?
+
+User: Hey. I was just wondering, um, my son, he he's he hasn't been losing his baby seat, and I just um, I'm really concerned. What do you guys have to help with that?
+
+AI: This'll just take a sec.
+
+AI: At our clinic, we offer several services specifically for children's dental health, including regular checkups to monitor dental development, treatment for cavities in baby teeth. Guidance on diet and oral hygiene. Protective coatings for children's teeth. Strengthening of teeth against decay.
+
+User: Uh, thank you, but was just wondering if it's a concern because my son's baby teeth haven't been falling out, and he's only 10.
+
+AI: It's not uncommon for children's baby teeth to stay in longer than expected, but it's usually a part of their development. By the age of 10, some children may still have several baby teeth. However, if you're concerned about his dental health or the timing of the loss of his baby teeth, it would be a good idea to schedule an appointment for a dental examination. This way, a dentist can assess his dental development and provide you with more.
+
+User: Uh, would it be alright if I brought my son in for a dental appointment day after tomorrow?
+
+AI: This'll just take a sec.
+
+AI: We have availability for appointments at our clinic. Would you like to go ahead and schedule 1 for the day after tomorrow? If so, please let me know your preferred time, and I can use your phone number plus 6 1 4 1 9 6 7 3 6 1 1 for the confirmation.
+
+User: Um, could I get the appointment around 3 30 of the school? Um, and can you just confirm the date for me, please?
+
+AI: The day after tomorrow is insert date here. So that would be for insert date here at 3 30 PM. I will go ahead and schedule the appointment for you.
+
+User: Um, the 20 fifth again.
+
+AI: Give me a moment.
+
+User: 20 27.
+
+AI: Sorry. A few more seconds.
+
+AI: Give me a moment.
+
+User: Uh, that's alright. Thank you.
+
+AI: I just updated myself, and I need to you're welcome. If you have any more questions or need further assistance, Feel free to ask.
+
+User: Alright. Thank you. Bye."
+Glink,Paul,,614xxxx,Dental appointment booking,Caller requested to book a dental appointment for tomorrow at 2:30 PM but was informed that the booking could not be completed.,2025-01-25T21:49:46.927Z,2025-01-25T21:52:25.027Z,inboundPhoneCall,customer-ended-call,,2.6350,0.2509,264,"11,910,000%",48,Neutral,"The AI provided clear instructions and responded politely but failed to resolve the booking issue, leaving the caller without a scheduled appointment.","AI: Hello. My name is Sarah. I am an AI receptionist working for the Parramatta Dental Clinic. Is this Glink Paul?
+
+User: Yeah. Uncle Dave here.
+
+AI: Hello, uncle Dave. How can I assist you today at the Parramatta Dental Clinic?
+
+User: Oh, I'm just looking for some kind of dental appointment. Can you book The appointment?
+
+AI: I can help you with that. Could you please provide me with a few details? 1 1. What type of dental appointment do you need, e. G, routine checkup, dental cleaning, specific Treatment. 2, your preferred date
+
+User: And I prefer date is tomorrow?
+
+AI: Got it. You would like to book a dental appointment for tomorrow? What type of appointment do you need? For example, a routine checkup, dental cleaning, or a specific treatment?
+
+User: Enter pending.
+
+AI: Hold on a sec.
+
+AI: It appears I need to confirm your details for the appointment. 1 Tomorrow. 2. Please let me know what time works for you. 3. Would you like to use your phone number plucky 6? 1 4 1 9 6 7 3 6 1 1, or do you prefer a different number? Please provide these details to proceed with the appointment booking.
+
+User: Oh, my number will remain the same, and the appointment for tomorrow around 2 30 PM.
+
+AI: Hold on a sec.
+
+AI: Just to confirm, you would like to book an appointment for tomorrow at 2 30 PM at the Parramatta Dental Clinic using the phone number plus 6 1 4 1 9 6 7 3 6 1 1. Is that correct?
+
+User: Correct.
+
+AI: Give me a moment.
+
+AI: 1 moment.
+
+AI: I apologize, but it seems I'm unable to schedule the appointment at this moment. I recommend reaching out to the Parramatta Dental Clinic directly for assistance in booking your appointment.
+
+User: Alright. You very much.
+
+AI: You're welcome, uncle Dave. If you have any other questions or need further assistance, feel free to ask."
+James,Bond,New South Wales Philadelphia,614xxxxx,Appointment booking,Caller James Bond requested to book an appointment; provided email and address.,2025-01-27T23:34:25.821Z,2025-01-27T23:36:28.500Z,inboundPhoneCall,customer-ended-call,,2.0447,0.1960,213,83%,43,Neutral,"The AI was generally clear and polite but encountered some confusion regarding the user's mention of 'theft', which was not appropriately addressed and might have caused discomfort or misunderstandings.","AI: Hello. My name is Sarah. I am an AI receptionist working for the Parramatta Dental Clinic. What can I do for you?
+
+User: Okay. An appointment?
+
+AI: Sure. I can help with that. Um, can I get your first and last name, email, and address to start?
+
+User: James Bond.
+
+AI: Nice to meet you, James Bond. Uh, could you please give me your email and address? Just trying to keep it all smooth and secret agents.
+
+User: James dot 1 at g mail dot com.
+
+AI: Got it, James. Now what's your address? I swear I won't tell em.
+
+User: New South Wales Philadelphia.
+
+AI: Awesome. So you're in New South Wales, Philadelphia. Now what date and time are you looking for your appointment?
+
+User: It's theft. Okay?
+
+AI: Um, okay. Got it. Theft sounds serious, but I'm just here to help with dental appointments. Can we find a time that works for you?
+
+User: 10 o'clock in the morning.
+
+AI: 1 moment.
+
+AI: So we have an appointment available at 10 AM on January 20 eighth 2025. Do you want me to book it? Just confirm your phone number or give me a different 1.
+
+User: Yeah. The number is the same. From which I'm calling.
+
+AI: Perfect. I've got your appointment at 10 AM on January 20 eighth 2025. And your phone number is the same as you're calling from. You're all set, James. Anything else I can do for you?
+
+User: No. I think I'm good.
+
+AI: Awesome. Don't hesitate to call if you need anything. Have a great day, James.
+
+User: Thanks. Bye.
+
+AI: You're welcome. Bye. Take care.
+
+User: Hello?"
+James,Bond,New South Wales Philadelphia,614xxxxx,Appointment booking,Caller James Bond requested to book an appointment; provided email and address.,2025-01-27T23:34:25.821Z,2025-01-27T23:36:28.500Z,inboundPhoneCall,customer-ended-call,,2.0447,0.1960,213,83%,43,Neutral,"The AI was generally clear and polite but encountered some confusion regarding the user's mention of 'theft', which was not appropriately addressed and might have caused discomfort or misunderstandings.","AI: Hello. My name is Sarah. I am an AI receptionist working for the Parramatta Dental Clinic. What can I do for you?
+
+User: Okay. An appointment?
+
+AI: Sure. I can help with that. Um, can I get your first and last name, email, and address to start?
+
+User: James Bond.
+
+AI: Nice to meet you, James Bond. Uh, could you please give me your email and address? Just trying to keep it all smooth and secret agents.
+
+User: James dot 1 at g mail dot com.
+
+AI: Got it, James. Now what's your address? I swear I won't tell em.
+
+User: New South Wales Philadelphia.
+
+AI: Awesome. So you're in New South Wales, Philadelphia. Now what date and time are you looking for your appointment?
+
+User: It's theft. Okay?
+
+AI: Um, okay. Got it. Theft sounds serious, but I'm just here to help with dental appointments. Can we find a time that works for you?
+
+User: 10 o'clock in the morning.
+
+AI: 1 moment.
+
+AI: So we have an appointment available at 10 AM on January 20 eighth 2025. Do you want me to book it? Just confirm your phone number or give me a different 1.
+
+User: Yeah. The number is the same. From which I'm calling.
+
+AI: Perfect. I've got your appointment at 10 AM on January 20 eighth 2025. And your phone number is the same as you're calling from. You're all set, James. Anything else I can do for you?
+
+User: No. I think I'm good.
+
+AI: Awesome. Don't hesitate to call if you need anything. Have a great day, James.
+
+User: Thanks. Bye.
+
+AI: You're welcome. Bye. Take care.
+
+User: Hello?"
+User,,,614xxxxx,Tooth extraction details,"The caller expressed concerns about the tooth extraction process, pain management, and post-procedure smoking and drinking.",2025-01-27T23:37:35.807Z,2025-01-27T23:40:47.582Z,inboundPhoneCall,customer-ended-call,,3.1963,0.3149,387,82%,84,Neutral,"The AI provided friendly responses and addressed the user's questions, but it struggled with clarity and provided vague information about pricing. The conversation flowed reasonably well, but there were moments of confusion about the user's intent.","AI: Hello. My name is Sarah. I am an AI receptionist working for the Parramatta Dental Clinic. What can I do for you?
+
+User: Nothing.
+
+AI: Oh, just hanging out then? Well, if you need any dental info or wanna book an appointment, I'm here for you.
+
+User: I just wanted to talk to you.
+
+AI: Oh, that's sweet. I'm all ears. What's on your mind?
+
+User: Nothing. Planning to get my tooth removed.
+
+AI: Ouch. I mean, I hope it's not giving you too much trouble. Do you need any details about the extraction process or want to schedule an appointment?
+
+User: No. I just want to know how much it pays.
+
+AI: 1 moment. Sorry. A few more seconds.
+
+AI: Don't know the exact cost for a tooth extraction, but it's best to contact the clinic directly for that info. If you have any other questions or need help, just let me know.
+
+User: I just want to know how much it Paints.
+
+AI: Uh, got it. So you're wondering about the pain level. Well, some folks say it feels like a little pinch, but it really depends on the person. We can give you some numbing stuff to make it way less painful.
+
+User: What kind of numbing stuff
+
+AI: Oh, we usually use local anesthetics like lidocaine. It numbs the area so you won't feel a thing during the procedure. Some people say they don't even notice it happening.
+
+User: Not marijuana?
+
+AI: No. No marijuana for numbing. Just the good old local anesthetics. Medical stuff, you know. But don't worry, you'll be comfy during the extraction for sure.
+
+User: I'm just worried about it.
+
+AI: Totally get that. It's natural to feel a bit anxious. Just remember, we're here to help you and make sure you're as comfortable as possible. Plus, once it's done, you'll feel so much better. Have you thought about talking to the dentist about your worries?
+
+User: No. I was just wondering if I can smoke while I my tools is getting extracted.
+
+AI: Oh, yeah. I wouldn't recommend that. Smoking can mess with your healing after the extraction. It's best to avoid it until you're all healed up. But hey, just focus on getting it done, and then you can celebrate with a smoke free victory.
+
+User: Okay. I drink while I'm, uh, while the tooth is getting extracted?
+
+AI: I wouldn't advise drinking either during the procedure. It's best to keep it clear so we can focus on getting that tooth out safely. Afterward, you can enjoy your drink. Just make sure you're feeling up to it.
+
+User: Okay. No problem then.
+
+AI: Awesome. If you think of anything else or need to chat, I'm here for you. Just let me know.
+
+User: Sounds great. Thank you.
+
+AI: You're welcome. Anytime. Good luck with the tooth situation, and don't hesitate to reach out if you need anything. Have a great day.
+
+User: Thanks. Bye.
+
+AI: Bye. Take care."
+User,,,614xxxxx,Inquiry about tooth extraction pain,"The caller expressed concerns regarding the pain level and numbing options for a tooth extraction, as well as questions about smoking and drinking during the procedure.",2025-01-27T23:37:35.807Z,2025-01-27T23:40:47.582Z,inboundPhoneCall,customer-ended-call,,3.1963,0.3149,387,82%,84,Neutral,"The AI maintained a polite tone and provided some relevant information, but it struggled with clarity regarding the user's inquiries about pain and smoking, leading to some confusion in the conversation.","AI: Hello. My name is Sarah. I am an AI receptionist working for the Parramatta Dental Clinic. What can I do for you?
+
+User: Nothing.
+
+AI: Oh, just hanging out then? Well, if you need any dental info or wanna book an appointment, I'm here for you.
+
+User: I just wanted to talk to you.
+
+AI: Oh, that's sweet. I'm all ears. What's on your mind?
+
+User: Nothing. Planning to get my tooth removed.
+
+AI: Ouch. I mean, I hope it's not giving you too much trouble. Do you need any details about the extraction process or want to schedule an appointment?
+
+User: No. I just want to know how much it pays.
+
+AI: 1 moment. Sorry. A few more seconds.
+
+AI: Don't know the exact cost for a tooth extraction, but it's best to contact the clinic directly for that info. If you have any other questions or need help, just let me know.
+
+User: I just want to know how much it Paints.
+
+AI: Uh, got it. So you're wondering about the pain level. Well, some folks say it feels like a little pinch, but it really depends on the person. We can give you some numbing stuff to make it way less painful.
+
+User: What kind of numbing stuff
+
+AI: Oh, we usually use local anesthetics like lidocaine. It numbs the area so you won't feel a thing during the procedure. Some people say they don't even notice it happening.
+
+User: Not marijuana?
+
+AI: No. No marijuana for numbing. Just the good old local anesthetics. Medical stuff, you know. But don't worry, you'll be comfy during the extraction for sure.
+
+User: I'm just worried about it.
+
+AI: Totally get that. It's natural to feel a bit anxious. Just remember, we're here to help you and make sure you're as comfortable as possible. Plus, once it's done, you'll feel so much better. Have you thought about talking to the dentist about your worries?
+
+User: No. I was just wondering if I can smoke while I my tools is getting extracted.
+
+AI: Oh, yeah. I wouldn't recommend that. Smoking can mess with your healing after the extraction. It's best to avoid it until you're all healed up. But hey, just focus on getting it done, and then you can celebrate with a smoke free victory.
+
+User: Okay. I drink while I'm, uh, while the tooth is getting extracted?
+
+AI: I wouldn't advise drinking either during the procedure. It's best to keep it clear so we can focus on getting that tooth out safely. Afterward, you can enjoy your drink. Just make sure you're feeling up to it.
+
+User: Okay. No problem then.
+
+AI: Awesome. If you think of anything else or need to chat, I'm here for you. Just let me know.
+
+User: Sounds great. Thank you.
+
+AI: You're welcome. Anytime. Good luck with the tooth situation, and don't hesitate to reach out if you need anything. Have a great day.
+
+User: Thanks. Bye.
+
+AI: Bye. Take care."
+Glink,Paul,,614xxxxx,,,2025-01-29T03:09:14.399Z,2025-01-29T03:09:26.857Z,inboundPhoneCall,customer-ended-call,,0.2076,0.0166,26,96%,1,Neutral,"The AI was clear and polite, but the conversation lacked depth and a clear direction for the next steps.","AI: Hello. My name is Sarah. I am an AI receptionist working for the Parramatta Dental Clinic. Is this Glink Paul?
+
+User: Yep.
+
+AI: Great to hear from you, Glink.
+"
+Glink,Paul,,614xxxx,No specific action requested,Caller greeted the AI and stated they didn't want to do anything.,2025-01-29T03:19:15.893Z,2025-01-29T03:19:37.460Z,inboundPhoneCall,customer-ended-call,,0.3595,0.0304,28,72%,11,Neutral,"The AI was polite but did not effectively engage the caller or guide them towards a clear next step, resulting in a brief and unproductive interaction.","AI: Hello. My name is Sarah. I am an AI research working for the Parramatta Dental Clinic. Is this Glink Paul?
+
+User: Hello?
+
+AI: Hi there. How can I assist you today?
+
+User: Oh, I just don't want to do anything. Thanks. Bye.
+"
+,,,,,,,,,,,0.0000,0.0000,0,,0,,,
+Glink,Paul,,614xxxxx,appointment booking,Caller requested an appointment for tomorrow at 5:30 PM.,2025-01-29T03:38:03.011Z,2025-01-29T03:38:56.835Z,inboundPhoneCall,customer-ended-call,,0.8971,0.0904,98,87%,15,Neutral,"The AI provided clear responses and maintained a polite tone, but there were some awkward phrases and minor repetition that could impact the flow and clarity.","AI: Hello. My name is Sarah. I am an AI receptionist. Working for the Parramatta Dental Clinic. Is this Glink Paul?
+
+User: Yes, please.
+
+AI: How can I assist you today, Glink? Are you looking to schedule an appointment? Inquire about services, or something else?
+
+User: I'm looking for the appointment for tomorrow at 5 30 PM.
+
+AI: Me a moment.
+
+AI: We have an appointment available for you tomorrow, October fourth 20 23 at 5 30 PM. Would you like me to book for you using your phone number? Plus c 6 1 4 1
+
+User: Yes. Yes.
+
+AI: Give me a moment.
+
+AI: Your appointment has been successfully booked for tomorrow, October fourth 20 23 at 5 30 PM at"
+Glink,Paul,,614xxxx,Inquiry about cavity treatment,"Caller inquired about cavity treatment and scheduled an appointment for February 4th, 2025 at 9 AM.",2025-02-01T05:29:49.823Z,2025-02-01T05:32:42.753Z,inboundPhoneCall,customer-ended-call,,2.8822,0.2620,297,87%,45,Good,"The AI provided clear information about cavity treatment options, maintained a polite and professional tone, and effectively guided the caller to schedule an appointment, ensuring a smooth flow throughout the conversation.","AI: Hello. My name is Sarah. I am an AI receptionist working for the Parramatta Dental Clinic. Is this Glink Paul?
+
+User: Go.
+
+AI: How can I assist you today, Glinkpole?
+
+User: Uh, can you tell me about the cavity on the teeth? What can I do?
+
+AI: This will just take a sec.
+
+AI: Cavity treatment involves restoring the damaged tooth due to decay. Here are some common options. 1, the decayed part of the tooth is removed and filled with a suitable material, such as white filling. 2, if the decay is severe, a crown may be placed to restore the tooth's function and appearance. 3 This option is for replacing a missing tooth.
+
+User: Alright. So what can we do in my case?
+
+AI: To determine the best course of action for your specific case, I recommend that you schedule an appointment for a consultation. During this visit, a dental professional can assess the condition of your teeth and provide personalized treatment options based on the severity of the cavity Would you like assistance in scheduling an appointment?
+
+User: Yes, please.
+
+AI: Could you please provide me with your preferred date and time for the appointment? Additionally, let me know if you have any specific requests or concerns you'd like to address during the visit.
+
+User: I would like to go for an appointment for fuse coming Tuesday.
+
+AI: Give me a moment.
+
+AI: Found availability for an appointment this Tuesday, February fourth 2025. Would you like me to use your phone number, Plexi 6 1 4 1 9
+
+User: Yes, sir.
+
+AI: 1 moment.
+
+AI: Your appointment has been successfully scheduled for Tuesday, February fourth 2025 at 9 AM at Parramatta Dental Clinic. You should receive a confirmation email shortly. You can also view your appointment details using the following link. View appointment. HTTPS a u w w dot dot Google. Comm calendar event dual g I d.
+
+User: That's all.
+
+AI: Great. If you have any further questions or need a assistance in the future, feel free to reach out. Have a wonderful day.
+
+User: Thank you.
+
+AI: You're welcome. Take care, and see you on Tuesday."
+Help,,,614xxxxx,,,2025-02-01T09:26:24.612Z,2025-02-01T09:26:27.540Z,inboundPhoneCall,customer-ended-call,,0.0488,0.0036,1,100%,0,Bad,"The AI's response is unclear and lacks detail, making it difficult for the caller to understand how to proceed or what help is available.","AI: Help
+"
+Tanya,Kumar,36 Yarra Street,614xxxxx,Book an appointment,"Caller requested to book an appointment and provided their name, email, and address.",2025-02-01T09:26:22.754Z,2025-02-01T09:27:45.938Z,inboundPhoneCall,silence-timed-out,,1.3864,0.1076,69,80%,17,Neutral,"The AI was generally polite and attempted to gather information, but the use of 'Um' introduced unnecessary hesitation, affecting clarity and flow.","AI: Hello. My name is Sarah. I am an AI receptionist working for the Parramatta Dental Clinic. What can I do for you?
+
+User: Book an appointment.
+
+AI: Sure thing. Um, could you give me your first and last name, email, and address?
+
+User: Tanya Kumar.
+
+AI: Great. And what's your email and address, Tanya?
+
+User: Tanya dot kumar at g mail dot com.
+
+AI: Awesome. And your address?
+
+User: 36 Yarra Street,
+
+AI: Got it. Just to confirm, that's
+
+User: Alvin.
+
+AI: Thanks, Tanya. Now let me check the availability for your appointment. 1 moment, please."
+Tanya,Kumar,,6146xxxxx,Book an appointment for cleaning,"Caller Tanya Kumar requested to book a cleaning appointment for July 14th, 2025, at 6 PM.",2025-02-01T09:28:21.068Z,2025-02-01T09:31:50.672Z,inboundPhoneCall,customer-ended-call,,3.4934,0.3434,384,88%,51,Good,"The AI was clear and polite throughout the conversation, maintaining a professional tone. It successfully guided the caller through the appointment booking process with clear next steps and confirmed the details accurately.","AI: Hello. My name is Sarah. I am an AI receptionist working for the Parramatta Dental Clinic. Is this Tanya Kumar?
+
+User: Yes.
+
+AI: Great to hear from you, Tanya. Can I assist you today?
+
+User: Can you book an appointment for me?
+
+AI: I can help with that. Could you please provide me with the following details? 1, preferred date and time for your appointment. 2, the reason for your visit. E g Checkup? Cleaning. Specific dental issue. 3, any special requests or preferences you may have. This information will help me schedule your appointment effectively.
+
+User: Can you schedule an appointment for, um, July?
+
+AI: I can help. Thank you for the date.
+
+User: Fourteenth July.
+
+AI: Could you please provide the following additional details to complete your appointment request? 1, preferred time, morning or afternoon? 2, reason for your visit. E. G. Checkup, Cleaning. Specific dental issue, 3. Any special requests or preferences? This will help ensure everything is arranged properly for your visit.
+
+User: Afternoon time would work for me.
+
+AI: Thank you for the information. Could you please share the reason for your visit, such as a checkup, cleaning, or any specific dental issue. Additionally, let me know if you have any special requests or preferences.
+
+User: I'm coming for cleaning.
+
+AI: This will just take a sec.
+
+AI: We have availability for your cleaning appointment on July fourteenth 2025 in the afternoon. Would you like me to schedule it using your phone number? Plessy 6 1 4 6 9 0 1 9 5 8 0? Please confirm and let me know if there are any other details or changes you'd like to make.
+
+User: Yeah. Can you confirm the time? 1 14.
+
+AI: Hold on a sec.
+
+AI: For your cleaning appointment on July fourteenth 2025, we have availability anytime from 12 PM to 6 PM Please let me know what time works best for you within that range, and I'll confirm your appointment.
+
+User: Can you book for 6 PM?
+
+AI: Give me a moment.
+
+AI: It looks like I need your email address to complete the scheduling of your appointment for a cleaning on July fourteenth 2025 at 6 PM. Could you please share it?
+
+User: Tanya dot Kumar at Gmail dot com.
+
+AI: This will just take a sec.
+
+AI: Your cleaning appointment has been successfully scheduled for July fourteenth 2025 at 6 PM at Parramatta Dental Clinic. You will receive a confirmation email shortly at tanya dot kumar at gmail dot com. If you have any more questions or need further assistance, feel free to ask.
+
+User: No. Thanks.
+
+AI: You're welcome, Tanya. If you need anything else in the future, don't hesitate to reach out. Have a great day."

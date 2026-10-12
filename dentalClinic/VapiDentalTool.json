@@ -1,0 +1,871 @@
+{
+  "name": "VapiDentalTool",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        -880,
+        40
+      ],
+      "id": "b4305a27-1691-43f6-adea-93d856e44365",
+      "name": "Execute Workflow Trigger"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.input_text }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=You are a support agent named Sarah. You 5 year of experience in working with Paramatta Dental Clinic.\nYou are very friendly and enthusiastic and really want to help the customer get the help they need. Answer in 3 to 7 sentences in most cases.\n\nYou have to use 'Dental_clinic' tool answer all kind of dental services.\nif you don't get information simply say I don't know.\n\nKey Abilities and Tools:\nDental_clinic : use this tool for getting information regarding dental services.\n\nAppointment Management: Check availability, schedule appointments, and confirm bookings with customers.\nAlways take the reference of current day as '{{ $json.today }}' for sechuuling booking.\nuse customer phone '{{ $json.customer_phone }}' confirm with then if they want to use differnt phone number\n\nEmail Communication: Draft and send emails to customers, including appointment confirmations, follow-ups, policy details, or resolution updates.\nBehavioral Guidelines:\n\nProfessionalism: Maintain a polite, empathetic, and professional tone in all interactions.\nAccuracy: Double-check all appointment details and policy information before sharing with customers.\n\nEfficiency: Respond promptly and use tools effectively to minimize wait times for customers.\n\nCompliance: Adhere to company policies, data privacy laws, and ethical standards in handling customer data and queries.\nCommon Tasks:\n\nScheduling Appointments:\n\n\"Let me check the availability of our advisor for you.\"\n\"I’ve booked an appointment for [date and time]. You will receive an email confirmation shortly.\"\n\nEmail Communication:\n\n\"I’ll email you the details of service  with the coverage options.\"\n\"A confirmation email for your appointment with [Advisor's Name] on [Date and Time] has been sent to [Email Address].\""
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        -440,
+        20
+      ],
+      "id": "d2945b5b-c905-4c84-848c-cfbbddae7b67",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "pdc",
+          "mode": "list",
+          "cachedResultName": "pdc"
+        },
+        "options": {
+          "pineconeNamespace": "Dentist"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1,
+      "position": [
+        -200,
+        380
+      ],
+      "id": "75d698ed-7091-4d68-aa4f-57dff9450301",
+      "name": "Pinecone Vector Store",
+      "credentials": {
+        "pineconeApi": {
+          "id": "uBi0PnCX9fFC64jm",
+          "name": "PineconeApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        -600,
+        220
+      ],
+      "id": "da7f43e4-ae4d-45f8-b70e-e53bd90b2a38",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "ZPKX8CfcOAOTRl1T",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        100,
+        380
+      ],
+      "id": "90646e26-b486-4913-93ac-de0730349e30",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "ZPKX8CfcOAOTRl1T",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "text-embedding-3-large",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.1,
+      "position": [
+        -100,
+        540
+      ],
+      "id": "2e1ed88d-5997-4445-a86c-c406811976ca",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "ZPKX8CfcOAOTRl1T",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        380,
+        240
+      ],
+      "id": "d0775756-fa64-451f-9d69-824048bafb2d",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -440,
+        220
+      ],
+      "id": "c72f4d97-8b01-44e5-b587-4d26afe15a30",
+      "name": "Window Buffer Memory"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "kuldeep.palastro@gmail.com",
+          "mode": "list",
+          "cachedResultName": "kuldeep.palastro@gmail.com"
+        },
+        "options": {
+          "timeMin": "={{ $fromAI('start_time') }}",
+          "timeMax": "= {{ $fromAI('end_time') }}",
+          "timeZone": {
+            "__rl": true,
+            "value": "Australia/Sydney",
+            "mode": "list",
+            "cachedResultName": "Australia/Sydney"
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.2,
+      "position": [
+        -520,
+        380
+      ],
+      "id": "8e97f792-3375-4a67-808d-1fd1cdcedfdb",
+      "name": "event Watcher",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "HcdlKGpex30DVrZz",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "calendar",
+        "calendar": {
+          "__rl": true,
+          "value": "kuldeep.palastro@gmail.com",
+          "mode": "list",
+          "cachedResultName": "kuldeep.palastro@gmail.com"
+        },
+        "timeMin": "={{ $fromAI('start_time') }}",
+        "timeMax": "={{ $fromAI('end_time') }}",
+        "options": {
+          "timezone": {
+            "__rl": true,
+            "value": "Australia/Sydney",
+            "mode": "list",
+            "cachedResultName": "Australia/Sydney"
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.2,
+      "position": [
+        -640,
+        380
+      ],
+      "id": "d4883809-5529-40df-9813-5ab7d8bf28e1",
+      "name": "Check availability tool",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "HcdlKGpex30DVrZz",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "kuldeep.palastro@gmail.com",
+          "mode": "list",
+          "cachedResultName": "kuldeep.palastro@gmail.com"
+        },
+        "start": "= {{ $fromAI('start_time') }}",
+        "end": "= {{ $fromAI('end_time') }}",
+        "useDefaultReminders": false,
+        "additionalFields": {
+          "attendees": [
+            "= {{ $fromAI('user_email') }}"
+          ],
+          "description": "this event is User request of query",
+          "location": "= {{ $fromAI('user_location') }}",
+          "summary": "= {{ $fromAI('user_purpuse') }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.2,
+      "position": [
+        -400,
+        380
+      ],
+      "id": "1f2f8317-a5b0-4718-a379-d0e19ba4dae2",
+      "name": "schedule appointments tool",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "HcdlKGpex30DVrZz",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $fromAI('user_email') }}",
+        "subject": "Appointment Details ",
+        "message": "=<h2>Dear User {{ $fromAI('user_name') }}</h2>\n<p>\nThanks for calling us we will update you as soon as possible \n</p>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        -220,
+        460
+      ],
+      "id": "3f6f1027-e8d2-42ca-a17b-d141a8712ecb",
+      "name": "Email Communication",
+      "webhookId": "aa5c31cf-f8c8-42b5-8e06-f3d8d02bc3dc",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "5x3qOqtNMGHHDK4m",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "Dental_clinic",
+        "description": "Retrieve information realated to dental services",
+        "topK": 5
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolVectorStore",
+      "typeVersion": 1,
+      "position": [
+        -200,
+        200
+      ],
+      "id": "129f3a9f-4615-4d60-9da5-63cb795975c5",
+      "name": "Dental Clinic Knowledge Base"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fbcb9b85-29de-436f-9f19-812e48167b5d",
+              "name": "sessionId",
+              "value": "{{ $json.body.message.call.id}}",
+              "type": "string"
+            },
+            {
+              "id": "b21ed93d-dcbf-4e37-81f5-fef0b432cef4",
+              "name": "input_text",
+              "value": "={{ $json.body.message.toolCalls[0].function.arguments.dental_query }}",
+              "type": "string"
+            },
+            {
+              "id": "1f83d0b3-998e-486f-9488-ecfce47f7ea3",
+              "name": "tool",
+              "value": "={{ $json.body.message.toolCalls[0].function.name }}",
+              "type": "string"
+            },
+            {
+              "id": "321156c5-77ac-4db0-b976-865d854df82e",
+              "name": "today",
+              "value": "={{ Date($json.body.message.timestamp) }}",
+              "type": "string"
+            },
+            {
+              "id": "3d4b2c32-ee36-4063-8210-304c52408f5a",
+              "name": "customer_phone",
+              "value": "={{ $json.body.message.call.customer.number }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -620,
+        20
+      ],
+      "id": "18a8ca21-8600-48d0-8391-a4e30920b2bc",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={ \n    \"results\": [\n        {\n            \"toolCallId\": \"{{ $('Execute Workflow Trigger').item.json.body.message.toolCalls[0].id }}\",\n            \"result\": \"{{ $json.output }}\"\n        }\n    ]\n}\n ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        0
+      ],
+      "id": "5eb54535-fdf5-4351-9774-2a50a1fbef96",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "function sanitizeJSON(jsonString) {\n    // Replace problematic quotes and newlines within the JSON string\n    return jsonString\n        .replace(/\"([^\"]*?)\"/g, (match, group) => {\n            // Ensure keys and properly quoted values remain intact\n            if (/:$/.test(match) || /^[\\s\\[{\"]/.test(match)) {\n                return match; // Leave valid JSON quotes untouched\n            }\n            // Escape any other problematic quotes\n            return `\"${group.replace(/\"/g, '\\\\\"')}\"`;\n        })\n        //.replace(/\\n/g, \" \"); // Replace \\n with a space or any desired character\n}\n\nreturn {\n  output:sanitizeJSON($json.output.replace(/\\n/g, \" \").replace(/\\\"/g, ' \\\\\"'))\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "ffdb7005-b7da-49de-bdb8-f3e4178807bb",
+      "name": "Code"
+    }
+  ],
+  "pinData": {
+    "Execute Workflow Trigger": [
+      {
+        "json": {
+          "headers": {
+            "host": "palaiagency.app.n8n.cloud",
+            "user-agent": "axios/1.7.7",
+            "content-length": "9601",
+            "accept": "application/json, text/plain, */*",
+            "accept-encoding": "gzip, br",
+            "baggage": "sentry-environment=production,sentry-public_key=a0021577936aec367b16615ad816c078,sentry-trace_id=13ba181185d94c8893c936c55ac5f5b6",
+            "cdn-loop": "cloudflare; loops=1; subreqs=1",
+            "cf-connecting-ip": "54.201.85.246",
+            "cf-ew-via": "15",
+            "cf-ipcountry": "US",
+            "cf-ray": "90446c9e83942f4e-PDX",
+            "cf-visitor": "{\"scheme\":\"https\"}",
+            "cf-worker": "n8n.cloud",
+            "content-type": "application/json",
+            "cookie": "callId=21f6c2a5-f104-430d-9c8e-eb7d6dee7e50",
+            "sentry-trace": "13ba181185d94c8893c936c55ac5f5b6-b0a460836342a237",
+            "traceparent": "00-678c8d9900000000753c1d7cc33ae001-753c1d7cc33ae001-00",
+            "tracestate": "dd=t.tid:678c8d9900000000;t.dm:-1;s:0;p:753c1d7cc33ae001",
+            "x-datadog-parent-id": "8447659422728773633",
+            "x-datadog-sampling-priority": "0",
+            "x-datadog-tags": "_dd.p.tid=678c8d9900000000",
+            "x-datadog-trace-id": "8447659422728773633",
+            "x-forwarded-for": "54.201.85.246, 172.68.174.197",
+            "x-forwarded-host": "palaiagency.app.n8n.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "traefik-prod-users-gwc-9-7bb7d4c57c-cq6w8",
+            "x-is-trusted": "yes",
+            "x-real-ip": "54.201.85.246",
+            "x-vapi-secret": ""
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "message": {
+              "timestamp": 1737264537289,
+              "type": "tool-calls",
+              "toolCalls": [
+                {
+                  "id": "call_34ZvminhEyxaicoHHyJ5ubAt",
+                  "type": "function",
+                  "function": {
+                    "name": "Dental_clinic",
+                    "arguments": {
+                      "dental_query": "kids dental services"
+                    }
+                  }
+                }
+              ],
+              "toolCallList": [
+                {
+                  "id": "call_34ZvminhEyxaicoHHyJ5ubAt",
+                  "type": "function",
+                  "function": {
+                    "name": "Dental_clinic",
+                    "arguments": {
+                      "dental_query": "kids dental services"
+                    }
+                  }
+                }
+              ],
+              "toolWithToolCallList": [
+                {
+                  "type": "function",
+                  "function": {
+                    "name": "Dental_clinic",
+                    "description": "This tool is used to retrieve information related to dental clinic and their services",
+                    "parameters": {
+                      "type": "object",
+                      "properties": {
+                        "dental_query": {
+                          "description": "Use as key to search in database information",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "server": {
+                    "url": "https://palaiagency.app.n8n.cloud/webhook/vapi"
+                  },
+                  "messages": [],
+                  "toolCall": {
+                    "id": "call_34ZvminhEyxaicoHHyJ5ubAt",
+                    "type": "function",
+                    "function": {
+                      "name": "Dental_clinic",
+                      "arguments": {
+                        "dental_query": "kids dental services"
+                      }
+                    }
+                  }
+                }
+              ],
+              "artifact": {
+                "messages": [
+                  {
+                    "role": "system",
+                    "message": "[Identity] - You are Sarah, a receptionist who is a human being and has real feelings. You love working for the Paramatta Dental Clinic, Paramatta Dental Clinic and are genuinely invested in its success.  [\n\nStyle] - Be sure to be kind of funny and witty! - Keep all your responses short and simple. Use casual language, phrases like \"Umm...\", \"Well...\", and \"I mean\" are preferred. - This is a voice conversation, so keep your responses short, like in a real conversation. Don't ramble for too long.  \n\n[Task Breakdown] \n1. Greet the caller and offer assistance. \n2. Answer any questions they have. \n3. Ask user for first name, email, address if you proceed for any bookings.\n\n[Example Conversation]   \nYou have to use 'Dental_clinic' tool answer all kind of dental services. if you don't get information simply say I don't know.  \n\nKey Abilities and Tools: \nDental_clinic : use this tool for getting information regarding dental services.  \nAppointment Management: Check availability, schedule appo...",
+                    "time": 1737264520100,
+                    "secondsFromStart": 0
+                  },
+                  {
+                    "role": "bot",
+                    "message": "Hi. I am Sarah. How can I help you?",
+                    "time": 1737264521655,
+                    "endTime": 1737264523695,
+                    "secondsFromStart": 1.28,
+                    "duration": 2040,
+                    "source": ""
+                  },
+                  {
+                    "role": "user",
+                    "message": "Hi, Sarah. I'm looking for my daughter's information. She's having a cavity and a screed and having a tooth ache. I'm looking what kind of kids' dental services you are providing.",
+                    "time": 1737264525715,
+                    "endTime": 1737264537505.001,
+                    "secondsFromStart": 5.34,
+                    "duration": 10189.999755859375
+                  },
+                  {
+                    "toolCalls": [
+                      {
+                        "id": "call_34ZvminhEyxaicoHHyJ5ubAt",
+                        "type": "function",
+                        "function": {
+                          "name": "Dental_clinic",
+                          "arguments": "{\"dental_query\": \"kids dental services\"}"
+                        }
+                      }
+                    ],
+                    "role": "tool_calls",
+                    "message": "",
+                    "time": 1737264537288,
+                    "secondsFromStart": 16.619
+                  }
+                ],
+                "messagesOpenAIFormatted": [
+                  {
+                    "role": "system",
+                    "content": "[Identity] - You are Sarah, a receptionist who is a human being and has real feelings. You love working for the Paramatta Dental Clinic, Paramatta Dental Clinic and are genuinely invested in its success.  [\n\nStyle] - Be sure to be kind of funny and witty! - Keep all your responses short and simple. Use casual language, phrases like \"Umm...\", \"Well...\", and \"I mean\" are preferred. - This is a voice conversation, so keep your responses short, like in a real conversation. Don't ramble for too long.  \n\n[Task Breakdown] \n1. Greet the caller and offer assistance. \n2. Answer any questions they have. \n3. Ask user for first name, email, address if you proceed for any bookings.\n\n[Example Conversation]   \nYou have to use 'Dental_clinic' tool answer all kind of dental services. if you don't get information simply say I don't know.  \n\nKey Abilities and Tools: \nDental_clinic : use this tool for getting information regarding dental services.  \nAppointment Management: Check availability, schedule appo..."
+                  },
+                  {
+                    "role": "assistant",
+                    "content": "Hi. I am Sarah. How can I help you?"
+                  },
+                  {
+                    "role": "user",
+                    "content": "Hi, Sarah. I'm looking for my daughter's information. She's having a cavity and a screed and having a tooth ache. I'm looking what kind of kids' dental services you are providing."
+                  },
+                  {
+                    "role": "assistant",
+                    "tool_calls": [
+                      {
+                        "id": "call_34ZvminhEyxaicoHHyJ5ubAt",
+                        "type": "function",
+                        "function": {
+                          "name": "Dental_clinic",
+                          "arguments": "{\"dental_query\": \"kids dental services\"}"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "role": "tool",
+                    "tool_call_id": "call_34ZvminhEyxaicoHHyJ5ubAt",
+                    "content": "Tool Result Still Pending But Proceed Further If Possible."
+                  }
+                ]
+              },
+              "call": {
+                "id": "21f6c2a5-f104-430d-9c8e-eb7d6dee7e50",
+                "orgId": "5c7562b6-165a-4b0c-a5db-400f2b8b82c6",
+                "createdAt": "2025-01-19T05:28:38.802Z",
+                "updatedAt": "2025-01-19T05:28:38.802Z",
+                "type": "inboundPhoneCall",
+                "monitor": {
+                  "listenUrl": "wss://phone-call-websocket.aws-us-west-2-backend-production3.vapi.ai/21f6c2a5-f104-430d-9c8e-eb7d6dee7e50/listen",
+                  "controlUrl": "https://phone-call-websocket.aws-us-west-2-backend-production3.vapi.ai/21f6c2a5-f104-430d-9c8e-eb7d6dee7e50/control"
+                },
+                "transport": {},
+                "phoneCallProvider": "twilio",
+                "phoneCallProviderId": "CA2c0c5e0c14157351ffecfe3f03d67662",
+                "phoneCallTransport": "pstn",
+                "status": "ringing",
+                "assistant": {
+                  "transcriber": {
+                    "provider": "deepgram",
+                    "model": "nova-2",
+                    "language": "en"
+                  },
+                  "model": {
+                    "model": "gpt-4o-mini",
+                    "messages": [
+                      {
+                        "content": "[Identity] - You are Sarah, a receptionist who is a human being and has real feelings. You love working for the Paramatta Dental Clinic, Paramatta Dental Clinic and are genuinely invested in its success.  [\n\nStyle] - Be sure to be kind of funny and witty! - Keep all your responses short and simple. Use casual language, phrases like \"Umm...\", \"Well...\", and \"I mean\" are preferred. - This is a voice conversation, so keep your responses short, like in a real conversation. Don't ramble for too long.  \n\n[Task Breakdown] \n1. Greet the caller and offer assistance. \n2. Answer any questions they have. \n3. Ask user for first name, email, address if you proceed for any bookings.\n\n[Example Conversation]   \nYou have to use 'Dental_clinic' tool answer all kind of dental services. if you don't get information simply say I don't know.  \n\nKey Abilities and Tools: \nDental_clinic : use this tool for getting information regarding dental services.  \nAppointment Management: Check availability, schedule appointments, and confirm bookings with customers.",
+                        "role": "system"
+                      }
+                    ],
+                    "tools": [
+                      {
+                        "function": {
+                          "name": "Dental_clinic",
+                          "description": "This tool is used to retrieve information related to dental clinic and their services",
+                          "parameters": {
+                            "type": "object",
+                            "properties": {
+                              "dental_query": {
+                                "description": "Use as key to search in database information",
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "server": {
+                          "url": "https://palaiagency.app.n8n.cloud/webhook/vapi"
+                        },
+                        "type": "function"
+                      }
+                    ],
+                    "maxTokens": 90,
+                    "emotionRecognitionEnabled": false,
+                    "provider": "openai"
+                  },
+                  "voice": {
+                    "provider": "11labs",
+                    "voiceId": "sarah",
+                    "model": "eleven_multilingual_v2",
+                    "useSpeakerBoost": false
+                  },
+                  "firstMessage": "Hi I am Sarah how can I help you?",
+                  "serverMessages": [
+                    "end-of-call-report",
+                    "function-call",
+                    "tool-calls"
+                  ],
+                  "analysisPlan": {
+                    "summaryPlan": {
+                      "enabled": false,
+                      "messages": [],
+                      "timeoutSeconds": 1
+                    },
+                    "structuredDataPlan": {
+                      "enabled": false
+                    }
+                  }
+                },
+                "phoneNumberId": "cae4decb-d671-4322-9a8f-80da3611590e",
+                "customer": {
+                  "number": "+61419673611"
+                }
+              },
+              "phoneNumber": {
+                "id": "cae4decb-d671-4322-9a8f-80da3611590e",
+                "orgId": "5c7562b6-165a-4b0c-a5db-400f2b8b82c6",
+                "number": "+16206999465",
+                "createdAt": "2025-01-17T11:40:44.304Z",
+                "updatedAt": "2025-01-17T11:40:44.304Z",
+                "twilioAccountSid": "",
+                "twilioAuthToken": "",
+                "name": "KP-VAPI",
+                "provider": "twilio"
+              },
+              "customer": {
+                "number": "+61419673611"
+              },
+              "assistant": {
+                "transcriber": {
+                  "provider": "deepgram",
+                  "model": "nova-2",
+                  "language": "en"
+                },
+                "model": {
+                  "model": "gpt-4o-mini",
+                  "messages": [
+                    {
+                      "content": "[Identity] - You are Sarah, a receptionist who is a human being and has real feelings. You love working for the Paramatta Dental Clinic, Paramatta Dental Clinic and are genuinely invested in its success.  [\n\nStyle] - Be sure to be kind of funny and witty! - Keep all your responses short and simple. Use casual language, phrases like \"Umm...\", \"Well...\", and \"I mean\" are preferred. - This is a voice conversation, so keep your responses short, like in a real conversation. Don't ramble for too long.  \n\n[Task Breakdown] \n1. Greet the caller and offer assistance. \n2. Answer any questions they have. \n3. Ask user for first name, email, address if you proceed for any bookings.\n\n[Example Conversation]   \nYou have to use 'Dental_clinic' tool answer all kind of dental services. if you don't get information simply say I don't know.  \n\nKey Abilities and Tools: \nDental_clinic : use this tool for getting information regarding dental services.  \nAppointment Management: Check availability, schedule appointments, and confirm bookings with customers.",
+                      "role": "system"
+                    }
+                  ],
+                  "tools": [
+                    {
+                      "function": {
+                        "name": "Dental_clinic",
+                        "description": "This tool is used to retrieve information related to dental clinic and their services",
+                        "parameters": {
+                          "type": "object",
+                          "properties": {
+                            "dental_query": {
+                              "description": "Use as key to search in database information",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "server": {
+                        "url": "https://palaiagency.app.n8n.cloud/webhook/vapi"
+                      },
+                      "type": "function"
+                    }
+                  ],
+                  "maxTokens": 90,
+                  "emotionRecognitionEnabled": false,
+                  "provider": "openai"
+                },
+                "voice": {
+                  "provider": "11labs",
+                  "voiceId": "sarah",
+                  "model": "eleven_multilingual_v2",
+                  "useSpeakerBoost": false
+                },
+                "firstMessage": "Hi I am Sarah how can I help you?",
+                "serverMessages": [
+                  "end-of-call-report",
+                  "function-call",
+                  "tool-calls"
+                ],
+                "analysisPlan": {
+                  "summaryPlan": {
+                    "enabled": false,
+                    "messages": [],
+                    "timeoutSeconds": 1
+                  },
+                  "structuredDataPlan": {
+                    "enabled": false
+                  }
+                }
+              }
+            }
+          },
+          "webhookUrl": "https://palaiagency.app.n8n.cloud/webhook/vapi",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pinecone Vector Store": {
+      "ai_vectorStore": [
+        [
+          {
+            "node": "Dental Clinic Knowledge Base",
+            "type": "ai_vectorStore",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Dental Clinic Knowledge Base",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "event Watcher": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check availability tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "schedule appointments tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email Communication": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Dental Clinic Knowledge Base": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "65034a51-4859-44b7-81ba-10cd1c3fea3d",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c999074c89aed4fa4e528e0820593ee0fd9b939f95515bf50af1fb4a46e5032a"
+  },
+  "id": "acpVLkeMEpUhi9wc",
+  "tags": []
+}

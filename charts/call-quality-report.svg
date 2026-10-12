@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="967" viewBox="0 0 1040 967" role="img" aria-label="Call quality report: 2 AI voice calls graded by an LLM judge">
+<title>AI voice agent call quality report</title>
+<rect x="0" y="0" width="1040" height="967" rx="14" fill="#fcfcfb" stroke="rgba(11,11,11,0.10)" stroke-width="1"/>
+<text x="32.0" y="54.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="23" fill="#0b0b0b" font-weight="600" text-anchor="start">AI Voice Agent — Call Quality Report</text>
+<text x="32.0" y="77.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12.5" fill="#52514e" font-weight="400" text-anchor="start">Real-estate outbound campaign · Pal Realty · Vapi voice agent orchestrated by n8n · every call graded by an LLM-as-judge</text>
+<text x="1008.0" y="54.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#898781" font-weight="500" text-anchor="end">n8n + Vapi</text>
+<text x="1008.0" y="72.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#898781" font-weight="400" text-anchor="end">Jan 2025</text>
+<line x1="32" y1="98" x2="1008" y2="98" stroke="#e1e0d9" stroke-width="1"/>
+<rect x="32.0" y="124" width="184.0" height="86" rx="10" fill="#f9f9f7" stroke="rgba(11,11,11,0.10)" stroke-width="1"/>
+<text x="46.0" y="148.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#898781" font-weight="500" text-anchor="start">Leads in campaign</text>
+<text x="46.0" y="180.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="28" fill="#0b0b0b" font-weight="600" text-anchor="start">3</text>
+<text x="46.0" y="198.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#52514e" font-weight="400" text-anchor="start">2 with call data</text>
+<rect x="230.0" y="124" width="184.0" height="86" rx="10" fill="#f9f9f7" stroke="rgba(11,11,11,0.10)" stroke-width="1"/>
+<text x="244.0" y="148.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#898781" font-weight="500" text-anchor="start">Calls analysed</text>
+<text x="244.0" y="180.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="28" fill="#0b0b0b" font-weight="600" text-anchor="start">2</text>
+<text x="244.0" y="198.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#52514e" font-weight="400" text-anchor="start">graded end to end</text>
+<rect x="428.0" y="124" width="184.0" height="86" rx="10" fill="#f9f9f7" stroke="rgba(11,11,11,0.10)" stroke-width="1"/>
+<text x="442.0" y="148.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#898781" font-weight="500" text-anchor="start">Leads qualified</text>
+<text x="442.0" y="180.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="28" fill="#0b0b0b" font-weight="600" text-anchor="start">1</text>
+<text x="442.0" y="198.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#52514e" font-weight="400" text-anchor="start">interest + follow-up consent</text>
+<rect x="626.0" y="124" width="184.0" height="86" rx="10" fill="#f9f9f7" stroke="rgba(11,11,11,0.10)" stroke-width="1"/>
+<text x="640.0" y="148.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#898781" font-weight="500" text-anchor="start">AI talk share</text>
+<text x="640.0" y="180.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="28" fill="#0b0b0b" font-weight="600" text-anchor="start">78%</text>
+<text x="640.0" y="198.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#52514e" font-weight="400" text-anchor="start">of all words spoken</text>
+<rect x="824.0" y="124" width="184.0" height="86" rx="10" fill="#f9f9f7" stroke="rgba(11,11,11,0.10)" stroke-width="1"/>
+<text x="838.0" y="148.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#898781" font-weight="500" text-anchor="start">Call spend</text>
+<text x="838.0" y="180.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="28" fill="#0b0b0b" font-weight="600" text-anchor="start">$0.24</text>
+<text x="838.0" y="198.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#52514e" font-weight="400" text-anchor="start">$0.12 per call</text>
+<text x="32.0" y="253.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="14.5" fill="#0b0b0b" font-weight="600" text-anchor="start">Who did the talking</text>
+<text x="32.0" y="271.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#52514e" font-weight="400" text-anchor="start">Share of words spoken by the agent vs the caller. A cold call reads as a conversation near 50/50; above ~70% the agent is monologuing.</text>
+<rect x="32" y="282" width="10" height="10" rx="2.5" fill="#2a78d6"/>
+<text x="48.0" y="291.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#52514e" font-weight="500" text-anchor="start">AI agent</text>
+<rect x="140" y="282" width="10" height="10" rx="2.5" fill="#eb6834"/>
+<text x="156.0" y="291.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#52514e" font-weight="500" text-anchor="start">Caller</text>
+<text x="32.0" y="331.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="13" fill="#0b0b0b" font-weight="600" text-anchor="start">Kuldeep</text>
+<text x="32.0" y="346.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#898781" font-weight="400" text-anchor="start">0m 16s call</text>
+<rect x="164" y="320.0" width="844" height="22" rx="4" fill="#f9f9f7"/>
+<path d="M 168.0 320.0 H 752.2 V 342.0 H 168.0 A 4.0 4.0 0 0 1 164.0 338.0 V 324.0 A 4.0 4.0 0 0 1 168.0 320.0 Z" fill="#2a78d6"/>
+<path d="M 754.2 320.0 H 1004.0 A 4.0 4.0 0 0 1 1008.0 324.0 V 338.0 A 4.0 4.0 0 0 1 1004.0 342.0 H 754.2 V 320.0 Z" fill="#eb6834"/>
+<text x="176.0" y="335.5" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#ffffff" font-weight="600" text-anchor="start">AI 70%</text>
+<text x="766.2" y="335.5" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#ffffff" font-weight="600" text-anchor="start">Caller 30%</text>
+<text x="32.0" y="373.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="13" fill="#0b0b0b" font-weight="600" text-anchor="start">Kush</text>
+<text x="32.0" y="388.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#898781" font-weight="400" text-anchor="start">1m 38s call</text>
+<rect x="164" y="362.0" width="844" height="22" rx="4" fill="#f9f9f7"/>
+<path d="M 168.0 362.0 H 831.7 V 384.0 H 168.0 A 4.0 4.0 0 0 1 164.0 380.0 V 366.0 A 4.0 4.0 0 0 1 168.0 362.0 Z" fill="#2a78d6"/>
+<path d="M 833.7 362.0 H 1004.0 A 4.0 4.0 0 0 1 1008.0 366.0 V 380.0 A 4.0 4.0 0 0 1 1004.0 384.0 H 833.7 V 362.0 Z" fill="#eb6834"/>
+<text x="176.0" y="377.5" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#ffffff" font-weight="600" text-anchor="start">AI 79%</text>
+<text x="845.7" y="377.5" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#ffffff" font-weight="600" text-anchor="start">Caller 21%</text>
+<line x1="32" y1="406" x2="1008" y2="406" stroke="#e1e0d9" stroke-width="1"/>
+<text x="32.0" y="447.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="14.5" fill="#0b0b0b" font-weight="600" text-anchor="start">Judge verdict</text>
+<text x="32.0" y="465.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#52514e" font-weight="400" text-anchor="start">Rubric: clarity, tone, conversational flow, and whether the caller was guided to a clear next step. Written by the n8n information-extractor node on every</text>
+<text x="32.0" y="481.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#52514e" font-weight="400" text-anchor="start">end-of-call report.</text>
+<rect x="32" y="504" width="92" height="26" rx="13" fill="#f9f9f7" stroke="rgba(11,11,11,0.10)" stroke-width="1"/>
+<circle cx="48" cy="517.0" r="5" fill="#d03b3b"/>
+<text x="62.0" y="521.5" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12.5" fill="#0b0b0b" font-weight="600" text-anchor="start">Bad</text>
+<text x="140.0" y="521.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="13.5" fill="#0b0b0b" font-weight="600" text-anchor="start">Kuldeep</text>
+<text x="214.0" y="521.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#52514e" font-weight="400" text-anchor="start">The AI&#x27;s response did not conclude the call appropriately and seemed to misunderstand the</text>
+<text x="214.0" y="538.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#52514e" font-weight="400" text-anchor="start">user&#x27;s desire to end the conversation, which led to confusion.</text>
+<rect x="32" y="575" width="92" height="26" rx="13" fill="#f9f9f7" stroke="rgba(11,11,11,0.10)" stroke-width="1"/>
+<circle cx="48" cy="588.0" r="5" fill="#fab219"/>
+<text x="62.0" y="592.5" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12.5" fill="#0b0b0b" font-weight="600" text-anchor="start">Neutral</text>
+<text x="140.0" y="592.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="13.5" fill="#0b0b0b" font-weight="600" text-anchor="start">Kush</text>
+<text x="214.0" y="592.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#52514e" font-weight="400" text-anchor="start">The AI was generally polite and maintained a professional tone, but there were some issues</text>
+<text x="214.0" y="609.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#52514e" font-weight="400" text-anchor="start">with clarity and flow, particularly in summarizing the user&#x27;s property information and a</text>
+<text x="214.0" y="626.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#52514e" font-weight="400" text-anchor="start">slight mispronunciation of the user&#x27;s name.</text>
+<line x1="32" y1="667" x2="1008" y2="667" stroke="#e1e0d9" stroke-width="1"/>
+<text x="32.0" y="708.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="14.5" fill="#0b0b0b" font-weight="600" text-anchor="start">Campaign funnel</text>
+<text x="32.0" y="726.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#52514e" font-weight="400" text-anchor="start">Where the leads went</text>
+<text x="32.0" y="769.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#52514e" font-weight="500" text-anchor="start">In campaign list</text>
+<rect x="174" y="754.0" width="310" height="22" rx="4" fill="#f9f9f7"/>
+<path d="M 178.0 754.0 H 480.0 A 4.0 4.0 0 0 1 484.0 758.0 V 772.0 A 4.0 4.0 0 0 1 480.0 776.0 H 178.0 A 4.0 4.0 0 0 1 174.0 772.0 V 758.0 A 4.0 4.0 0 0 1 178.0 754.0 Z" fill="#86b6ef"/>
+<text x="474.0" y="769.5" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#ffffff" font-weight="600" text-anchor="end">3</text>
+<text x="32.0" y="809.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#52514e" font-weight="500" text-anchor="start">Call data captured</text>
+<rect x="174" y="794.0" width="310" height="22" rx="4" fill="#f9f9f7"/>
+<path d="M 178.0 794.0 H 376.7 A 4.0 4.0 0 0 1 380.7 798.0 V 812.0 A 4.0 4.0 0 0 1 376.7 816.0 H 178.0 A 4.0 4.0 0 0 1 174.0 812.0 V 798.0 A 4.0 4.0 0 0 1 178.0 794.0 Z" fill="#3987e5"/>
+<text x="370.7" y="809.5" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#ffffff" font-weight="600" text-anchor="end">2</text>
+<text x="32.0" y="849.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#52514e" font-weight="500" text-anchor="start">Qualified leads</text>
+<rect x="174" y="834.0" width="310" height="22" rx="4" fill="#f9f9f7"/>
+<path d="M 178.0 834.0 H 273.3 A 4.0 4.0 0 0 1 277.3 838.0 V 852.0 A 4.0 4.0 0 0 1 273.3 856.0 H 178.0 A 4.0 4.0 0 0 1 174.0 852.0 V 838.0 A 4.0 4.0 0 0 1 178.0 834.0 Z" fill="#1c5cab"/>
+<text x="267.3" y="849.5" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#ffffff" font-weight="600" text-anchor="end">1</text>
+<text x="528.0" y="708.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="14.5" fill="#0b0b0b" font-weight="600" text-anchor="start">Cost &amp; duration</text>
+<text x="528.0" y="726.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#52514e" font-weight="400" text-anchor="start">Billed by Vapi per call</text>
+<text x="528.0" y="745.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#898781" font-weight="500" text-anchor="start">Caller</text>
+<text x="656.0" y="745.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#898781" font-weight="500" text-anchor="end">Duration</text>
+<text x="772.0" y="745.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#898781" font-weight="500" text-anchor="end">Cost</text>
+<text x="1008.0" y="745.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#898781" font-weight="500" text-anchor="end">Per min</text>
+<line x1="528" y1="755" x2="1008" y2="755" stroke="#c3c2b7" stroke-width="1"/>
+<text x="528.0" y="775.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12.5" fill="#0b0b0b" font-weight="600" text-anchor="start" style="font-variant-numeric:tabular-nums">Kuldeep</text>
+<text x="656.0" y="775.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12.5" fill="#52514e" font-weight="400" text-anchor="end" style="font-variant-numeric:tabular-nums">0m 16s</text>
+<text x="772.0" y="775.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12.5" fill="#52514e" font-weight="400" text-anchor="end" style="font-variant-numeric:tabular-nums">$0.04</text>
+<text x="1008.0" y="775.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12.5" fill="#52514e" font-weight="400" text-anchor="end" style="font-variant-numeric:tabular-nums">$0.15</text>
+<text x="528.0" y="797.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12.5" fill="#0b0b0b" font-weight="600" text-anchor="start" style="font-variant-numeric:tabular-nums">Kush</text>
+<text x="656.0" y="797.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12.5" fill="#52514e" font-weight="400" text-anchor="end" style="font-variant-numeric:tabular-nums">1m 38s</text>
+<text x="772.0" y="797.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12.5" fill="#52514e" font-weight="400" text-anchor="end" style="font-variant-numeric:tabular-nums">$0.20</text>
+<text x="1008.0" y="797.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12.5" fill="#52514e" font-weight="400" text-anchor="end" style="font-variant-numeric:tabular-nums">$0.12</text>
+<line x1="528" y1="813" x2="1008" y2="813" stroke="#e1e0d9" stroke-width="1"/>
+<text x="528.0" y="831.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12.5" fill="#0b0b0b" font-weight="600" text-anchor="start" style="font-variant-numeric:tabular-nums">Total</text>
+<text x="772.0" y="831.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12.5" fill="#0b0b0b" font-weight="600" text-anchor="end" style="font-variant-numeric:tabular-nums">$0.24</text>
+<line x1="32" y1="871" x2="1008" y2="871" stroke="#e1e0d9" stroke-width="1"/>
+<text x="32.0" y="895.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#898781" font-weight="400" text-anchor="start">Source: RealestateOutboundCallLogs.csv — 2 analysed calls, 1 lead awaiting an end-of-call report. Sample size is small by design: this figure demonstrates the grading</text>
+<text x="32.0" y="911.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#898781" font-weight="400" text-anchor="start">pipeline end to end, not a statistically meaningful quality benchmark.</text>
+<text x="32.0" y="937.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#898781" font-weight="400" text-anchor="start">Generated by charts/generate_charts.py from the judge&#x27;s CSV output.</text>
+</svg>

@@ -1,0 +1,34 @@
+# macOS
+.DS_Store
+._*
+
+# n8n
+.n8n/
+*.n8n.db
+
+# Secrets — never commit these
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+service-account*.json
+
+# Redaction backups contain the ORIGINAL unredacted data — never commit these
+*.bak
+*.original.bak
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Render scratch used when eyeballing the figures
+/tmp-render/

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="576" viewBox="0 0 1040 576" role="img" aria-label="Conversation flow for 2 graded calls, turn by turn">
+<title>Conversation flow — turn by turn</title>
+<rect x="0" y="0" width="1040" height="576" rx="14" fill="#fcfcfb" stroke="rgba(11,11,11,0.10)" stroke-width="1"/>
+<text x="32.0" y="54.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="23" fill="#0b0b0b" font-weight="600" text-anchor="start">Conversation flow — turn by turn</text>
+<text x="32.0" y="77.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12.5" fill="#52514e" font-weight="400" text-anchor="start">Each block is one turn, sized by the words spoken. Both calls share one scale, so the short call really is short.</text>
+<line x1="32" y1="98" x2="1008" y2="98" stroke="#e1e0d9" stroke-width="1"/>
+<rect x="32" y="113" width="10" height="10" rx="2.5" fill="#2a78d6"/>
+<text x="48.0" y="122.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#52514e" font-weight="500" text-anchor="start">AI agent</text>
+<rect x="140" y="113" width="10" height="10" rx="2.5" fill="#eb6834"/>
+<text x="156.0" y="122.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#52514e" font-weight="500" text-anchor="start">Caller</text>
+<circle cx="253" cy="118" r="8" fill="#d03b3b"/>
+<text x="268.0" y="122.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#52514e" font-weight="500" text-anchor="start">Flagged turn (see notes)</text>
+<rect x="32" y="146" width="92" height="26" rx="13" fill="#f9f9f7" stroke="rgba(11,11,11,0.10)" stroke-width="1"/>
+<circle cx="48" cy="159.0" r="5" fill="#d03b3b"/>
+<text x="62.0" y="163.5" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12.5" fill="#0b0b0b" font-weight="600" text-anchor="start">Bad</text>
+<text x="140.0" y="162.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="13.5" fill="#0b0b0b" font-weight="600" text-anchor="start">Kuldeep</text>
+<text x="140.0" y="177.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#898781" font-weight="400" text-anchor="start">0m 16s · 33 words · 3 turns · customer-ended-call</text>
+<rect x="32" y="202" width="976" height="20" rx="4" fill="#f9f9f7"/>
+<rect x="32" y="228" width="976" height="20" rx="4" fill="#f9f9f7"/>
+<path d="M 35.0 202.0 H 88.0 A 3.0 3.0 0 0 1 91.0 205.0 V 219.0 A 3.0 3.0 0 0 1 88.0 222.0 H 35.0 A 3.0 3.0 0 0 1 32.0 219.0 V 205.0 A 3.0 3.0 0 0 1 35.0 202.0 Z" fill="#2a78d6"/>
+<path d="M 96.0 228.0 H 132.1 A 3.0 3.0 0 0 1 135.1 231.0 V 245.0 A 3.0 3.0 0 0 1 132.1 248.0 H 96.0 A 3.0 3.0 0 0 1 93.0 245.0 V 231.0 A 3.0 3.0 0 0 1 96.0 228.0 Z" fill="#eb6834"/>
+<path d="M 140.1 202.0 H 172.0 A 3.0 3.0 0 0 1 175.0 205.0 V 219.0 A 3.0 3.0 0 0 1 172.0 222.0 H 140.1 A 3.0 3.0 0 0 1 137.1 219.0 V 205.0 A 3.0 3.0 0 0 1 140.1 202.0 Z" fill="#2a78d6"/>
+<circle cx="156.1" cy="189.0" r="8.5" fill="#d03b3b" stroke="#fcfcfb" stroke-width="2"/>
+<circle cx="41" cy="258" r="8.5" fill="#d03b3b"/>
+<text x="41.0" y="261.5" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#ffffff" font-weight="600" text-anchor="middle">1</text>
+<text x="58.0" y="262.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#52514e" font-weight="400" text-anchor="start">Turn 3: agent keeps pitching after the caller said goodbye — the judge&#x27;s stated reason for the Bad grade</text>
+<line x1="32" y1="301" x2="1008" y2="301" stroke="#e1e0d9" stroke-width="1"/>
+<rect x="32" y="325" width="92" height="26" rx="13" fill="#f9f9f7" stroke="rgba(11,11,11,0.10)" stroke-width="1"/>
+<circle cx="48" cy="338.0" r="5" fill="#fab219"/>
+<text x="62.0" y="342.5" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12.5" fill="#0b0b0b" font-weight="600" text-anchor="start">Neutral</text>
+<text x="140.0" y="341.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="13.5" fill="#0b0b0b" font-weight="600" text-anchor="start">Kush</text>
+<text x="140.0" y="356.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#898781" font-weight="400" text-anchor="start">1m 38s · 225 words · 15 turns · customer-ended-call</text>
+<rect x="32" y="381" width="976" height="20" rx="4" fill="#f9f9f7"/>
+<rect x="32" y="407" width="976" height="20" rx="4" fill="#f9f9f7"/>
+<path d="M 35.0 381.0 H 88.0 A 3.0 3.0 0 0 1 91.0 384.0 V 398.0 A 3.0 3.0 0 0 1 88.0 401.0 H 35.0 A 3.0 3.0 0 0 1 32.0 398.0 V 384.0 A 3.0 3.0 0 0 1 35.0 381.0 Z" fill="#2a78d6"/>
+<path d="M 96.0 407.0 H 149.0 A 3.0 3.0 0 0 1 152.0 410.0 V 424.0 A 3.0 3.0 0 0 1 149.0 427.0 H 96.0 A 3.0 3.0 0 0 1 93.0 424.0 V 410.0 A 3.0 3.0 0 0 1 96.0 407.0 Z" fill="#eb6834"/>
+<path d="M 157.0 381.0 H 163.6 A 3.0 3.0 0 0 1 166.6 384.0 V 398.0 A 3.0 3.0 0 0 1 163.6 401.0 H 157.0 A 3.0 3.0 0 0 1 154.0 398.0 V 384.0 A 3.0 3.0 0 0 1 157.0 381.0 Z" fill="#2a78d6"/>
+<path d="M 171.6 407.0 H 178.3 A 3.0 3.0 0 0 1 181.3 410.0 V 424.0 A 3.0 3.0 0 0 1 178.3 427.0 H 171.6 A 3.0 3.0 0 0 1 168.6 424.0 V 410.0 A 3.0 3.0 0 0 1 171.6 407.0 Z" fill="#eb6834"/>
+<path d="M 186.3 381.0 H 357.2 A 3.0 3.0 0 0 1 360.2 384.0 V 398.0 A 3.0 3.0 0 0 1 357.2 401.0 H 186.3 A 3.0 3.0 0 0 1 183.3 398.0 V 384.0 A 3.0 3.0 0 0 1 186.3 381.0 Z" fill="#2a78d6"/>
+<text x="271.7" y="395.5" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#ffffff" font-weight="600" text-anchor="middle">42</text>
+<path d="M 365.2 407.0 H 409.8 A 3.0 3.0 0 0 1 412.8 410.0 V 424.0 A 3.0 3.0 0 0 1 409.8 427.0 H 365.2 A 3.0 3.0 0 0 1 362.2 424.0 V 410.0 A 3.0 3.0 0 0 1 365.2 407.0 Z" fill="#eb6834"/>
+<path d="M 417.8 381.0 H 462.3 A 3.0 3.0 0 0 1 465.3 384.0 V 398.0 A 3.0 3.0 0 0 1 462.3 401.0 H 417.8 A 3.0 3.0 0 0 1 414.8 398.0 V 384.0 A 3.0 3.0 0 0 1 417.8 381.0 Z" fill="#2a78d6"/>
+<path d="M 470.3 407.0 H 481.2 A 3.0 3.0 0 0 1 484.2 410.0 V 424.0 A 3.0 3.0 0 0 1 481.2 427.0 H 470.3 A 3.0 3.0 0 0 1 467.3 424.0 V 410.0 A 3.0 3.0 0 0 1 470.3 407.0 Z" fill="#eb6834"/>
+<path d="M 489.2 381.0 H 634.9 A 3.0 3.0 0 0 1 637.9 384.0 V 398.0 A 3.0 3.0 0 0 1 634.9 401.0 H 489.2 A 3.0 3.0 0 0 1 486.2 398.0 V 384.0 A 3.0 3.0 0 0 1 489.2 381.0 Z" fill="#2a78d6"/>
+<text x="562.0" y="395.5" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#ffffff" font-weight="600" text-anchor="middle">36</text>
+<path d="M 642.9 407.0 H 662.1 A 3.0 3.0 0 0 1 665.1 410.0 V 424.0 A 3.0 3.0 0 0 1 662.1 427.0 H 642.9 A 3.0 3.0 0 0 1 639.9 424.0 V 410.0 A 3.0 3.0 0 0 1 642.9 407.0 Z" fill="#eb6834"/>
+<path d="M 670.1 381.0 H 799.0 A 3.0 3.0 0 0 1 802.0 384.0 V 398.0 A 3.0 3.0 0 0 1 799.0 401.0 H 670.1 A 3.0 3.0 0 0 1 667.1 398.0 V 384.0 A 3.0 3.0 0 0 1 670.1 381.0 Z" fill="#2a78d6"/>
+<text x="734.6" y="395.5" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#ffffff" font-weight="600" text-anchor="middle">32</text>
+<path d="M 807.0 407.0 H 822.0 A 3.0 3.0 0 0 1 825.0 410.0 V 424.0 A 3.0 3.0 0 0 1 822.0 427.0 H 807.0 A 3.0 3.0 0 0 1 804.0 424.0 V 410.0 A 3.0 3.0 0 0 1 807.0 407.0 Z" fill="#eb6834"/>
+<path d="M 830.0 381.0 H 925.2 A 3.0 3.0 0 0 1 928.2 384.0 V 398.0 A 3.0 3.0 0 0 1 925.2 401.0 H 830.0 A 3.0 3.0 0 0 1 827.0 398.0 V 384.0 A 3.0 3.0 0 0 1 830.0 381.0 Z" fill="#2a78d6"/>
+<text x="877.6" y="395.5" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#ffffff" font-weight="600" text-anchor="middle">24</text>
+<path d="M 933.2 407.0 H 939.8 A 3.0 3.0 0 0 1 942.8 410.0 V 424.0 A 3.0 3.0 0 0 1 939.8 427.0 H 933.2 A 3.0 3.0 0 0 1 930.2 424.0 V 410.0 A 3.0 3.0 0 0 1 933.2 407.0 Z" fill="#eb6834"/>
+<path d="M 947.8 381.0 H 1005.0 A 3.0 3.0 0 0 1 1008.0 384.0 V 398.0 A 3.0 3.0 0 0 1 1005.0 401.0 H 947.8 A 3.0 3.0 0 0 1 944.8 398.0 V 384.0 A 3.0 3.0 0 0 1 947.8 381.0 Z" fill="#2a78d6"/>
+<text x="976.4" y="395.5" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#ffffff" font-weight="600" text-anchor="middle">15</text>
+<circle cx="160.3" cy="368.0" r="8.5" fill="#d03b3b" stroke="#fcfcfb" stroke-width="2"/>
+<circle cx="41" cy="437" r="8.5" fill="#d03b3b"/>
+<text x="41.0" y="440.5" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#ffffff" font-weight="600" text-anchor="middle">1</text>
+<text x="58.0" y="441.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#52514e" font-weight="400" text-anchor="start">Turn 3: agent&#x27;s turn cut off mid-sentence, then re-sent from the start (caller talking over the agent)</text>
+<line x1="32" y1="480" x2="1008" y2="480" stroke="#e1e0d9" stroke-width="1"/>
+<text x="32.0" y="504.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#898781" font-weight="400" text-anchor="start">Flagged turns come from two mechanical rules over the transcript: a turn that ends mid-sentence with no terminal punctuation, and a turn whose text is re-sent as the</text>
+<text x="32.0" y="520.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#898781" font-weight="400" text-anchor="start">opening of the speaker&#x27;s next turn. Both are conversation-quality signals the LLM judge described in prose; these rules make them countable across calls.</text>
+<text x="32.0" y="546.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#898781" font-weight="400" text-anchor="start">Generated by charts/generate_charts.py from the judge&#x27;s CSV output.</text>
+</svg>

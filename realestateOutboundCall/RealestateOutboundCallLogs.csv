@@ -1,0 +1,37 @@
+first_name,last_name,phone,status,Interested_In_Selling,property_type,wilingness_for_follow-up,preferred_time_for_follow_up,property_location,query,summary,started_at,ended_at,call_type,ended_reason,recording_url,call_duration,call_cost,bot_word_count,bot_word_percent,user_word_count,ai_call_performance_grade,ai_performance_justification,formatted_transcript
+Kuldeep,Pal,614xxxxx,called,No,Not Provided,No,Not Specified,Not Provided,,"The call aimed to engage the customer about selling property, but the customer expressed no interest and promptly ended the conversation.",2025-01-28T08:30:24.606Z,2025-01-28T08:30:40.713Z,outboundPhoneCall,customer-ended-call,,0.2684,0.0392,23,70%,10,Bad,"The AI's response did not conclude the call appropriately and seemed to misunderstand the user's desire to end the conversation, which led to confusion.","AI: Hi, Koldeep. This is Sarah calling from Pal Realty. How are you doing today?
+
+User: All good. Thank you very much. Bye bye. See you.
+
+AI: I totally understand, Koldeep. Just to mention, I'm reaching
+"
+Kush,Pal,61xxxxx,called,Yes,double storey house,Yes,Not Specified,Tarahmetto,,"Kush called to inquire about selling a double storey house located in Tarahmetto, and expressed clear interest in selling now as well as a willingness for a follow-up conversation.",2025-01-26T10:28:13.623Z,2025-01-26T10:29:52.001Z,outboundPhoneCall,customer-ended-call,,1.6396,0.1975,178,79%,47,Neutral,"The AI was generally polite and maintained a professional tone, but there were some issues with clarity and flow, particularly in summarizing the user's property information and a slight mispronunciation of the user's name.","AI: Hi, Kirsch. This is Sarah calling from Palpeek Realty. How are you doing today?
+
+User: Hey, sir. I'm good. I just called to inquire, um, about selling my property.
+
+AI: That's great to
+
+User: And I can
+
+AI: That's great to hear, Kush. I'm glad you reached out. I'm here to help you with any questions or information you might need about selling your property. Can you tell me a little more about your property, like its type or location?
+
+User: It's a double storey house with, like, 6 bedrooms. And 2 bathrooms
+
+AI: Gotcha. That sounds like a lovely home. And where is it located?
+
+User: Uh, it's in Tarahmetto.
+
+AI: Thank you for sharing that, Kush. So to summarize, you have a double store You It's wonderful to know you're considering selling. Would you be open to having a follow-up conversation to discuss your options further?
+
+User: Uh, Yeah. I'd be happy to.
+
+AI: That's fantastic to hear. Thank you for your willingness to chat further. 1 of our agents will reach out soon to assist you with selling your property. Have a great day, Kush.
+
+User: You too, Sarah. Thank you.
+
+AI: You're welcome, Kush. Thanks for your time today. If you have any more questions in the meantime, feel free to reach out. Take care.
+
+User: So Thank you.
+
+AI: You're welcome. If you need anything else, don't hesitate to ask. Have a wonderful day."
+Sandeep,Pal,614xxxxx,Called,,,,,,,,,,,,,,,,,,,,

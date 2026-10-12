@@ -1,0 +1,3232 @@
+{
+  "name": "Realestate Working Outbound",
+  "nodes": [
+    {
+      "parameters": {
+        "useJson": true,
+        "claimsJson": "={\n  \"orgId\": \"5c7562b6-165a-4b0c-a5db-400f2b8b82c6\",\n  \"exp\": {{ Math.floor(new Date().getTime() / 1000) + 3600 }}\n}",
+        "options": {}
+      },
+      "id": "07b883c0-d3ca-4d34-9cfc-11fe458ecd84",
+      "name": "JWT",
+      "type": "n8n-nodes-base.jwt",
+      "typeVersion": 1,
+      "position": [
+        0,
+        700
+      ],
+      "credentials": {
+        "jwtAuth": {
+          "id": "ZFvmst3UaGVuhRaJ",
+          "name": "JWT Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.vapi.ai/assistant",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $('Assitant Template').item.json.assistant }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        180,
+        700
+      ],
+      "id": "05332e19-9b98-4005-8744-d172ad31ae6d",
+      "name": "Create Assistance",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "Y87dDV7NxlCTN0Ad",
+          "name": "VAPI Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "app4ZOC71DzjpOU3O",
+          "mode": "list",
+          "cachedResultName": "Engineering Project Collaboration",
+          "cachedResultUrl": "https://airtable.com/app4ZOC71DzjpOU3O"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblZYt1jVdI0s6Zli",
+          "mode": "list",
+          "cachedResultName": "Real_Call_logs",
+          "cachedResultUrl": "https://airtable.com/app4ZOC71DzjpOU3O/tblZYt1jVdI0s6Zli"
+        },
+        "filterByFormula": "=(status ='not called') ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        -760,
+        640
+      ],
+      "id": "b1a7beac-6abc-4ae7-abd0-0bb2d7ba9632",
+      "name": "Airtable",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "97NFXcdcXxbaOw56",
+          "name": "Airtable Personal Access Token account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "reset": false
+        }
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -580,
+        640
+      ],
+      "id": "b42efcda-a49c-486b-bf85-b49e68213605",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cf0f149b-d951-4802-ab58-1a2799e02588",
+              "name": "prompt",
+              "value": "=# AI Cold Call Agent for Pal Realty\n\n**Role**\n\nYou are Sarah, an AI Cold Call Agent representing Pal Realty. Your task is to make friendly, professional calls to gauge the interest of potential property sellers and gather actionable insights while leaving a positive impression.\n\n**Objective:** \nEngage with potential property sellers in a natural and conversational manner to:\n\t1.\tDetermine if they are interested in selling their property now or in the future.\n\t2.\tSecure their willingness for a follow-up conversation.\n\t3.\tGather basic property details (if they show interest).\n\t4.\tLeave a positive impression of Pal, even if they are not interested.\n\n**Details about the user**: \nFirst name: {{ $json.first_name }}\n\n**Instructions for AI Agent:**\n1. **Introduction**: Begin the call by introducing yourself and the company in a friendly tone. Example:“Hi [first_name], this is Sarah from Pal Realty. How are you doing today?”\n2. **Purpose of Call**: Clearly communicate the reason for calling early in the conversation. Example: “I’m reaching out to see if you’ve considered selling your property or if it’s something you might consider in the future.\n3. **Use of Fillers**: Use active listening and conversational fillers like “uhm,” “ah,” or “gotcha” sparingly to create a natural flow. If the user seems hesitant or distracted, refocus them gently: “I totally get it—it’s a big decision! Just curious, have you thought about selling, or would you like more information for the future?”\n\n4. **Handle Responses Thoughtfully**: \nIf the user is interested:\n\t•\tGather basic information about the property, such as its type, location, and reason for selling.\n\t•\tExample: “Got it! Could you tell me a little more about your property, like the type or location?”\nIf the user is unsure or hesitant:\n\t•\tLeave the door open for future discussions.\n\t•\tExample: “No worries at all! I understand selling is a big decision. Would it be okay if we checked in with you sometime down the road?”\nIf the user is not interested:\n\t•\tRespect their decision and leave a positive impression.\n\t•\tExample: “That’s perfectly fine! If you ever change your mind or have questions, we’d be happy to help. Thank you for your time!”\n\n5. **Closure**: End the call on a positive note by thanking the user and outlining next steps (if applicable). Example: “Thank you for sharing that with me, [first_name]. One of our agents will reach out soon to assist you further. Have a great day!”\n\n6. **Friendly and Positive Tone**: \tThroughout the call, maintain a professional yet approachable tone. Use the customer’s name during the conversation to create a personal connection.\n\n7. **Data Collection and Categorization**: Gather the following data during the call:\n\t•\tUser’s interest level (Interested Now, Interested Later, Not Interested).\n\t•\tWillingness for follow-up.\n\t•\tBasic property details (if applicable).\n\t•\tIf the user does not provide certain details, record “Not Provided” as the default value.\n\n8. **Bring the Conversation Back**: Always try to steer the conversation back to the user's potential interest in selling their property.\n\nEnd of Call\n\t•\tAlways thank the user for their time, regardless of the outcome.\n\t•\tExample: “Thanks again for chatting with me today, [first_name]. If you ever have questions or need assistance, we’re just a call away!”\n\n\nTone and Style Guidelines:\n\t•\tBe conversational and avoid sounding overly scripted.\n\t•\tBalance professionalism with warmth to build trust.\n\t•\tSteer the conversation back to the main goal (interest in selling) if it veers off track.\n\n",
+              "type": "string"
+            },
+            {
+              "id": "eec36ab7-581f-4d7f-9152-0f73128b9539",
+              "name": "first_message",
+              "value": "=Hi {{ $json.first_name }}, this is Sarah calling from Pal Realty, how are you doing today?",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -360,
+        700
+      ],
+      "id": "85eea4ca-d725-430b-ac07-e2ec4bc6c066",
+      "name": "Prompt Filling"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "745896dd-2250-4119-8234-98a42ff6eb06",
+              "name": "assistant",
+              "value": "={\n  \"server\": {\n      \"url\": \"https://aiagency.app.n8n.cloud/webhook/real\"\n  },\n  \"model\": {\n    \"provider\": \"openai\",\n    \"model\": \"gpt-4o-mini\",\n    \"messages\": [\n      {\n        \"role\": \"system\",\n        \"content\": {{ JSON.stringify($json.prompt) }}\n      }\n    ],\n    \"maxTokens\": 250,\n    \"emotionRecognitionEnabled\": false,\n  \n    \"maxTokens\": 90,\n    \"emotionRecognitionEnabled\": false,\n        \"tools\": [\n      {\n        \"type\": \"function\",\n        \"function\": {\n          \"name\": \"getAvaiabilty\",\n          \"description\": \"Call this tool to get slot in calendar\",\n          \"parameters\": {\n            \"type\": \"object\",\n            \"properties\": {\n              \"query\": {\n                \"type\": \"string\"\n              }\n            }\n          }\n        },\n        \"server\": {\n          \"url\": \"https://aiagency.app.n8n.cloud/webhook/real\"\n        }\n      },\n      {\n        \"type\": \"function\",\n        \"server\": {\n          \"url\": \"https://aiagency.app.n8n.cloud/webhook/real\"\n        },\n        \"function\": {\n          \"name\": \"schedule_appointments\",\n          \"description\": \"Use this tool to book an appointment\",\n          \"parameters\": {\n            \"type\": \"object\",\n            \"properties\": {\n              \"first_name\": {\n                \"type\": \"string\"\n              },\n              \"phoone\": {\n                \"type\": \"string\"\n              },\n              \"slot\": {\n                \"type\": \"string\"\n              },\n              \"email\": {\n                \"type\": \"string\"\n              }\n            }\n          }\n        }\n      }\n    ],\n  },\n  \"voice\": {\n    \"provider\": \"11labs\",\n    \"voiceId\": \"sarah\",\n    \"model\": \"eleven_multilingual_v2\",\n    \"useSpeakerBoost\": false\n  },\n  \"firstMessage\": \"{{ $json.first_message}}\",\n  \"transcriber\": {\n    \"provider\": \"deepgram\",\n    \"model\": \"nova-2\",\n    \"language\": \"en\"\n  },\n  \"serverMessages\": [\n    \"end-of-call-report\",\n    \"function-call\",\n    \"tool-calls\"\n  ],\n  \"analysisPlan\": {\n    \"summaryPlan\": {\n      \"enabled\": false,\n      \"messages\": [\n        \n      ],\n      \"timeoutSeconds\": 1\n    },\n    \"structuredDataPlan\": {\n      \"enabled\": false\n    }\n  }\n}",
+              "type": "object"
+            },
+            {
+              "id": "f0d1835e-377e-4262-b85a-bc5c711279bd",
+              "name": "",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -160,
+        700
+      ],
+      "id": "cb50492b-cfd5-4802-9762-64c56a5e756f",
+      "name": "Assitant Template"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.vapi.ai/call",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('JWT').item.json.token }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"customer\": {\n    \"number\": \"{{ $('Loop Over Items').item.json.phone }}\",\n    \"name\": \"{{ $('Loop Over Items').item.json.first_name }}\"\n  },\n  \"phoneNumberId\": \"93e7c3dc-2060-401c-a8f0-6719ca1346f4\",\n  \"assistantId\": \"{{ $json.id }}\"\n}",
+        "options": {}
+      },
+      "id": "795e5334-c91f-4b18-a252-81da2fcc2b2d",
+      "name": "Make Call",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        340,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.1,
+      "position": [
+        480,
+        -640
+      ],
+      "id": "18ffa92a-f083-451d-8302-f90fe2c65493",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "ZPKX8CfcOAOTRl1T",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "92f90607-65cc-41cf-9449-d571ec328830",
+              "leftValue": "={{ $json.transcript.isNotEmpty() }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        260,
+        -700
+      ],
+      "id": "91ef73a9-b614-41cf-a18d-64c4cf9876c5",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.1,
+      "position": [
+        860,
+        -660
+      ],
+      "id": "bc55fa09-36b1-4873-887a-873a49a4b6f1",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "ZPKX8CfcOAOTRl1T",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "text": "={{ $('If').item.json.transcript }}",
+        "attributes": {
+          "attributes": [
+            {
+              "name": "ai_call_performance_grade",
+              "description": "AI call handling performance graded by (Good,Nuetral,Bad)",
+              "required": true
+            },
+            {
+              "name": "ai_performance_justification",
+              "description": "Justification for the performance grade",
+              "required": true
+            }
+          ]
+        },
+        "options": {
+          "systemPromptTemplate": "### **Instructions:**\nAnalyze the interaction in the transcript and grade the\nAI receptionist's performance as **bad**, **neutral**, or\n**good**.\n### **Evaluation Criteria:**\n1. **Clarity:** Was the AI easy to understand?\n2. **Tone:** Did the AI sound polite and professional?\n3. **Flow:** Was the conversation smooth, with minimal repetition or confusion?\n4. **Resolution:** Did the AI guide the caller toward a clear next step?\n### **Grading Instructions:**\n- **Grade:** **Bad**, **Neutral**, or **Good**\n- **Justification:** 1-2 concise sentences summarizing key reasons for the grade."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "typeVersion": 1,
+      "position": [
+        820,
+        -840
+      ],
+      "id": "6ceef738-4b80-4b54-b287-b91f54554d5a",
+      "name": "Grade Performance"
+    },
+    {
+      "parameters": {
+        "text": "={{ $json.transcript }}",
+        "attributes": {
+          "attributes": [
+            {
+              "name": "first_name",
+              "description": "The callers first name",
+              "required": true
+            },
+            {
+              "name": "last_name",
+              "description": "The callers last name",
+              "required": true
+            },
+            {
+              "name": "address",
+              "description": "The callers address",
+              "required": true
+            },
+            {
+              "name": "query",
+              "description": "Primary reason for a call in a few words"
+            },
+            {
+              "name": "summary",
+              "description": "Concise summary for the entire conversation"
+            }
+          ]
+        },
+        "options": {
+          "systemPromptTemplate": "You are an expert extraction algorithm.\nOnly extract relevant information from the text.\nIf you do not know the value of an attribute asked to extract, you may omit the attribute's value.\n\nYou are a transcript analyzer for extracting the caller's first and last name from a call handled by an Al voice receptionist at Paramatta Dental Clinic.\nAnalyze the entire transcript for the correct first and last name of the caller, address of the caller, query and summary."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "typeVersion": 1,
+      "position": [
+        480,
+        -840
+      ],
+      "id": "7a31f3c8-a0f4-4a36-8e5f-c4efdc9e2393",
+      "name": "Personal Information Extractor"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get the transcript\nconst transcript = $('init_variables').first().json.transcript;\n\n// Split the transcript into lines\nconst lines = transcript.split('\\n');\n\n// Add an additional newline between each user and AI chat\nconst formatted_transcript = lines.map((line, index) => {\n  if (index > 0 && (line.startsWith('AI:') || line.startsWith('User:'))) {\n    return '\\n' + line;\n  } else {\n    return line;\n  }\n}).join('\\n');\n\n// Return the formatted transcript\nreturn { formatted_transcript };\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1180,
+        -840
+      ],
+      "id": "18c02508-e675-4004-8ab4-68d0198de4d9",
+      "name": "Code Format transcript"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6ea8224b-91d8-4916-ae08-e5373515678c",
+              "name": "transcript",
+              "value": "={{ $json.body.message.transcript || \"\"}}",
+              "type": "string"
+            },
+            {
+              "id": "bd3484b8-af47-4cb8-b2a8-774b32ddb564",
+              "name": "started_at",
+              "value": "={{ $json.body.message.startedAt || null }}",
+              "type": "string"
+            },
+            {
+              "id": "8cc11f8a-8570-44d9-9bd5-cfad7fcd83f4",
+              "name": "ended_at",
+              "value": "={{ $json.body.message.endedAt || null }}",
+              "type": "string"
+            },
+            {
+              "id": "38d85ae9-0dfd-40f9-87e2-0b2914ea000e",
+              "name": "call_type",
+              "value": "={{ $json.body.message.call.type || null }}",
+              "type": "string"
+            },
+            {
+              "id": "ab78c574-5df7-48e3-99ef-3b2170a4782e",
+              "name": "ended_reason",
+              "value": "={{ $json.body.message.endedReason || null }}",
+              "type": "string"
+            },
+            {
+              "id": "3aeddc79-4140-4412-8b14-fb364333867d",
+              "name": "recording_url",
+              "value": "={{ $json.body.message.recordingUrl || null }}",
+              "type": "string"
+            },
+            {
+              "id": "78e99e34-8a3c-4ceb-9bed-a9039bbbd0c7",
+              "name": "call_id",
+              "value": "={{ $json.body.message.call.id || null }}",
+              "type": "string"
+            },
+            {
+              "id": "de3fac58-b7a0-4a73-9772-f93fa90daaeb",
+              "name": "user_number",
+              "value": "={{ $json.body.message.call.customer.number || null  }}",
+              "type": "string"
+            },
+            {
+              "id": "98034a13-73a3-4c5a-b6d5-434e595bd82c",
+              "name": "call_cost",
+              "value": "={{ $json.body.message.cost || null }}",
+              "type": "number"
+            },
+            {
+              "id": "9271ea04-90ec-474e-9cab-eeff99dcf9f4",
+              "name": "call_duration",
+              "value": "={{ $json.body.message.durationMinutes || null }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -480,
+        -520
+      ],
+      "id": "cc05750c-67b5-44d5-aea2-1cebf482b51d",
+      "name": "init_variables"
+    },
+    {
+      "parameters": {
+        "jsCode": "const transcript = $('init_variables').first().json.transcript\n\n// Initialize counters for bot (AI) and user words\nlet bot_word_count = 0;\nlet user_word_count = 0;\n\n// Split the transcript into lines based on the newline character '\\n'\n// Each line represents either the AI or the User speaking\nconst lines = transcript.split('\\n');\n\n// Loop through each line in the transcript\nfor (let i = 0; i < lines.length; i++) {\n    // Check if the line starts with \"AI:\" or \"User:\"\n    if (lines[i].startsWith('AI:')) {\n        // Remove \"AI:\" prefix and split the remaining text into words\n        const words = lines[i].replace('AI:', '').trim().split(/\\s+/);\n        // Add the number of words to the bot's word count\n        bot_word_count += words.length;\n    } else if (lines[i].startsWith('User:')) {\n        // Remove \"User:\" prefix and split the remaining text into words\n        const words = lines[i].replace('User:', '').trim().split(/\\s+/);\n        // Add the number of words to the user's word count\n        user_word_count += words.length;\n    }\n}\n\n// Calculate the total word count (AI + User)\nconst total_word_count = bot_word_count + user_word_count;\n\n// Avoid dividing by zero to prevent errors in case there's no data\nlet bot_word_percent = 0;\nlet user_word_percent = 0;\n\nif (total_word_count > 0) {\n    // Calculate the word percentages for AI and User\n    bot_word_percent = Math.round((bot_word_count / total_word_count) * 100);\n    user_word_percent = Math.round((user_word_count / total_word_count) * 100);\n}\n\n// Output the results for use in other parts of the workflow\nreturn {\n    bot_word_count: bot_word_count,\n    bot_word_percent: bot_word_percent + '%',\n    user_word_count: user_word_count,\n    user_word_percent: user_word_percent + '%'\n};\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1420,
+        -840
+      ],
+      "id": "e48819ad-e0fb-4108-8a41-61483a428d97",
+      "name": "Word count"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e3232305-4d76-462b-a479-bc8d67bea06d",
+              "name": "first_name",
+              "value": "={{ $('Personal Information Extractor').item.json.output.first_name }}",
+              "type": "string"
+            },
+            {
+              "id": "d4d0b6df-522f-47e3-911f-28c5deb8df2d",
+              "name": "last_name",
+              "value": "={{ $('Personal Information Extractor').item.json.output.last_name }}",
+              "type": "string"
+            },
+            {
+              "id": "4c91a42e-a17e-40c9-b4d3-b834e4258005",
+              "name": "address",
+              "value": "={{ $('Personal Information Extractor').item.json.output.address }}",
+              "type": "string"
+            },
+            {
+              "id": "6281f66a-f51f-47d1-9a1e-d828fc4b8cc5",
+              "name": "phone",
+              "value": "={{ $('If').item.json.user_number }}",
+              "type": "string"
+            },
+            {
+              "id": "dba75c46-cdb3-4d7b-8270-ab0aeff09dd7",
+              "name": "query",
+              "value": "={{ $('Personal Information Extractor').item.json.output.query }}",
+              "type": "string"
+            },
+            {
+              "id": "abf2964b-c961-4108-9692-bc26d070db3a",
+              "name": "summary",
+              "value": "={{ $('Personal Information Extractor').item.json.output.summary }}",
+              "type": "string"
+            },
+            {
+              "id": "1bb496ec-b2c7-43d5-bb9c-f3c2ece08b6b",
+              "name": "started_at",
+              "value": "={{ $('If').item.json.started_at }}",
+              "type": "string"
+            },
+            {
+              "id": "34a71098-7e12-436c-9522-ebbfe0065f7a",
+              "name": "ended_at",
+              "value": "={{ $('If').item.json.ended_at }}",
+              "type": "string"
+            },
+            {
+              "id": "fe53dc85-504a-41bd-9b15-b38ab9955dcb",
+              "name": "call_type",
+              "value": "={{ $('If').item.json.call_type }}",
+              "type": "string"
+            },
+            {
+              "id": "ab5977b4-6c67-4af8-996f-672beddd367f",
+              "name": "ended_reason",
+              "value": "={{ $('If').item.json.ended_reason }}",
+              "type": "string"
+            },
+            {
+              "id": "5af1e411-160b-44fa-9195-2d21ab09c7c0",
+              "name": "recording_url",
+              "value": "={{ $('If').item.json.recording_url }}",
+              "type": "string"
+            },
+            {
+              "id": "3f88c2c0-0478-4453-9720-83cf0f4a9fe8",
+              "name": "call_duration",
+              "value": "={{ $('If').item.json.call_duration }}",
+              "type": "number"
+            },
+            {
+              "id": "67c6f586-d67f-4408-97b6-4a5bf4774ffc",
+              "name": "call_cost",
+              "value": "={{ $('If').item.json.call_cost }}",
+              "type": "number"
+            },
+            {
+              "id": "a9a3820e-0b77-4b36-acbc-491a4ddfd88e",
+              "name": "bot_word_count",
+              "value": "={{ $json.bot_word_count }}",
+              "type": "number"
+            },
+            {
+              "id": "c9709be9-32ac-49aa-b0ce-802dca998f9d",
+              "name": "bot_word_percent",
+              "value": "={{ $json.bot_word_percent }}",
+              "type": "string"
+            },
+            {
+              "id": "735edb5b-6579-479d-ba41-cd10988b9774",
+              "name": "user_word_count",
+              "value": "={{ $json.user_word_count }}",
+              "type": "number"
+            },
+            {
+              "id": "df59c462-fc27-4856-b1d4-cd35385d1b08",
+              "name": "user_word_percent",
+              "value": "={{ $json.user_word_percent }}",
+              "type": "string"
+            },
+            {
+              "id": "246a274f-0f0c-41ac-aa10-cf1f5378e9e4",
+              "name": "ai_call_performance_grade",
+              "value": "={{ $('Grade Performance').item.json.output.ai_call_performance_grade }}",
+              "type": "string"
+            },
+            {
+              "id": "36bf941d-ae6c-4e5b-a7c8-6a4b4e1929fe",
+              "name": "ai_performance_justification",
+              "value": "={{ $('Grade Performance').item.json.output.ai_performance_justification }}",
+              "type": "string"
+            },
+            {
+              "id": "11d7a0b9-00ab-4daa-ab67-583f4b1ac424",
+              "name": "formatted_transcript",
+              "value": "={{ $('Code Format transcript').item.json.formatted_transcript }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1640,
+        -840
+      ],
+      "id": "503cc10c-4f7c-4d89-bf1b-abfc03632b32",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e3232305-4d76-462b-a479-bc8d67bea06d",
+              "name": "first_name",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "d4d0b6df-522f-47e3-911f-28c5deb8df2d",
+              "name": "last_name",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "4c91a42e-a17e-40c9-b4d3-b834e4258005",
+              "name": "address",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "6281f66a-f51f-47d1-9a1e-d828fc4b8cc5",
+              "name": "phone",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "dba75c46-cdb3-4d7b-8270-ab0aeff09dd7",
+              "name": "query",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "abf2964b-c961-4108-9692-bc26d070db3a",
+              "name": "summary",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "1bb496ec-b2c7-43d5-bb9c-f3c2ece08b6b",
+              "name": "started_at",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "34a71098-7e12-436c-9522-ebbfe0065f7a",
+              "name": "ended_at",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "fe53dc85-504a-41bd-9b15-b38ab9955dcb",
+              "name": "call_type",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "ab5977b4-6c67-4af8-996f-672beddd367f",
+              "name": "ended_reason",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "5af1e411-160b-44fa-9195-2d21ab09c7c0",
+              "name": "recording_url",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "3f88c2c0-0478-4453-9720-83cf0f4a9fe8",
+              "name": "call_duration",
+              "value": "=",
+              "type": "number"
+            },
+            {
+              "id": "67c6f586-d67f-4408-97b6-4a5bf4774ffc",
+              "name": "call_cost",
+              "value": "=",
+              "type": "number"
+            },
+            {
+              "id": "a9a3820e-0b77-4b36-acbc-491a4ddfd88e",
+              "name": "bot_word_count",
+              "value": "=",
+              "type": "number"
+            },
+            {
+              "id": "735edb5b-6579-479d-ba41-cd10988b9774",
+              "name": "user_word_count",
+              "value": "=",
+              "type": "number"
+            },
+            {
+              "id": "df59c462-fc27-4856-b1d4-cd35385d1b08",
+              "name": "user_word_percent",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "246a274f-0f0c-41ac-aa10-cf1f5378e9e4",
+              "name": "ai_call_performance_grade",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "36bf941d-ae6c-4e5b-a7c8-6a4b4e1929fe",
+              "name": "ai_performance_justification",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "11d7a0b9-00ab-4daa-ab67-583f4b1ac424",
+              "name": "formatted_transcript",
+              "value": "=",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1640,
+        -680
+      ],
+      "id": "488f5aa1-4930-4d59-b9d9-2f18c3ea9ff9",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e3232305-4d76-462b-a479-bc8d67bea06d",
+              "name": "first_name",
+              "value": "={{ $json.first_name }}",
+              "type": "string"
+            },
+            {
+              "id": "ef6ff065-d37b-4263-ae7f-2864c552b81f",
+              "name": "last_name",
+              "value": "={{ $json.last_name }}",
+              "type": "string"
+            },
+            {
+              "id": "9a4d974e-4dfb-4be8-abf5-d526093a2fef",
+              "name": "address",
+              "value": "={{ $json.address }}",
+              "type": "string"
+            },
+            {
+              "id": "8a0c01fc-dfa9-4aee-b021-31f616a35905",
+              "name": "phone",
+              "value": "={{ $json.phone }}",
+              "type": "string"
+            },
+            {
+              "id": "7b55ea27-dd37-482f-9f8a-f11150250203",
+              "name": "query",
+              "value": "={{ $json.query }}",
+              "type": "string"
+            },
+            {
+              "id": "5af66098-4684-42ee-b94b-b4bd619da0b2",
+              "name": "summary",
+              "value": "={{ $json.summary }}",
+              "type": "string"
+            },
+            {
+              "id": "db0a1ca9-9be8-49bc-9635-64fac1c5980e",
+              "name": "started_at",
+              "value": "={{ $json.started_at }}",
+              "type": "string"
+            },
+            {
+              "id": "c03fa6a6-989c-4e98-a0b4-24c1fde9b606",
+              "name": "ended_at",
+              "value": "={{ $json.ended_at }}",
+              "type": "string"
+            },
+            {
+              "id": "736b3d2e-cc0d-404a-973f-330c4c94fa7a",
+              "name": "call_type",
+              "value": "={{ $json.call_type }}",
+              "type": "string"
+            },
+            {
+              "id": "d336d7c4-50ad-4e1d-a1a9-3919c69c8689",
+              "name": "ended_reason",
+              "value": "={{ $json.ended_reason }}",
+              "type": "string"
+            },
+            {
+              "id": "1a5727ca-ccd4-4679-9fe6-0664fa8598a7",
+              "name": "recording_url",
+              "value": "={{ $json.recording_url }}",
+              "type": "string"
+            },
+            {
+              "id": "31f33b89-9dab-47cc-9fe7-39211e0a8d51",
+              "name": "call_duration",
+              "value": "={{ $json.call_duration }}",
+              "type": "number"
+            },
+            {
+              "id": "a2c6cad0-ccd0-422b-b831-17949e9bd0e6",
+              "name": "call_cost",
+              "value": "={{ $json.call_cost }}",
+              "type": "number"
+            },
+            {
+              "id": "be67cfba-da5c-4979-94d7-c7dc4d498f9a",
+              "name": "bot_word_count",
+              "value": "={{ $json.bot_word_count }}",
+              "type": "number"
+            },
+            {
+              "id": "8bad67aa-586b-4e8a-8045-4436ded41380",
+              "name": "bot_word_count",
+              "value": "={{ $json.bot_word_count }}",
+              "type": "number"
+            },
+            {
+              "id": "a339b012-e474-4df4-b9dc-a207c77108a5",
+              "name": "bot_word_percent",
+              "value": "={{ $json.bot_word_percent }}",
+              "type": "string"
+            },
+            {
+              "id": "d598008d-da19-4432-8a30-b9f9b7384f20",
+              "name": "user_word_count",
+              "value": "={{ $json.user_word_count }}",
+              "type": "number"
+            },
+            {
+              "id": "b83aee5f-f006-4508-8af9-497eac54b370",
+              "name": "ai_call_performance_grade",
+              "value": "={{ $json.ai_call_performance_grade }}",
+              "type": "string"
+            },
+            {
+              "id": "71dfb97b-32e0-44b9-a243-8cca1c2ea307",
+              "name": "ai_performance_justification",
+              "value": "={{ $json.ai_performance_justification }}",
+              "type": "string"
+            },
+            {
+              "id": "ab16d9f3-85c1-45cb-abf7-69b71dc2f097",
+              "name": "ai_performance_justification",
+              "value": "={{ $json.ai_performance_justification }}",
+              "type": "string"
+            },
+            {
+              "id": "1ebf35cb-a565-4101-ab03-130762311b03",
+              "name": "formatted_transcript",
+              "value": "={{ $json.formatted_transcript }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1880,
+        -780
+      ],
+      "id": "b718788d-a964-4607-adab-60d27ef45f3e",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "app4ZOC71DzjpOU3O",
+          "mode": "list",
+          "cachedResultName": "Engineering Project Collaboration",
+          "cachedResultUrl": "https://airtable.com/app4ZOC71DzjpOU3O"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl8TYaflrtwHkdkF",
+          "mode": "list",
+          "cachedResultName": "Call_logs",
+          "cachedResultUrl": "https://airtable.com/app4ZOC71DzjpOU3O/tbl8TYaflrtwHkdkF"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "call_duration": "={{ $json.call_duration }}",
+            "call_cost": "={{ $json.call_cost }}",
+            "bot_word_count": "={{ $json.bot_word_count }}",
+            "user_word_count": "={{ $json.user_word_count }}",
+            "first_name": "={{ $json.first_name }}",
+            "last_name": "={{ $json.last_name }}",
+            "address": "={{ $json.address }}",
+            "query": "={{ $json.query }}",
+            "summary": "={{ $json.summary }}",
+            "started_at": "={{ $json.started_at }}",
+            "ended_at": "={{ $json.ended_at }}",
+            "call_type": "={{ $json.call_type }}",
+            "ended_reason": "={{ $json.ended_reason }}",
+            "recording_url": "={{ $json.recording_url }}",
+            "bot_word_percent": "={{ $json.bot_word_percent }}",
+            "ai_call_performance_grade": "={{ $json.ai_call_performance_grade }}",
+            "ai_performance_justification": "={{ $json.ai_performance_justification }}",
+            "formatted_transcript": "={{ $json.formatted_transcript }}",
+            "phone": "={{ $json.phone }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "first_name",
+              "displayName": "first_name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "last_name",
+              "displayName": "last_name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "address",
+              "displayName": "address",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "phone",
+              "displayName": "phone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "query",
+              "displayName": "query",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "summary",
+              "displayName": "summary",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "started_at",
+              "displayName": "started_at",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "ended_at",
+              "displayName": "ended_at",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "call_type",
+              "displayName": "call_type",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "ended_reason",
+              "displayName": "ended_reason",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "recording_url",
+              "displayName": "recording_url",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "call_duration",
+              "displayName": "call_duration",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "call_cost",
+              "displayName": "call_cost",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "bot_word_count",
+              "displayName": "bot_word_count",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "bot_word_percent",
+              "displayName": "bot_word_percent",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "user_word_count",
+              "displayName": "user_word_count",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "ai_call_performance_grade",
+              "displayName": "ai_call_performance_grade",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "ai_performance_justification",
+              "displayName": "ai_performance_justification",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "formatted_transcript",
+              "displayName": "formatted_transcript",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        2100,
+        -780
+      ],
+      "id": "bcc3cd24-3ae5-4630-99d2-0c79267a04e6",
+      "name": "Airtable1",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "97NFXcdcXxbaOw56",
+          "name": "Airtable Personal Access Token account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.call_type }}",
+                    "rightValue": "inboundPhoneCall",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "inbound"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "c918377f-1a63-4206-9007-d0d496a66d82",
+                    "leftValue": "={{ $json.call_type }}",
+                    "rightValue": "outboundPhoneCall",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "outbound"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -180,
+        -540
+      ],
+      "id": "51e7f325-cbf3-4852-ac9e-3ab855130138",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.1,
+      "position": [
+        560,
+        -280
+      ],
+      "id": "6b7ae167-3713-4e24-9422-55044d4c6e64",
+      "name": "OpenAI Chat Model2",
+      "credentials": {
+        "openAiApi": {
+          "id": "ZPKX8CfcOAOTRl1T",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "92f90607-65cc-41cf-9449-d571ec328830",
+              "leftValue": "={{ $json.transcript.isNotEmpty() }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        280,
+        -340
+      ],
+      "id": "2f8197c1-ddd6-4f0e-a0b9-a2c5e7ee69ef",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.1,
+      "position": [
+        900,
+        -280
+      ],
+      "id": "944baa82-df02-4713-9dae-29e3b4055f3a",
+      "name": "OpenAI Chat Model3",
+      "credentials": {
+        "openAiApi": {
+          "id": "ZPKX8CfcOAOTRl1T",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "text": "={{ $('If1').item.json.transcript }}",
+        "attributes": {
+          "attributes": [
+            {
+              "name": "ai_call_performance_grade",
+              "description": "AI call handling performance graded by (Good,Nuetral,Bad)",
+              "required": true
+            },
+            {
+              "name": "ai_performance_justification",
+              "description": "Justification for the performance grade",
+              "required": true
+            }
+          ]
+        },
+        "options": {
+          "systemPromptTemplate": "### **Instructions:**\nAnalyze the interaction in the transcript and grade the\nAI receptionist's performance as **bad**, **neutral**, or\n**good**.\n### **Evaluation Criteria:**\n1. **Clarity:** Was the AI easy to understand?\n2. **Tone:** Did the AI sound polite and professional?\n3. **Flow:** Was the conversation smooth, with minimal repetition or confusion?\n4. **Resolution:** Did the AI guide the caller toward a clear next step?\n### **Grading Instructions:**\n- **Grade:** **Bad**, **Neutral**, or **Good**\n- **Justification:** 1-2 concise sentences summarizing key reasons for the grade."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "typeVersion": 1,
+      "position": [
+        840,
+        -500
+      ],
+      "id": "c617b9ff-dd62-4b35-9596-a2240df8f3f1",
+      "name": "Grade Performance1"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get the transcript\nconst transcript = $('init_variables').first().json.transcript;\n\n// Split the transcript into lines\nconst lines = transcript.split('\\n');\n\n// Add an additional newline between each user and AI chat\nconst formatted_transcript = lines.map((line, index) => {\n  if (index > 0 && (line.startsWith('AI:') || line.startsWith('User:'))) {\n    return '\\n' + line;\n  } else {\n    return line;\n  }\n}).join('\\n');\n\n// Return the formatted transcript\nreturn { formatted_transcript };\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1200,
+        -500
+      ],
+      "id": "7b098e3f-4ee3-475c-bc94-6bef231adac5",
+      "name": "Code Format transcript1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const transcript = $('init_variables').first().json.transcript\n\n// Initialize counters for bot (AI) and user words\nlet bot_word_count = 0;\nlet user_word_count = 0;\n\n// Split the transcript into lines based on the newline character '\\n'\n// Each line represents either the AI or the User speaking\nconst lines = transcript.split('\\n');\n\n// Loop through each line in the transcript\nfor (let i = 0; i < lines.length; i++) {\n    // Check if the line starts with \"AI:\" or \"User:\"\n    if (lines[i].startsWith('AI:')) {\n        // Remove \"AI:\" prefix and split the remaining text into words\n        const words = lines[i].replace('AI:', '').trim().split(/\\s+/);\n        // Add the number of words to the bot's word count\n        bot_word_count += words.length;\n    } else if (lines[i].startsWith('User:')) {\n        // Remove \"User:\" prefix and split the remaining text into words\n        const words = lines[i].replace('User:', '').trim().split(/\\s+/);\n        // Add the number of words to the user's word count\n        user_word_count += words.length;\n    }\n}\n\n// Calculate the total word count (AI + User)\nconst total_word_count = bot_word_count + user_word_count;\n\n// Avoid dividing by zero to prevent errors in case there's no data\nlet bot_word_percent = 0;\nlet user_word_percent = 0;\n\nif (total_word_count > 0) {\n    // Calculate the word percentages for AI and User\n    bot_word_percent = Math.round((bot_word_count / total_word_count) * 100);\n    user_word_percent = Math.round((user_word_count / total_word_count) * 100);\n}\n\n// Output the results for use in other parts of the workflow\nreturn {\n    bot_word_count: bot_word_count,\n    bot_word_percent: bot_word_percent + '%',\n    user_word_count: user_word_count,\n    user_word_percent: user_word_percent + '%'\n};\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1440,
+        -500
+      ],
+      "id": "16de219b-547d-40c1-bbcb-112d7721fe02",
+      "name": "Word count1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6281f66a-f51f-47d1-9a1e-d828fc4b8cc5",
+              "name": "phone",
+              "value": "={{ $('If1').item.json.user_number }}",
+              "type": "string"
+            },
+            {
+              "id": "abf2964b-c961-4108-9692-bc26d070db3a",
+              "name": "summary",
+              "value": "={{ $('Personal Interest Extractor').item.json.output.summary }}",
+              "type": "string"
+            },
+            {
+              "id": "1bb496ec-b2c7-43d5-bb9c-f3c2ece08b6b",
+              "name": "started_at",
+              "value": "={{ $('If1').item.json.started_at }}",
+              "type": "string"
+            },
+            {
+              "id": "34a71098-7e12-436c-9522-ebbfe0065f7a",
+              "name": "ended_at",
+              "value": "={{ $('If1').item.json.ended_at }}",
+              "type": "string"
+            },
+            {
+              "id": "fe53dc85-504a-41bd-9b15-b38ab9955dcb",
+              "name": "call_type",
+              "value": "={{ $('If1').item.json.call_type }}",
+              "type": "string"
+            },
+            {
+              "id": "ab5977b4-6c67-4af8-996f-672beddd367f",
+              "name": "ended_reason",
+              "value": "={{ $('If1').item.json.ended_reason }}",
+              "type": "string"
+            },
+            {
+              "id": "5af1e411-160b-44fa-9195-2d21ab09c7c0",
+              "name": "recording_url",
+              "value": "={{ $('If1').item.json.recording_url }}",
+              "type": "string"
+            },
+            {
+              "id": "3f88c2c0-0478-4453-9720-83cf0f4a9fe8",
+              "name": "call_duration",
+              "value": "={{ $('If1').item.json.call_duration }}",
+              "type": "number"
+            },
+            {
+              "id": "67c6f586-d67f-4408-97b6-4a5bf4774ffc",
+              "name": "call_cost",
+              "value": "={{ $('If1').item.json.call_cost }}",
+              "type": "number"
+            },
+            {
+              "id": "a9a3820e-0b77-4b36-acbc-491a4ddfd88e",
+              "name": "bot_word_count",
+              "value": "={{ $json.bot_word_count }}",
+              "type": "number"
+            },
+            {
+              "id": "c9709be9-32ac-49aa-b0ce-802dca998f9d",
+              "name": "bot_word_percent",
+              "value": "={{ $json.bot_word_percent }}",
+              "type": "string"
+            },
+            {
+              "id": "735edb5b-6579-479d-ba41-cd10988b9774",
+              "name": "user_word_count",
+              "value": "={{ $json.user_word_count }}",
+              "type": "number"
+            },
+            {
+              "id": "df59c462-fc27-4856-b1d4-cd35385d1b08",
+              "name": "user_word_percent",
+              "value": "={{ $json.user_word_percent }}",
+              "type": "string"
+            },
+            {
+              "id": "246a274f-0f0c-41ac-aa10-cf1f5378e9e4",
+              "name": "ai_call_performance_grade",
+              "value": "={{ $('Grade Performance1').item.json.output.ai_call_performance_grade }}",
+              "type": "string"
+            },
+            {
+              "id": "36bf941d-ae6c-4e5b-a7c8-6a4b4e1929fe",
+              "name": "ai_performance_justification",
+              "value": "={{ $('Grade Performance1').item.json.output.ai_performance_justification }}",
+              "type": "string"
+            },
+            {
+              "id": "11d7a0b9-00ab-4daa-ab67-583f4b1ac424",
+              "name": "formatted_transcript",
+              "value": "={{ $('Code Format transcript1').item.json.formatted_transcript }}",
+              "type": "string"
+            },
+            {
+              "id": "3134432b-2a8c-4661-b391-1ede4af42477",
+              "name": "Interested_In_Selling",
+              "value": "={{ $('Personal Interest Extractor').item.json.output.Interested_In_Selling }}",
+              "type": "string"
+            },
+            {
+              "id": "f1c4334a-4dd7-42ee-a6e2-228015a2be72",
+              "name": "property_type",
+              "value": "={{ $('Personal Interest Extractor').item.json.output.property_type }}",
+              "type": "string"
+            },
+            {
+              "id": "9fe275b6-e3f0-488d-a7fb-9a3888f07778",
+              "name": "willingness_for_follow-up",
+              "value": "={{ $('Personal Interest Extractor').item.json.output['willingness_for_follow-up'] }}",
+              "type": "string"
+            },
+            {
+              "id": "e678b541-c86d-4e62-b1b6-61e5bd551b3b",
+              "name": "preferred_time_for_follow_up",
+              "value": "={{ $('Personal Interest Extractor').item.json.output.preferred_time_for_follow_up }}",
+              "type": "string"
+            },
+            {
+              "id": "d128b518-8e16-4a37-ab19-ac62564eb4ec",
+              "name": "property_location",
+              "value": "={{ $('Personal Interest Extractor').item.json.output.property_location }}",
+              "type": "string"
+            },
+            {
+              "id": "1230ba86-c13e-4c54-8e78-37d57a0fecaa",
+              "name": "additional_notes",
+              "value": "={{ $('Personal Interest Extractor').item.json.output.additional_notes }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1660,
+        -500
+      ],
+      "id": "21c11a37-2989-492c-8bb8-e58e1b662c9b",
+      "name": "Edit Fields3"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e3232305-4d76-462b-a479-bc8d67bea06d",
+              "name": "first_name",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "d4d0b6df-522f-47e3-911f-28c5deb8df2d",
+              "name": "last_name",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "4c91a42e-a17e-40c9-b4d3-b834e4258005",
+              "name": "address",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "6281f66a-f51f-47d1-9a1e-d828fc4b8cc5",
+              "name": "phone",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "dba75c46-cdb3-4d7b-8270-ab0aeff09dd7",
+              "name": "query",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "abf2964b-c961-4108-9692-bc26d070db3a",
+              "name": "summary",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "1bb496ec-b2c7-43d5-bb9c-f3c2ece08b6b",
+              "name": "started_at",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "34a71098-7e12-436c-9522-ebbfe0065f7a",
+              "name": "ended_at",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "fe53dc85-504a-41bd-9b15-b38ab9955dcb",
+              "name": "call_type",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "ab5977b4-6c67-4af8-996f-672beddd367f",
+              "name": "ended_reason",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "5af1e411-160b-44fa-9195-2d21ab09c7c0",
+              "name": "recording_url",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "3f88c2c0-0478-4453-9720-83cf0f4a9fe8",
+              "name": "call_duration",
+              "value": "=",
+              "type": "number"
+            },
+            {
+              "id": "67c6f586-d67f-4408-97b6-4a5bf4774ffc",
+              "name": "call_cost",
+              "value": "=",
+              "type": "number"
+            },
+            {
+              "id": "a9a3820e-0b77-4b36-acbc-491a4ddfd88e",
+              "name": "bot_word_count",
+              "value": "=",
+              "type": "number"
+            },
+            {
+              "id": "735edb5b-6579-479d-ba41-cd10988b9774",
+              "name": "user_word_count",
+              "value": "=",
+              "type": "number"
+            },
+            {
+              "id": "df59c462-fc27-4856-b1d4-cd35385d1b08",
+              "name": "user_word_percent",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "246a274f-0f0c-41ac-aa10-cf1f5378e9e4",
+              "name": "ai_call_performance_grade",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "36bf941d-ae6c-4e5b-a7c8-6a4b4e1929fe",
+              "name": "ai_performance_justification",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "11d7a0b9-00ab-4daa-ab67-583f4b1ac424",
+              "name": "formatted_transcript",
+              "value": "=",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1660,
+        -340
+      ],
+      "id": "e620afe9-4e00-4852-aaa9-f4ee90e40d65",
+      "name": "Edit Fields4"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5af66098-4684-42ee-b94b-b4bd619da0b2",
+              "name": "summary",
+              "value": "={{ $json.summary }}",
+              "type": "string"
+            },
+            {
+              "id": "db0a1ca9-9be8-49bc-9635-64fac1c5980e",
+              "name": "started_at",
+              "value": "={{ $json.started_at }}",
+              "type": "string"
+            },
+            {
+              "id": "c03fa6a6-989c-4e98-a0b4-24c1fde9b606",
+              "name": "ended_at",
+              "value": "={{ $json.ended_at }}",
+              "type": "string"
+            },
+            {
+              "id": "736b3d2e-cc0d-404a-973f-330c4c94fa7a",
+              "name": "call_type",
+              "value": "={{ $json.call_type }}",
+              "type": "string"
+            },
+            {
+              "id": "d336d7c4-50ad-4e1d-a1a9-3919c69c8689",
+              "name": "ended_reason",
+              "value": "={{ $json.ended_reason }}",
+              "type": "string"
+            },
+            {
+              "id": "1a5727ca-ccd4-4679-9fe6-0664fa8598a7",
+              "name": "recording_url",
+              "value": "={{ $json.recording_url }}",
+              "type": "string"
+            },
+            {
+              "id": "31f33b89-9dab-47cc-9fe7-39211e0a8d51",
+              "name": "call_duration",
+              "value": "={{ $json.call_duration }}",
+              "type": "number"
+            },
+            {
+              "id": "a2c6cad0-ccd0-422b-b831-17949e9bd0e6",
+              "name": "call_cost",
+              "value": "={{ $json.call_cost }}",
+              "type": "number"
+            },
+            {
+              "id": "be67cfba-da5c-4979-94d7-c7dc4d498f9a",
+              "name": "bot_word_count",
+              "value": "={{ $json.bot_word_count }}",
+              "type": "number"
+            },
+            {
+              "id": "8bad67aa-586b-4e8a-8045-4436ded41380",
+              "name": "bot_word_count",
+              "value": "={{ $json.bot_word_count }}",
+              "type": "number"
+            },
+            {
+              "id": "a339b012-e474-4df4-b9dc-a207c77108a5",
+              "name": "bot_word_percent",
+              "value": "={{ $json.bot_word_percent }}",
+              "type": "string"
+            },
+            {
+              "id": "d598008d-da19-4432-8a30-b9f9b7384f20",
+              "name": "user_word_count",
+              "value": "={{ $json.user_word_count }}",
+              "type": "number"
+            },
+            {
+              "id": "b83aee5f-f006-4508-8af9-497eac54b370",
+              "name": "ai_call_performance_grade",
+              "value": "={{ $json.ai_call_performance_grade }}",
+              "type": "string"
+            },
+            {
+              "id": "71dfb97b-32e0-44b9-a243-8cca1c2ea307",
+              "name": "ai_performance_justification",
+              "value": "={{ $json.ai_performance_justification }}",
+              "type": "string"
+            },
+            {
+              "id": "ab16d9f3-85c1-45cb-abf7-69b71dc2f097",
+              "name": "ai_performance_justification",
+              "value": "={{ $json.ai_performance_justification }}",
+              "type": "string"
+            },
+            {
+              "id": "1ebf35cb-a565-4101-ab03-130762311b03",
+              "name": "formatted_transcript",
+              "value": "={{ $json.formatted_transcript }}",
+              "type": "string"
+            },
+            {
+              "id": "e6310a64-6cff-4633-8165-42644881cc0b",
+              "name": "Interested_In_Selling",
+              "value": "={{ $json.Interested_In_Selling }}",
+              "type": "string"
+            },
+            {
+              "id": "2a2e2fb6-eb99-458f-a2a4-23d3b46db263",
+              "name": "property_type",
+              "value": "={{ $json.property_type }}",
+              "type": "string"
+            },
+            {
+              "id": "eee49c38-30d2-4aa6-bc0c-33b87b6eb817",
+              "name": "willingness_for_follow-up",
+              "value": "={{ $json['willingness_for_follow-up'] }}",
+              "type": "string"
+            },
+            {
+              "id": "aee778b8-44d1-4fcc-b0de-f89f7ff2c6ba",
+              "name": "preferred_time_for_follow_up",
+              "value": "={{ $json.preferred_time_for_follow_up }}",
+              "type": "string"
+            },
+            {
+              "id": "109ef13c-1336-4d70-959f-bf7b728d93e5",
+              "name": "property_location",
+              "value": "={{ $json.property_location }}",
+              "type": "string"
+            },
+            {
+              "id": "895a75c0-272c-4fb8-8020-9899b25e4222",
+              "name": "additional_notes",
+              "value": "={{ $json.additional_notes }}",
+              "type": "string"
+            },
+            {
+              "id": "05db216d-5313-4bd4-9863-120ddaa7831f",
+              "name": "phone",
+              "value": "={{ $json.phone }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1900,
+        -440
+      ],
+      "id": "2ecf8c4b-3316-462c-880b-1cb9e41048b2",
+      "name": "Edit Fields5"
+    },
+    {
+      "parameters": {
+        "operation": "upsert",
+        "base": {
+          "__rl": true,
+          "value": "app4ZOC71DzjpOU3O",
+          "mode": "list",
+          "cachedResultName": "Engineering Project Collaboration",
+          "cachedResultUrl": "https://airtable.com/app4ZOC71DzjpOU3O"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblZYt1jVdI0s6Zli",
+          "mode": "list",
+          "cachedResultName": "Real_Call_logs",
+          "cachedResultUrl": "https://airtable.com/app4ZOC71DzjpOU3O/tblZYt1jVdI0s6Zli"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "call_duration": "={{ $json.call_duration }}",
+            "call_cost": "={{ $json.call_cost }}",
+            "bot_word_count": "={{ $json.bot_word_count }}",
+            "bot_word_percent": "={{ $json.bot_word_percent }}",
+            "user_word_count": "={{ $json.user_word_count }}",
+            "phone": "={{ $json.phone }}",
+            "status": "called",
+            "Interested_In_Selling": "={{ $json.Interested_In_Selling }}",
+            "property_type": "={{ $json.property_type }}",
+            "wilingness_for_follow-up": "={{ $json['willingness_for_follow-up'] }}",
+            "preferred_time_for_follow_up": "={{ $json.preferred_time_for_follow_up }}",
+            "property_location": "={{ $json.property_location }}",
+            "summary": "={{ $json.summary }}",
+            "call_type": "={{ $json.call_type }}",
+            "started_at": "={{ $json.started_at }}",
+            "ended_at": "={{ $json.ended_at }}",
+            "ended_reason": "={{ $json.ended_reason }}",
+            "recording_url": "={{ $json.recording_url }}",
+            "ai_call_performance_grade": "={{ $json.ai_call_performance_grade }}",
+            "ai_performance_justification": "={{ $json.ai_performance_justification }}",
+            "formatted_transcript": "={{ $json.formatted_transcript }}"
+          },
+          "matchingColumns": [
+            "phone"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "first_name",
+              "displayName": "first_name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "last_name",
+              "displayName": "last_name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "phone",
+              "displayName": "phone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Interested_In_Selling",
+              "displayName": "Interested_In_Selling",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "property_type",
+              "displayName": "property_type",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "wilingness_for_follow-up",
+              "displayName": "wilingness_for_follow-up",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "preferred_time_for_follow_up",
+              "displayName": "preferred_time_for_follow_up",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "property_location",
+              "displayName": "property_location",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "query",
+              "displayName": "query",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "summary",
+              "displayName": "summary",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "started_at",
+              "displayName": "started_at",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "ended_at",
+              "displayName": "ended_at",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "call_type",
+              "displayName": "call_type",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "ended_reason",
+              "displayName": "ended_reason",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "recording_url",
+              "displayName": "recording_url",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "call_duration",
+              "displayName": "call_duration",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "call_cost",
+              "displayName": "call_cost",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "bot_word_count",
+              "displayName": "bot_word_count",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "bot_word_percent",
+              "displayName": "bot_word_percent",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "user_word_count",
+              "displayName": "user_word_count",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "ai_call_performance_grade",
+              "displayName": "ai_call_performance_grade",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "ai_performance_justification",
+              "displayName": "ai_performance_justification",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "formatted_transcript",
+              "displayName": "formatted_transcript",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        2120,
+        -440
+      ],
+      "id": "78e27edf-7d0d-444c-a1de-7eb6b2bdfb5b",
+      "name": "Airtable2",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "97NFXcdcXxbaOw56",
+          "name": "Airtable Personal Access Token account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "real",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -1100,
+        -520
+      ],
+      "id": "f0780cba-9797-4df9-ab10-b9631830863a",
+      "name": "Realestate",
+      "webhookId": "efc35fb8-83dd-44d2-bc6f-b833810b1eca"
+    },
+    {
+      "parameters": {
+        "text": "={{ $json.transcript }}",
+        "attributes": {
+          "attributes": [
+            {
+              "name": "Interested_In_Selling",
+              "description": "Person is Interested In Selling"
+            },
+            {
+              "name": "property_type",
+              "description": "Property  Type"
+            },
+            {
+              "name": "willingness_for_follow-up",
+              "description": "Willingness For Follow Up"
+            },
+            {
+              "name": "preferred_time_for_follow_up",
+              "description": "Preferred Time For Follow Up"
+            },
+            {
+              "name": "property_location",
+              "description": "Property Location"
+            },
+            {
+              "name": "additional_notes",
+              "description": "Additional Notes"
+            },
+            {
+              "name": "summary",
+              "description": "Concise summary for the entire conversation"
+            }
+          ]
+        },
+        "options": {
+          "systemPromptTemplate": "Summary Prompt:\nYou are an expert note-taker. You will be given a transcript of a call between an AI cold-call agent from Pal Realty and a potential customer. Summarize the key points of the call in 2-3 sentences, including the purpose of the call, the customer’s response, and any actionable next steps if applicable.\n\nSuccess Evaluation Prompt:\nYou are an expert call evaluator. You will be given a transcript of a call and the system prompt of the AI participant. Evaluate whether the call was successful based on the following criteria:\n\t1.\tThe person called expressed interest in selling their property, either now or in the future.\n\t2.\tThe person was open to having another conversation or receiving a follow-up call.\n\nIf both criteria are met, mark the evaluation as “true.” If either or both criteria are not met, mark the evaluation as “false.”\n\n\nStructured Data Extraction Prompt:\nYou are an expert data extractor. You will be given a transcript of a call. Extract structured data per the JSON Schema. If a variable is not discussed, use the default value specified:\n\n**Variables**\n\n\t1.\tProperty Address or Location: Extract if discussed; otherwise, set to \"Not Provided\".\n\t2.\tProperty Type: Identify the type (e.g., single-family home, condo); if not mentioned, set to \"Not Provided\".\n\t3.\tInterest in Selling: \n              Use one of the following:\n\t           •\t\"Yes\": Clear interest in selling now.\n\t           •\t\"Maybe\": Potential interest in the future.\n\t           •\t\"No\": Not interested or unclear.\n\t4.\tWillingness for Follow-Up: \n               Use one of the following:\n\t           •\t\"Yes\": Open to follow-up.\n\t           •\t\"No\": Declines follow-up or not discussed.\n\t5.\tPreferred Time for Follow-Up: If provided, extract it; otherwise, set to \"Not Specified\".\n\t6.\tAdditional Notes: Extract relevant comments; if none, set to \"None\".\n\n**Instructions**:\n\t•\tClearly label all extracted data and use defaults if a variable is not explicitly discussed.\n\t•\tEnsure structured data is populated even if the call results in “not interested.”\n    •\tEnsure the output is a properly formatted JSON object matching the schema exactly.\n\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "typeVersion": 1,
+      "position": [
+        500,
+        -500
+      ],
+      "id": "b958faca-424c-46c7-a188-9b1c552bf78b",
+      "name": "Personal Interest Extractor"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -1060,
+        640
+      ],
+      "id": "80355ffa-bb1a-49d5-8a4d-630757714b38",
+      "name": "When chat message received",
+      "webhookId": "3558ad41-9193-4f72-9b58-c7d641c3fcd9"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.input_text }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=You are a support agent named Sarah. You 5 year of experience in working with Paramatta Dental Clinic.\nYou are very friendly and enthusiastic and really want to help the customer get the help they need. Answer in 3 to 7 sentences in most cases.\n\nYou have to use 'Dental_clinic' tool answer all kind of dental services.\nif you don't get information simply say I don't know.\n\nKey Abilities and Tools:\nDental_clinic : use this tool for getting information regarding dental services.\n\nAppointment Management: Check availability, schedule appointments, and confirm bookings with customers.\nAlways take the reference of current day as '{{ $json.today }}' for sechuuling booking.\nuse customer phone '{{ $json.customer_phone }}' confirm with then if they want to use differnt phone number\n\nEmail Communication: Draft and send emails to customers, including appointment confirmations, follow-ups, policy details, or resolution updates.\nBehavioral Guidelines:\n\nProfessionalism: Maintain a polite, empathetic, and professional tone in all interactions.\nAccuracy: Double-check all appointment details and policy information before sharing with customers.\n\nEfficiency: Respond promptly and use tools effectively to minimize wait times for customers.\n\nCompliance: Adhere to company policies, data privacy laws, and ethical standards in handling customer data and queries.\nCommon Tasks:\n\nScheduling Appointments:\n\n\"Let me check the availability of our advisor for you.\"\n\"I’ve booked an appointment for [date and time]. You will receive an email confirmation shortly.\"\n\nEmail Communication:\n\n\"I’ll email you the details of service  with the coverage options.\"\n\"A confirmation email for your appointment with [Advisor's Name] on [Date and Time] has been sent to [Email Address].\""
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        -220,
+        -80
+      ],
+      "id": "a9d959a7-048b-41e8-bd17-2efaec3521f6",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -260,
+        140
+      ],
+      "id": "6a656f10-9a2f-46d0-ad30-04f4ef2c2b4e",
+      "name": "Window Buffer Memory"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "kuldeep.palastro@gmail.com",
+          "mode": "list",
+          "cachedResultName": "kuldeep.palastro@gmail.com"
+        },
+        "options": {
+          "timeMin": "={{ $fromAI('start_time') }}",
+          "timeMax": "= {{ $fromAI('end_time') }}",
+          "timeZone": {
+            "__rl": true,
+            "value": "Australia/Sydney",
+            "mode": "list",
+            "cachedResultName": "Australia/Sydney"
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.2,
+      "position": [
+        120,
+        140
+      ],
+      "id": "e9ff0e34-c0a3-4a4e-be3b-6d052e5d64ed",
+      "name": "event Watcher",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "HcdlKGpex30DVrZz",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "calendar",
+        "calendar": {
+          "__rl": true,
+          "value": "kuldeep.palastro@gmail.com",
+          "mode": "list",
+          "cachedResultName": "kuldeep.palastro@gmail.com"
+        },
+        "timeMin": "={{ $fromAI('start_time') }}",
+        "timeMax": "={{ $fromAI('end_time') }}",
+        "options": {
+          "timezone": {
+            "__rl": true,
+            "value": "Australia/Sydney",
+            "mode": "list",
+            "cachedResultName": "Australia/Sydney"
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.2,
+      "position": [
+        -60,
+        140
+      ],
+      "id": "435c57a3-1c03-4ed8-9bed-53ce0f9e7ef7",
+      "name": "Check availability tool",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "HcdlKGpex30DVrZz",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "kuldeep.palastro@gmail.com",
+          "mode": "list",
+          "cachedResultName": "kuldeep.palastro@gmail.com"
+        },
+        "start": "= {{ $fromAI('start_time') }}",
+        "end": "= {{ $fromAI('end_time') }}",
+        "useDefaultReminders": false,
+        "additionalFields": {
+          "attendees": [
+            "= {{ $fromAI('user_email') }}"
+          ],
+          "description": "this event is User request of query",
+          "location": "= {{ $fromAI('user_location') }}",
+          "summary": "= {{ $fromAI('user_purpuse') }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.2,
+      "position": [
+        300,
+        140
+      ],
+      "id": "69cbd6ae-a33b-4835-90fc-67042ecc2d2d",
+      "name": "schedule appointments tool",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "HcdlKGpex30DVrZz",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $fromAI('user_email') }}",
+        "subject": "Appointment Details ",
+        "message": "=<h2>Dear User {{ $fromAI('user_name') }}</h2>\n<p>\nThanks for calling us we will update you as soon as possible \n</p>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        460,
+        140
+      ],
+      "id": "79337ade-4344-4f48-9792-b6b50c0c4f67",
+      "name": "Email Communication",
+      "webhookId": "aa5c31cf-f8c8-42b5-8e06-f3d8d02bc3dc",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "5x3qOqtNMGHHDK4m",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "function sanitizeJSON(jsonString) {\n    // Replace problematic quotes and newlines within the JSON string\n    return jsonString\n        .replace(/\"([^\"]*?)\"/g, (match, group) => {\n            // Ensure keys and properly quoted values remain intact\n            if (/:$/.test(match) || /^[\\s\\[{\"]/.test(match)) {\n                return match; // Leave valid JSON quotes untouched\n            }\n            // Escape any other problematic quotes\n            return `\"${group.replace(/\"/g, '\\\\\"')}\"`;\n        })\n        //.replace(/\\n/g, \" \"); // Replace \\n with a space or any desired character\n}\n\nreturn {\n  output:sanitizeJSON($json.output.replace(/\\n/g, \" \").replace(/\\\"/g, ' \\\\\"'))\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        180,
+        -80
+      ],
+      "id": "7cdeb9a9-93f6-4dca-85b8-2742cefc5258",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        -420,
+        140
+      ],
+      "id": "f0df214d-ebfa-4367-8623-8090c31b83da",
+      "name": "OpenAI Chat Model4",
+      "credentials": {
+        "openAiApi": {
+          "id": "ZPKX8CfcOAOTRl1T",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fbcb9b85-29de-436f-9f19-812e48167b5d",
+              "name": "sessionId",
+              "value": "{{ $json.body.message.call.id}}",
+              "type": "string"
+            },
+            {
+              "id": "b21ed93d-dcbf-4e37-81f5-fef0b432cef4",
+              "name": "input_text",
+              "value": "={{ $json.body.message.toolCalls[0].function.arguments.dental_query }}",
+              "type": "string"
+            },
+            {
+              "id": "1f83d0b3-998e-486f-9488-ecfce47f7ea3",
+              "name": "tool",
+              "value": "={{ $json.body.message.tool_calls[0].function.name }}",
+              "type": "string"
+            },
+            {
+              "id": "321156c5-77ac-4db0-b976-865d854df82e",
+              "name": "today",
+              "value": "={{ Date($json.body.message.timestamp) }}",
+              "type": "string"
+            },
+            {
+              "id": "3d4b2c32-ee36-4063-8210-304c52408f5a",
+              "name": "customer_phone",
+              "value": "={{ $json.body.message.call.customer.number }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -480,
+        -80
+      ],
+      "id": "bf064232-6cfa-4fe6-84f1-46e0d8dc908b",
+      "name": "Edit Fields6"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={ \n    \"results\": [\n        {\n            \"toolCallId\": \"{{ $('Execute Workflow Trigger').item.json.body.message.toolCalls[0].id }}\",\n            \"result\": \"{{ $json.output }}\"\n        }\n    ]\n}\n ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        420,
+        -80
+      ],
+      "id": "91f48030-5726-4b9c-b026-41cc59844965",
+      "name": "responce"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        660,
+        -80
+      ],
+      "id": "cc43b01d-e724-429b-82fd-9dcd9548e44a",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "04979d2a-c7e4-40e9-b4c8-70735bb74423",
+                    "leftValue": "={{ $json.body.message.type }}",
+                    "rightValue": "end-of-call-report",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "End Of Call Request"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "feb1f55f-0864-412a-81d5-89864977f67f",
+                    "leftValue": "={{ $json.body.message.type }}",
+                    "rightValue": "tool-calls",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Tool Calls"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -880,
+        -520
+      ],
+      "id": "f72d5a7c-f872-4566-8b93-22bc54d60c7f",
+      "name": "Handle"
+    },
+    {
+      "parameters": {
+        "errorMessage": "Error occured"
+      },
+      "type": "n8n-nodes-base.stopAndError",
+      "typeVersion": 1,
+      "position": [
+        -480,
+        -340
+      ],
+      "id": "501f9409-2944-4e35-865e-eaee4adfb7ef",
+      "name": "Stop and Error"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.vapi.ai/call/{{ $json.id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('JWT').item.json.token }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "6b6b894d-5c63-4f00-8789-99a6104c41e9",
+      "name": "Call Status",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        720,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "08730a30-5c4a-4bd2-bfae-51613a64335c",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "ended",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        880,
+        700
+      ],
+      "id": "3bb3c693-525e-4b0b-820a-978be72d4d80",
+      "name": "if_active_call"
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1080,
+        800
+      ],
+      "id": "4474e520-d189-4f0c-be37-8074e08d6658",
+      "name": "Wait",
+      "webhookId": "06e40c77-15ff-403d-a3b2-108ead983c26"
+    },
+    {
+      "parameters": {
+        "method": "DELETE",
+        "url": "=https://api.vapi.ai/assistant/{{ $json.assistantId }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('JWT').item.json.token }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1420,
+        560
+      ],
+      "id": "fe696d55-b630-44db-a2ac-1c6c3f52d5fb",
+      "name": "Delete Assistance"
+    },
+    {
+      "parameters": {
+        "amount": 15
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        520,
+        700
+      ],
+      "id": "495b4025-73bf-4ac7-9ecb-553eb55b133a",
+      "name": "Wait1",
+      "webhookId": "06e40c77-15ff-403d-a3b2-108ead983c26"
+    },
+    {
+      "parameters": {
+        "amount": 15
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1120,
+        560
+      ],
+      "id": "72cea5d3-e6da-41b7-8561-769a091be189",
+      "name": "Wait2",
+      "webhookId": "06e40c77-15ff-403d-a3b2-108ead983c26"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "V7lbpbWQwpuQmseb",
+          "mode": "list",
+          "cachedResultName": "Vapi — VapiEndOfCall"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        1280,
+        300
+      ],
+      "id": "0272d7a3-b6be-4753-aea6-4fe6c52f4809",
+      "name": "Execute Workflow"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "JWT": {
+      "main": [
+        [
+          {
+            "node": "Create Assistance",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Assistance": {
+      "main": [
+        [
+          {
+            "node": "Make Call",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Prompt Filling",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prompt Filling": {
+      "main": [
+        [
+          {
+            "node": "Assitant Template",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Assitant Template": {
+      "main": [
+        [
+          {
+            "node": "JWT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Personal Information Extractor",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Personal Information Extractor",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Grade Performance",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Grade Performance": {
+      "main": [
+        [
+          {
+            "node": "Code Format transcript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Personal Information Extractor": {
+      "main": [
+        [
+          {
+            "node": "Grade Performance",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code Format transcript": {
+      "main": [
+        [
+          {
+            "node": "Word count",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "init_variables": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Word count": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Airtable1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Personal Interest Extractor",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Personal Interest Extractor",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Grade Performance1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Grade Performance1": {
+      "main": [
+        [
+          {
+            "node": "Code Format transcript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code Format transcript1": {
+      "main": [
+        [
+          {
+            "node": "Word count1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Word count1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields3": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields4": {
+      "main": [
+        []
+      ]
+    },
+    "Edit Fields5": {
+      "main": [
+        [
+          {
+            "node": "Airtable2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Realestate": {
+      "main": [
+        [
+          {
+            "node": "Handle",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Personal Interest Extractor": {
+      "main": [
+        [
+          {
+            "node": "Grade Performance1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "event Watcher": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check availability tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "schedule appointments tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email Communication": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "responce",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model4": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields6": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "responce": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Handle": {
+      "main": [
+        [
+          {
+            "node": "init_variables",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields6",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Stop and Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Make Call": {
+      "main": [
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Status": {
+      "main": [
+        [
+          {
+            "node": "if_active_call",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "if_active_call": {
+      "main": [
+        [
+          {
+            "node": "Wait2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Call Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "Call Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait2": {
+      "main": [
+        [
+          {
+            "node": "Execute Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "47ec7a51-4b00-4a55-8f89-2993326ac3b1",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c999074c89aed4fa4e528e0820593ee0fd9b939f95515bf50af1fb4a46e5032a"
+  },
+  "id": "D09IOEwSsWAQKcY0",
+  "tags": []
+}

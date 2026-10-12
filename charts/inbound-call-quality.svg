@@ -1,0 +1,175 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="1508" viewBox="0 0 1040 1508" role="img" aria-label="Inbound call quality report: 14 dental clinic calls graded by an LLM judge">
+<title>Dental clinic inbound call quality report</title>
+<rect x="0" y="0" width="1040" height="1508" rx="14" fill="#fcfcfb" stroke="rgba(11,11,11,0.10)" stroke-width="1"/>
+<text x="32.0" y="54.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="23" fill="#0b0b0b" font-weight="600" text-anchor="start">Dental Clinic — Inbound Call Quality</text>
+<text x="32.0" y="77.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12.5" fill="#52514e" font-weight="400" text-anchor="start">Parramatta Dental Clinic AI receptionist · Vapi voice agent orchestrated by n8n · every call graded after the fact by the same LLM-as-judge</text>
+<text x="1008.0" y="54.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#898781" font-weight="500" text-anchor="end">n8n + Vapi</text>
+<text x="1008.0" y="72.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#898781" font-weight="400" text-anchor="end">20 Jan – 1 Feb 2025</text>
+<line x1="32" y1="98" x2="1008" y2="98" stroke="#e1e0d9" stroke-width="1"/>
+<rect x="32.0" y="124" width="184.0" height="86" rx="10" fill="#f9f9f7" stroke="rgba(11,11,11,0.10)" stroke-width="1"/>
+<text x="46.0" y="148.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#898781" font-weight="500" text-anchor="start">Calls graded</text>
+<text x="46.0" y="180.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="26" fill="#0b0b0b" font-weight="600" text-anchor="start">14</text>
+<text x="46.0" y="198.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#52514e" font-weight="400" text-anchor="start">from 17 log rows</text>
+<rect x="230.0" y="124" width="184.0" height="86" rx="10" fill="#f9f9f7" stroke="rgba(11,11,11,0.10)" stroke-width="1"/>
+<text x="244.0" y="148.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#898781" font-weight="500" text-anchor="start">Grade mix</text>
+<text x="244.0" y="180.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="26" fill="#0b0b0b" font-weight="600" text-anchor="start">3 · 9 · 2</text>
+<text x="244.0" y="198.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#52514e" font-weight="400" text-anchor="start">Good · Neutral · Bad</text>
+<rect x="428.0" y="124" width="184.0" height="86" rx="10" fill="#f9f9f7" stroke="rgba(11,11,11,0.10)" stroke-width="1"/>
+<text x="442.0" y="148.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#898781" font-weight="500" text-anchor="start">Median talk share</text>
+<text x="442.0" y="180.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="26" fill="#0b0b0b" font-weight="600" text-anchor="start">83%</text>
+<text x="442.0" y="198.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#52514e" font-weight="400" text-anchor="start">agent&#x27;s share of words</text>
+<rect x="626.0" y="124" width="184.0" height="86" rx="10" fill="#f9f9f7" stroke="rgba(11,11,11,0.10)" stroke-width="1"/>
+<text x="640.0" y="148.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#898781" font-weight="500" text-anchor="start">Median call</text>
+<text x="640.0" y="180.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="26" fill="#0b0b0b" font-weight="600" text-anchor="start">2m 41s</text>
+<text x="640.0" y="198.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#52514e" font-weight="400" text-anchor="start">shortest 3s · longest 4m 41s</text>
+<rect x="824.0" y="124" width="184.0" height="86" rx="10" fill="#f9f9f7" stroke="rgba(11,11,11,0.10)" stroke-width="1"/>
+<text x="838.0" y="148.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#898781" font-weight="500" text-anchor="start">Spend</text>
+<text x="838.0" y="180.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="26" fill="#0b0b0b" font-weight="600" text-anchor="start">$2.97</text>
+<text x="838.0" y="198.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#52514e" font-weight="400" text-anchor="start">$0.09 per minute</text>
+<text x="32.0" y="253.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="14.5" fill="#0b0b0b" font-weight="600" text-anchor="start">Grade mix</text>
+<text x="32.0" y="271.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#52514e" font-weight="400" text-anchor="start">The outbound campaign&#x27;s rubric, unchanged: clarity, tone, flow, and whether the caller was guided to a clear next step. Most calls land Neutral — a verdict</text>
+<text x="32.0" y="287.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#52514e" font-weight="400" text-anchor="start">that reads as &quot;nothing went wrong&quot; rather than &quot;something went well&quot;.</text>
+<text x="32.0" y="330.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="13" fill="#0b0b0b" font-weight="600" text-anchor="start">Good</text>
+<text x="32.0" y="345.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#898781" font-weight="400" text-anchor="start">n = 3</text>
+<rect x="148" y="315" width="860" height="22" rx="4" fill="#f9f9f7"/>
+<path d="M 152.0 315.0 H 430.7 A 4.0 4.0 0 0 1 434.7 319.0 V 333.0 A 4.0 4.0 0 0 1 430.7 337.0 H 152.0 A 4.0 4.0 0 0 1 148.0 333.0 V 319.0 A 4.0 4.0 0 0 1 152.0 315.0 Z" fill="#0ca30c"/>
+<text x="424.7" y="330.5" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#ffffff" font-weight="600" text-anchor="end">3 calls · 21%</text>
+<text x="32.0" y="370.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="13" fill="#0b0b0b" font-weight="600" text-anchor="start">Neutral</text>
+<text x="32.0" y="385.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#898781" font-weight="400" text-anchor="start">n = 9</text>
+<rect x="148" y="355" width="860" height="22" rx="4" fill="#f9f9f7"/>
+<path d="M 152.0 355.0 H 1004.0 A 4.0 4.0 0 0 1 1008.0 359.0 V 373.0 A 4.0 4.0 0 0 1 1004.0 377.0 H 152.0 A 4.0 4.0 0 0 1 148.0 373.0 V 359.0 A 4.0 4.0 0 0 1 152.0 355.0 Z" fill="#fab219"/>
+<text x="998.0" y="370.5" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#0b0b0b" font-weight="600" text-anchor="end">9 calls · 64%</text>
+<text x="32.0" y="410.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="13" fill="#0b0b0b" font-weight="600" text-anchor="start">Bad</text>
+<text x="32.0" y="425.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#898781" font-weight="400" text-anchor="start">n = 2</text>
+<rect x="148" y="395" width="860" height="22" rx="4" fill="#f9f9f7"/>
+<path d="M 152.0 395.0 H 335.1 A 4.0 4.0 0 0 1 339.1 399.0 V 413.0 A 4.0 4.0 0 0 1 335.1 417.0 H 152.0 A 4.0 4.0 0 0 1 148.0 413.0 V 399.0 A 4.0 4.0 0 0 1 152.0 395.0 Z" fill="#d03b3b"/>
+<text x="329.1" y="410.5" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#ffffff" font-weight="600" text-anchor="end">2 calls · 14%</text>
+<line x1="32" y1="438" x2="1008" y2="438" stroke="#e1e0d9" stroke-width="1"/>
+<text x="32.0" y="479.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="14.5" fill="#0b0b0b" font-weight="600" text-anchor="start">Talk share by grade</text>
+<text x="32.0" y="497.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#52514e" font-weight="400" text-anchor="start">The agent&#x27;s share of the words spoken, recomputed from the word counts. If talking too</text>
+<text x="32.0" y="513.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#52514e" font-weight="400" text-anchor="start">much were the problem, the dots would march left as the grade improves. They do not.</text>
+<line x1="142.0" y1="538" x2="142.0" y2="712" stroke="#e1e0d9" stroke-width="1"/>
+<text x="142.0" y="730.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="10.5" fill="#898781" font-weight="400" text-anchor="middle">0%</text>
+<line x1="249.5" y1="538" x2="249.5" y2="712" stroke="#e1e0d9" stroke-width="1"/>
+<text x="249.5" y="730.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="10.5" fill="#898781" font-weight="400" text-anchor="middle">25%</text>
+<line x1="357.0" y1="538" x2="357.0" y2="712" stroke="#e1e0d9" stroke-width="1"/>
+<text x="357.0" y="730.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="10.5" fill="#898781" font-weight="400" text-anchor="middle">50%</text>
+<line x1="464.5" y1="538" x2="464.5" y2="712" stroke="#e1e0d9" stroke-width="1"/>
+<text x="464.5" y="730.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="10.5" fill="#898781" font-weight="400" text-anchor="middle">75%</text>
+<line x1="572.0" y1="538" x2="572.0" y2="712" stroke="#e1e0d9" stroke-width="1"/>
+<text x="572.0" y="730.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="10.5" fill="#898781" font-weight="400" text-anchor="middle">100%</text>
+<text x="32.0" y="565.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12.5" fill="#0b0b0b" font-weight="600" text-anchor="start">Good</text>
+<text x="32.0" y="580.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="10.5" fill="#898781" font-weight="400" text-anchor="start">n=3 · median 87%</text>
+<circle cx="469.9" cy="567.0" r="5.5" fill="#0ca30c" stroke="#fcfcfb" stroke-width="2"/>
+<circle cx="515.4" cy="567.0" r="5.5" fill="#0ca30c" stroke="#fcfcfb" stroke-width="2"/>
+<circle cx="521.6" cy="567.0" r="5.5" fill="#0ca30c" stroke="#fcfcfb" stroke-width="2"/>
+<line x1="515.4" y1="556.0" x2="515.4" y2="578.0" stroke="#0b0b0b" stroke-width="2"/>
+<text x="32.0" y="623.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12.5" fill="#0b0b0b" font-weight="600" text-anchor="start">Neutral</text>
+<text x="32.0" y="638.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="10.5" fill="#898781" font-weight="400" text-anchor="start">n=9 · median 82%</text>
+<circle cx="359.8" cy="625.0" r="5.5" fill="#fab219" stroke="#fcfcfb" stroke-width="2"/>
+<circle cx="443.1" cy="625.0" r="5.5" fill="#fab219" stroke="#fcfcfb" stroke-width="2"/>
+<circle cx="505.8" cy="625.0" r="5.5" fill="#fab219" stroke="#fcfcfb" stroke-width="2"/>
+<circle cx="499.8" cy="625.0" r="5.5" fill="#fab219" stroke="#fcfcfb" stroke-width="2"/>
+<circle cx="495.3" cy="625.0" r="5.5" fill="#fab219" stroke="#fcfcfb" stroke-width="2"/>
+<circle cx="556.1" cy="625.0" r="5.5" fill="#fab219" stroke="#fcfcfb" stroke-width="2"/>
+<text x="556.1" y="646.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="10" fill="#898781" font-weight="400" text-anchor="middle">12s</text>
+<circle cx="450.7" cy="625.0" r="5.5" fill="#fab219" stroke="#fcfcfb" stroke-width="2"/>
+<text x="450.7" y="646.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="10" fill="#898781" font-weight="400" text-anchor="middle">22s</text>
+<circle cx="514.9" cy="625.0" r="5.5" fill="#fab219" stroke="#fcfcfb" stroke-width="2"/>
+<circle cx="487.0" cy="625.0" r="5.5" fill="#fab219" stroke="#fcfcfb" stroke-width="2"/>
+<line x1="495.3" y1="614.0" x2="495.3" y2="636.0" stroke="#0b0b0b" stroke-width="2"/>
+<text x="32.0" y="681.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12.5" fill="#0b0b0b" font-weight="600" text-anchor="start">Bad</text>
+<text x="32.0" y="696.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="10.5" fill="#898781" font-weight="400" text-anchor="start">n=2 · median 90%</text>
+<circle cx="487.1" cy="683.0" r="5.5" fill="#d03b3b" stroke="#fcfcfb" stroke-width="2"/>
+<circle cx="572.0" cy="683.0" r="5.5" fill="#d03b3b" stroke="#fcfcfb" stroke-width="2"/>
+<text x="572.0" y="704.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="10" fill="#898781" font-weight="400" text-anchor="middle">3s</text>
+<line x1="529.5" y1="672.0" x2="529.5" y2="694.0" stroke="#0b0b0b" stroke-width="2"/>
+<text x="608.0" y="479.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="14.5" fill="#0b0b0b" font-weight="600" text-anchor="start">How calls ended</text>
+<text x="608.0" y="497.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#52514e" font-weight="400" text-anchor="start">How the call ended, not whether an appointment was booked.</text>
+<text x="608.0" y="513.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#52514e" font-weight="400" text-anchor="start">Booking outcome appears only in the prose summary, so this</text>
+<text x="608.0" y="529.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#52514e" font-weight="400" text-anchor="start">figure does not claim a booking rate.</text>
+<path d="M 612.0 548.0 H 950.9 V 572.0 H 612.0 A 4.0 4.0 0 0 1 608.0 568.0 V 552.0 A 4.0 4.0 0 0 1 612.0 548.0 Z" fill="#1c5cab"/>
+<path d="M 952.9 548.0 H 1004.0 A 4.0 4.0 0 0 1 1008.0 552.0 V 568.0 A 4.0 4.0 0 0 1 1004.0 572.0 H 952.9 V 548.0 Z" fill="#86b6ef"/>
+<text x="620.0" y="564.5" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#ffffff" font-weight="600" text-anchor="start">Customer ended · 12</text>
+<text x="980.4" y="564.5" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#ffffff" font-weight="600" text-anchor="middle">2</text>
+<rect x="608" y="587" width="10" height="10" rx="2.5" fill="#1c5cab"/>
+<text x="625.0" y="596.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#52514e" font-weight="500" text-anchor="start">Customer ended — 12 calls (86%)</text>
+<rect x="608" y="607" width="10" height="10" rx="2.5" fill="#86b6ef"/>
+<text x="625.0" y="616.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#52514e" font-weight="500" text-anchor="start">Silence timed out — 2 calls (14%)</text>
+<text x="608.0" y="646.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#898781" font-weight="400" text-anchor="start">Both timeouts fell on calls the judge graded Neutral; no Good call</text>
+<text x="608.0" y="662.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#898781" font-weight="400" text-anchor="start">ran out of silence.</text>
+<text x="608.0" y="688.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#898781" font-weight="400" text-anchor="start">Read from the prose: 3 summaries name a date for the appointment —</text>
+<text x="608.0" y="704.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#898781" font-weight="400" text-anchor="start">the same 3 calls the judge graded Good. One summary says the</text>
+<text x="608.0" y="720.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#898781" font-weight="400" text-anchor="start">booking could not be completed, and the judge graded that call</text>
+<text x="608.0" y="736.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#898781" font-weight="400" text-anchor="start">Neutral.</text>
+<line x1="32" y1="772" x2="1008" y2="772" stroke="#e1e0d9" stroke-width="1"/>
+<text x="32.0" y="813.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="14.5" fill="#0b0b0b" font-weight="600" text-anchor="start">Spend against call length</text>
+<text x="32.0" y="831.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#52514e" font-weight="400" text-anchor="start">Vapi bills per minute, so cost tracks call length: duration accounts for 97% of the variance in spend here (r = 0.99). The spread around the line is still</text>
+<text x="32.0" y="847.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#52514e" font-weight="400" text-anchor="start">real — only 4 of the 14 calls land within 5% of it — so the rate is a good planning number and a poor per-call prediction.</text>
+<circle cx="37" cy="862" r="5.5" fill="#0ca30c" stroke="#fcfcfb" stroke-width="2"/>
+<text x="47.0" y="866.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#52514e" font-weight="500" text-anchor="start">Good</text>
+<circle cx="119" cy="862" r="5.5" fill="#fab219" stroke="#fcfcfb" stroke-width="2"/>
+<text x="129.0" y="866.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#52514e" font-weight="500" text-anchor="start">Neutral</text>
+<circle cx="201" cy="862" r="5.5" fill="#d03b3b" stroke="#fcfcfb" stroke-width="2"/>
+<text x="211.0" y="866.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#52514e" font-weight="500" text-anchor="start">Bad</text>
+<line x1="278" y1="862" x2="300" y2="862" stroke="#898781" stroke-width="2"/>
+<text x="308.0" y="866.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#52514e" font-weight="500" text-anchor="start">$0.09 per minute · pooled rate</text>
+<line x1="78" y1="1094.0" x2="992" y2="1094.0" stroke="#e1e0d9" stroke-width="1"/>
+<text x="70.0" y="1098.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="10.5" fill="#898781" font-weight="400" text-anchor="end">$0.00</text>
+<line x1="78" y1="994.0" x2="992" y2="994.0" stroke="#e1e0d9" stroke-width="1"/>
+<text x="70.0" y="998.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="10.5" fill="#898781" font-weight="400" text-anchor="end">$0.25</text>
+<line x1="78" y1="894.0" x2="992" y2="894.0" stroke="#e1e0d9" stroke-width="1"/>
+<text x="70.0" y="898.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="10.5" fill="#898781" font-weight="400" text-anchor="end">$0.50</text>
+<line x1="78" y1="1094" x2="992" y2="1094" stroke="#c3c2b7" stroke-width="1"/>
+<text x="78.0" y="1112.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="10.5" fill="#898781" font-weight="400" text-anchor="middle">0m</text>
+<text x="260.8" y="1112.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="10.5" fill="#898781" font-weight="400" text-anchor="middle">1m</text>
+<text x="443.6" y="1112.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="10.5" fill="#898781" font-weight="400" text-anchor="middle">2m</text>
+<text x="626.4" y="1112.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="10.5" fill="#898781" font-weight="400" text-anchor="middle">3m</text>
+<text x="809.2" y="1112.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="10.5" fill="#898781" font-weight="400" text-anchor="middle">4m</text>
+<text x="992.0" y="1112.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="10.5" fill="#898781" font-weight="400" text-anchor="middle">5m</text>
+<text x="32.0" y="886.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#52514e" font-weight="500" text-anchor="start">Cost</text>
+<text x="992.0" y="1130.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#52514e" font-weight="500" text-anchor="end">Call length</text>
+<line x1="78" y1="1094" x2="992" y2="909.8" stroke="#898781" stroke-width="2"/>
+<circle cx="934.3" cy="943.0" r="5.5" fill="#0ca30c" stroke="#fcfcfb" stroke-width="2"/>
+<circle cx="929.1" cy="904.2" r="5.5" fill="#d03b3b" stroke="#fcfcfb" stroke-width="2"/>
+<circle cx="578.5" cy="999.0" r="5.5" fill="#fab219" stroke="#fcfcfb" stroke-width="2"/>
+<circle cx="629.6" cy="988.0" r="5.5" fill="#fab219" stroke="#fcfcfb" stroke-width="2"/>
+<circle cx="559.7" cy="993.6" r="5.5" fill="#fab219" stroke="#fcfcfb" stroke-width="2"/>
+<circle cx="451.8" cy="1015.6" r="5.5" fill="#fab219" stroke="#fcfcfb" stroke-width="2"/>
+<circle cx="662.3" cy="968.0" r="5.5" fill="#fab219" stroke="#fcfcfb" stroke-width="2"/>
+<circle cx="115.9" cy="1087.4" r="5.5" fill="#fab219" stroke="#fcfcfb" stroke-width="2"/>
+<circle cx="143.7" cy="1081.8" r="5.5" fill="#fab219" stroke="#fcfcfb" stroke-width="2"/>
+<circle cx="242.0" cy="1057.8" r="5.5" fill="#fab219" stroke="#fcfcfb" stroke-width="2"/>
+<circle cx="604.9" cy="989.2" r="5.5" fill="#0ca30c" stroke="#fcfcfb" stroke-width="2"/>
+<circle cx="331.4" cy="1051.0" r="5.5" fill="#fab219" stroke="#fcfcfb" stroke-width="2"/>
+<circle cx="86.9" cy="1092.6" r="5.5" fill="#d03b3b" stroke="#fcfcfb" stroke-width="2"/>
+<circle cx="716.6" cy="956.6" r="5.5" fill="#0ca30c" stroke="#fcfcfb" stroke-width="2"/>
+<text x="929.1" y="891.2" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#52514e" font-weight="500" text-anchor="middle">4m 39s · $0.47</text>
+<text x="934.3" y="962.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#52514e" font-weight="500" text-anchor="middle">4m 41s · $0.38</text>
+<text x="78.0" y="1130.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#52514e" font-weight="400" text-anchor="start">The two longest calls are the same length to within two seconds — 4m 41s at $0.38, 4m 39s at $0.47.</text>
+<text x="992.0" y="1130.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#52514e" font-weight="500" text-anchor="end">Call length</text>
+<line x1="32" y1="1150" x2="1008" y2="1150" stroke="#e1e0d9" stroke-width="1"/>
+<text x="32.0" y="1191.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="14.5" fill="#0b0b0b" font-weight="600" text-anchor="start">Data quality — what the log got wrong</text>
+<text x="32.0" y="1209.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="12" fill="#52514e" font-weight="400" text-anchor="start">Found by building this figure. Each item is a reason to read one exported row as a claim, not a fact.</text>
+<circle cx="42" cy="1224" r="9" fill="#f9f9f7" stroke="rgba(11,11,11,0.10)" stroke-width="1"/>
+<text x="42.0" y="1227.5" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#0b0b0b" font-weight="600" text-anchor="middle">1</text>
+<text x="60.0" y="1228.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#52514e" font-weight="400" text-anchor="start">bot_word_percent is unusable on 5 of 16 graded rows — the most recent read 11,706,000% to 11,910,000%, which matches neither the word counts nor the call</text>
+<text x="60.0" y="1244.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#52514e" font-weight="400" text-anchor="start">duration. Talk share in this figure is recomputed from bot_word_count and user_word_count, which are consistent on every row.</text>
+<circle cx="42" cy="1268" r="9" fill="#f9f9f7" stroke="rgba(11,11,11,0.10)" stroke-width="1"/>
+<text x="42.0" y="1271.5" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#0b0b0b" font-weight="600" text-anchor="middle">2</text>
+<text x="60.0" y="1272.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#52514e" font-weight="400" text-anchor="start">One call was written to the log twice, byte-identical in every field — a retried write that a unique key on the call id would have prevented.</text>
+<circle cx="42" cy="1296" r="9" fill="#f9f9f7" stroke="rgba(11,11,11,0.10)" stroke-width="1"/>
+<text x="42.0" y="1299.5" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#0b0b0b" font-weight="600" text-anchor="middle">3</text>
+<text x="60.0" y="1300.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#52514e" font-weight="400" text-anchor="start">A second call was written twice with the same transcript but a different summary and a different judge justification — the grader is a sampling model, so the</text>
+<text x="60.0" y="1316.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#52514e" font-weight="400" text-anchor="start">same transcript does not reliably produce the same verdict. Any per-call grade is one draw, not the answer.</text>
+<circle cx="42" cy="1340" r="9" fill="#f9f9f7" stroke="rgba(11,11,11,0.10)" stroke-width="1"/>
+<text x="42.0" y="1343.5" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#0b0b0b" font-weight="600" text-anchor="middle">4</text>
+<text x="60.0" y="1344.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#52514e" font-weight="400" text-anchor="start">One row is entirely empty — which is why 17 records hold 16 graded rows and 14 distinct calls.</text>
+<circle cx="42" cy="1368" r="9" fill="#f9f9f7" stroke="rgba(11,11,11,0.10)" stroke-width="1"/>
+<text x="42.0" y="1371.5" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#0b0b0b" font-weight="600" text-anchor="middle">5</text>
+<text x="60.0" y="1372.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11.5" fill="#52514e" font-weight="400" text-anchor="start">The phone column carries three different mask formats — it cannot be used as a join or upsert key until that is normalised.</text>
+<line x1="32" y1="1412" x2="1008" y2="1412" stroke="#e1e0d9" stroke-width="1"/>
+<text x="32.0" y="1436.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#898781" font-weight="400" text-anchor="start">Source: dentalClinic/DentalCallLogs.csv — 14 distinct graded calls made to one clinic over twelve days. Still a small sample: it demonstrates the grading pipeline on real</text>
+<text x="32.0" y="1452.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#898781" font-weight="400" text-anchor="start">conversations and shows which signals do not hold up, not a quality rate for the agent.</text>
+<text x="32.0" y="1478.0" font-family='system-ui, -apple-system, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif' font-size="11" fill="#898781" font-weight="400" text-anchor="start">Generated by charts/generate_charts.py from the judge&#x27;s CSV output.</text>
+</svg>
