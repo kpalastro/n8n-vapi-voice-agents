@@ -421,6 +421,12 @@ These are instance-specific and are **not** portable between n8n installations:
   payload cannot silently fall through into the CRM.
 - Use n8n credentials for every secret. Do not inline keys into node parameters — workflow JSON
   files get committed, credentials do not.
+- **Pinned payloads are scrubbed before they are committed.** Vapi's end-of-call report repeats the
+  dialled number's Twilio account SID and auth token inside `body.message.phoneNumber`, so pinning
+  one of those reports as test data writes a live credential into the workflow JSON even though no
+  node inlines one. [`tools/scrub_workflow_secrets.py`](tools/scrub_workflow_secrets.py) blanks
+  those two fields; it is what found this here — GitHub's push protection refused the first push,
+  not a code review.
 
 ## Known limitations
 
