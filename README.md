@@ -9,17 +9,18 @@ measured**. Each conversation is transcribed, its structured outcome extracted, 
 graded, and the result written to the CRM, so agent quality is a queryable number instead of a
 vibe.
 
-[![Call quality report — three leads dialled, two calls graded by the LLM judge, with talk-share, verdicts, funnel and cost](charts/call-quality-report.svg)](charts/call-quality-report.svg)
+[![Call quality report — three leads dialled, two calls graded by the LLM judge, with talk-share, verdicts, funnel and cost](charts/call-quality-report.png)](charts/call-quality-report.png)
 
-[![Conversation flow — every turn of both calls sized by words spoken, with mechanically flagged defect turns](charts/conversation-flow.svg)](charts/conversation-flow.svg)
+[![Conversation flow — every turn of both calls sized by words spoken, with mechanically flagged defect turns](charts/conversation-flow.png)](charts/conversation-flow.png)
 
 The third figure — the inbound cohort of 14 graded calls, which is the first set here big enough to
 test a belief rather than illustrate a pipeline — is embedded in
 [What the inbound cohort showed](#what-the-inbound-cohort-showed).
 
 > All three are generated from the judge's own CSV output by
-> [`charts/generate_charts.py`](charts/generate_charts.py) — re-run it to regenerate them.
-> Click any figure to open it full size.
+> [`charts/generate_charts.py`](charts/generate_charts.py), which writes them as SVG, and
+> [`charts/render_png.py`](charts/render_png.py), which rasterises each one to a 2x PNG for
+> embedding here. Re-run both to regenerate them. Click any figure to open it full size.
 
 ---
 
@@ -35,6 +36,7 @@ test a belief rather than illustrate a pipeline — is embedded in
 | `dentalClinic/VapiEndOfCall.json` | 20-node workflow: post-call analysis and destruction of the ephemeral Vapi assistant |
 | `dentalClinic/taniya_call_edited.MP3` | A real call recording from the dental receptionist (3m 23s, 128 kbps) |
 | `charts/generate_charts.py` | Deterministic SVG report generator — reads both call-log CSVs, emits the three figures |
+| `charts/render_png.py` | Rasterises each figure to a 2x PNG, cropped exactly to the figure, for embedding in this README |
 | `docs/DESIGN-NOTES.md` | Why the figures look the way they do — form choices, the validated palettes, and the layout self-check |
 | `tools/redact_call_logs.py` | Masks phone numbers and blanks recording links before a call log is committed |
 
@@ -226,7 +228,7 @@ of illustrating a pipeline: **14 distinct graded calls** made to one clinic betw
 second call was written twice *and* graded twice — see
 [What the log got wrong](#what-the-log-got-wrong).
 
-[![Inbound call quality report — 14 graded dental clinic calls: grade mix, talk share by grade, how calls ended, and spend against call length](charts/inbound-call-quality.svg)](charts/inbound-call-quality.svg)
+[![Inbound call quality report — 14 graded dental clinic calls: grade mix, talk share by grade, how calls ended, and spend against call length](charts/inbound-call-quality.png)](charts/inbound-call-quality.png)
 
 ### Talk share does not predict quality
 
@@ -289,7 +291,7 @@ they are worth more than the chart:
 
 | # | Defect | Effect |
 |---|---|---|
-| 1 | `bot_word_percent` reads 11,706,000% – 11,910,000% on the five most recent rows — matching neither the word counts nor the duration | The stored metric is unusable, so talk share is recomputed from the word counts. A derived field nothing validates drifts from its own inputs |
+| 1 | `bot_word_percent` reads 11,706,000% – 11,910,000% on the five **earliest** rows (20–25 Jan) and a correct whole percentage on the eleven graded rows after — neither value derivable from the word counts or the duration | The stored metric is unusable, so talk share is recomputed from the word counts. A derived field nothing validates drifts from its own inputs |
 | 2 | One call written to the log twice, byte-identical in every field | Any naive count double-counts the call. A unique key on the Vapi call id prevents it |
 | 3 | A second call written twice with the same transcript but a different `summary` **and a different judge justification** | The grader is a sampling model: the same transcript does not reliably produce the same verdict, so a per-call grade is one draw, not the answer |
 | 4 | One row entirely empty | 17 records → 16 graded rows → 14 distinct calls. Every count in this README has to say which denominator it means |
@@ -300,6 +302,27 @@ model for a verdict once and writes it to the CRM as if it were a measurement. I
 Grading each call several times and storing the modal verdict plus the spread — or fixing a seed
 and a low temperature — would make the column reproducible, and until then it should not drive an
 alert threshold.
+
+Defect 1 is the one with a fix in this repo. The `Code` node computed the talk share correctly and
+then returned it **as a string with a `%` suffix** — `"83%"` — which the `Set` nodes passed along
+as a string and the Airtable node handed to a **Percent** field. Airtable's typecast parses `"83%"`
+back into `0.83`, the fraction that field stores, which is why eleven rows read correctly: the
+value survived by coercion at the destination rather than by being right. That is one field-type
+change away from writing a number six orders of magnitude out, so the fix removes the coercion
+entirely:
+
+- the node returns **plain numbers** — integers for the counts, `0–100` for the two shares
+- the caller's share is the exact complement of the agent's, so the pair sums to 100 instead of
+  rounding independently to 99 or 101
+- a segment with no words counts as zero words, not one — `"".split(/\s+/)` returns `[""]`, so a
+  bare `AI:` line used to be counted as a word spoken
+- the `Set` nodes declare the shares as numbers, and the Airtable mapping does the single explicit
+  conversion to the fraction a Percent field stores, with a note on the node recording why
+
+The column type is the one thing here that cannot be read out of this repo, so the note names the
+alternative: if `bot_word_percent` is a Number field rather than a Percent field, bind
+`$json.bot_word_percent` directly. The five historical rows are left as they were found — recomputing
+them from the word counts they already carry is roadmap item 4's job.
 
 ---
 
@@ -415,8 +438,9 @@ These are instance-specific and are **not** portable between n8n installations:
 - **The business outcome is not recorded anywhere.** Whether the caller actually got an
   appointment exists only in the prose summary the extractor happens to write.
 - **The CRM holds a derived field that disagrees with its own inputs.** `bot_word_percent` is
-  wrong on the newest rows of the inbound table, in three different phone-mask formats on the
-  `phone` column, and nothing in the pipeline checks either.
+  wrong on the five earliest rows of the inbound table. The computation that produced it is fixed
+  (see [What the log got wrong](#what-the-log-got-wrong)), but the historical rows are not, the
+  `phone` column still carries three mask formats, and nothing in the pipeline validates either.
 - **Names are transcribed, not confirmed.** Defect 4 above is a symptom of that.
 - The `Code` nodes assume Vapi's `AI:` / `User:` transcript format. A change in that format fails
   quietly to zero word counts.

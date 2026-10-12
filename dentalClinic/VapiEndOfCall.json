@@ -249,7 +249,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const transcript = $('init_variables').first().json.transcript\n\n// Initialize counters for bot (AI) and user words\nlet bot_word_count = 0;\nlet user_word_count = 0;\n\n// Split the transcript into lines based on the newline character '\\n'\n// Each line represents either the AI or the User speaking\nconst lines = transcript.split('\\n');\n\n// Loop through each line in the transcript\nfor (let i = 0; i < lines.length; i++) {\n    // Check if the line starts with \"AI:\" or \"User:\"\n    if (lines[i].startsWith('AI:')) {\n        // Remove \"AI:\" prefix and split the remaining text into words\n        const words = lines[i].replace('AI:', '').trim().split(/\\s+/);\n        // Add the number of words to the bot's word count\n        bot_word_count += words.length;\n    } else if (lines[i].startsWith('User:')) {\n        // Remove \"User:\" prefix and split the remaining text into words\n        const words = lines[i].replace('User:', '').trim().split(/\\s+/);\n        // Add the number of words to the user's word count\n        user_word_count += words.length;\n    }\n}\n\n// Calculate the total word count (AI + User)\nconst total_word_count = bot_word_count + user_word_count;\n\n// Avoid dividing by zero to prevent errors in case there's no data\nlet bot_word_percent = 0;\nlet user_word_percent = 0;\n\nif (total_word_count > 0) {\n    // Calculate the word percentages for AI and User\n    bot_word_percent = Math.round((bot_word_count / total_word_count) * 100);\n    user_word_percent = Math.round((user_word_count / total_word_count) * 100);\n}\n\n// Output the results for use in other parts of the workflow\nreturn {\n    bot_word_count: bot_word_count,\n    bot_word_percent: bot_word_percent + '%',\n    user_word_count: user_word_count,\n    user_word_percent: user_word_percent + '%'\n};\n"
+        "jsCode": "const transcript = $('init_variables').first().json.transcript\n\n// Count the words in one turn. An empty segment counts as zero words:\n// \"\".split(/\\s+/) returns [\"\"], so without this guard a bare \"AI:\" line would be\n// counted as one word spoken.\nfunction countWords(segment) {\n    const text = segment.trim();\n    return text.length === 0 ? 0 : text.split(/\\s+/).length;\n}\n\nlet bot_word_count = 0;\nlet user_word_count = 0;\n\n// The transcript is one line per turn, prefixed \"AI:\" or \"User:\".\nfor (const line of transcript.split('\\n')) {\n    const turn = line.trim();\n    if (turn.startsWith('AI:')) {\n        bot_word_count += countWords(turn.slice(3));\n    } else if (turn.startsWith('User:')) {\n        user_word_count += countWords(turn.slice(5));\n    }\n}\n\nconst total_word_count = bot_word_count + user_word_count;\n\n// Talk share as NUMBERS from 0 to 100, not strings with a '%' suffix.\n//\n// This used to return \"83%\" \u2014 a decorated string handed to a numeric Airtable\n// column, which left the type coercion to the destination. Airtable happens to\n// parse \"83%\" back into the value a Percent field stores, which is why most rows\n// read correctly; but a value that survives only by coercion is one field-type\n// change away from being wrong, and this column is already wrong in the earliest\n// five rows. Emit a real number and let the\n// field do the formatting.\n//\n// The caller's share is the complement of the agent's, so the pair always sums\n// to 100 instead of rounding independently to 99 or 101.\n//\n// A call with no words at all has no talk share, so it reports null rather than\n// a misleading 0.\nlet bot_word_percent = null;\nlet user_word_percent = null;\nif (total_word_count > 0) {\n    bot_word_percent = Math.round((bot_word_count / total_word_count) * 1000) / 10;\n    user_word_percent = Math.round((100 - bot_word_percent) * 10) / 10;\n}\n\nreturn {\n    bot_word_count: bot_word_count,\n    user_word_count: user_word_count,\n    total_word_count: total_word_count,\n    bot_word_percent: bot_word_percent,\n    user_word_percent: user_word_percent\n};\n"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -352,7 +352,7 @@
               "id": "c9709be9-32ac-49aa-b0ce-802dca998f9d",
               "name": "bot_word_percent",
               "value": "={{ $json.bot_word_percent }}",
-              "type": "string"
+              "type": "number"
             },
             {
               "id": "735edb5b-6579-479d-ba41-cd10988b9774",
@@ -364,7 +364,7 @@
               "id": "df59c462-fc27-4856-b1d4-cd35385d1b08",
               "name": "user_word_percent",
               "value": "={{ $json.user_word_percent }}",
-              "type": "string"
+              "type": "number"
             },
             {
               "id": "246a274f-0f0c-41ac-aa10-cf1f5378e9e4",
@@ -626,7 +626,7 @@
               "id": "a339b012-e474-4df4-b9dc-a207c77108a5",
               "name": "bot_word_percent",
               "value": "={{ $json.bot_word_percent }}",
-              "type": "string"
+              "type": "number"
             },
             {
               "id": "d598008d-da19-4432-8a30-b9f9b7384f20",
@@ -705,7 +705,7 @@
             "call_type": "={{ $json.call_type }}",
             "ended_reason": "={{ $json.ended_reason }}",
             "recording_url": "={{ $json.recording_url }}",
-            "bot_word_percent": "={{ $json.bot_word_percent }}",
+            "bot_word_percent": "={{ $json.bot_word_percent / 100 }}",
             "ai_call_performance_grade": "={{ $json.ai_call_performance_grade }}",
             "ai_performance_justification": "={{ $json.ai_performance_justification }}",
             "formatted_transcript": "={{ $json.formatted_transcript }}",
@@ -936,6 +936,7 @@
       ],
       "id": "7d0816ee-b017-4fc2-b1ca-487e50a4acbc",
       "name": "Airtable",
+      "notes": "bot_word_percent is an Airtable Percent field, which stores the fraction (0.83 renders as 83%). This workflow reports 0-100, so the mapping divides by 100. If the column is a Number field instead, bind $json.bot_word_percent directly.",
       "credentials": {
         "airtableTokenApi": {
           "id": "97NFXcdcXxbaOw56",
